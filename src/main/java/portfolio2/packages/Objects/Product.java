@@ -5,10 +5,10 @@ public class Product {
     private String name;
     private String shortDescription;
     private String longDescription;
-    private Double price;
+    private double price;
     private String imageUrl;
 
-    public Product(int productID, String name, String shortDescription, String longDescription, Double price, String imageUrl){
+    public Product(int productID, String name, String shortDescription, String longDescription, double price, String imageUrl){
         this.productID = productID;
         this.name = name;
         this.shortDescription = shortDescription;
@@ -49,11 +49,11 @@ public class Product {
         this.longDescription = longDescription;
     }
 
-    public Double getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
