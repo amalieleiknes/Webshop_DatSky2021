@@ -3,6 +3,15 @@ package portfolio2.packages.Objects;
 import java.util.ArrayList;
 
 public class ProductRegister {
+
+    static Product product1;
+
+    public static void initialize() {
+        product1 = new Product(1, "kaffe", "en pose med kaffi",
+                "en stor pose med kaffi", 35.00, "../images/kaffe.jpg");
+
+    }
+
     private static ArrayList<Product> productRegister = new ArrayList<>();
 
     public static ArrayList<Product> getProductRegister() {

@@ -8,6 +8,17 @@ import java.util.ArrayList;
 @Component
 public class CustomerRegister {
 
+    static Customer cust1;
+    static Customer cust2;
+
+    // testing info
+    public static void initialize() {
+        cust1 = new Customer("Amalie", "Leiknes", "adresse", "1415",
+                "oslo", "94849484", "test@test.no","test");
+        customerRegister.add(cust1);
+
+    }
+
     @Autowired
     private static ArrayList<Customer> customerRegister = new ArrayList<>();
 

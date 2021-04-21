@@ -1,13 +1,12 @@
 package portfolio2.packages.API;
 
 import org.springframework.hateoas.CollectionModel;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import portfolio2.packages.Objects.Customer;
 import portfolio2.packages.Objects.CustomerRegister;
 import portfolio2.packages.Objects.Order;
+
+import java.util.ArrayList;
 
 
 @RestController
@@ -26,6 +25,22 @@ public class CustomerController {
         return null;
     }
 
+    @PostMapping("/logOnCustomer")
+    public Customer checkLogIn(String email, String password){
+        Customer cust = null;
+        ArrayList<Customer> customers = CustomerRegister.getCustomerRegister();
 
+        for(Customer c : customers){
+            if(c.getEmail().equals(email) && c.getPassword().equals(password)){
+                cust = c;
+            }
+        }
+        return cust;
+    }
+
+    @GetMapping("/getAllCustomers")
+    public ArrayList<Customer> getAllCustomers(){
+        return CustomerRegister.getCustomerRegister();
+    }
 
 }

@@ -1,12 +1,12 @@
 package portfolio2.packages.Objects;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.RepresentationModel;
-import org.springframework.stereotype.Component;
 
-public class Customer extends RepresentationModel<Customer> {
+import java.util.UUID;
 
-    private String customerID;
+public class Customer{
+
+    private final String customerID;
     private String firstname;
     private String lastname;
     private String address;
@@ -16,8 +16,9 @@ public class Customer extends RepresentationModel<Customer> {
     private String email;
     private String password;
 
-    public Customer(String customerID, String firstname, String lastname, String address, String postnumber, String postoffice, String tlphNumber, String email, String password) {
-        this.customerID = customerID;
+    public Customer(String firstname, String lastname, String address, String postnumber, String postoffice,
+                    String tlphNumber, String email, String password) {
+        this.customerID = UUID.randomUUID().toString();;
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
@@ -30,10 +31,6 @@ public class Customer extends RepresentationModel<Customer> {
 
     public String getCustomerID() {
         return customerID;
-    }
-
-    public void setCustomerID(String customerID) {
-        this.customerID = customerID;
     }
 
     public String getFirstname() {
