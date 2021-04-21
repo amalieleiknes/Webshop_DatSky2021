@@ -1,0 +1,104 @@
+
+/* CSS for top-navigation-bar */
+.topnav{
+    background-color: #1d3064;
+    color: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    margin: 0;
+    z-index: 1;
+    transition: top 0.3s;
+}
+
+.topnav a{
+    color: white;
+}
+
+/* Top-navigation-bar links on mouse-over */
+.topnav a:hover {
+    background-color: #1d3040;
+}
+
+/* Active link */
+.topnav a.active {
+    background-color: #2a6cde;
+}
+
+.left-side{
+    width: 15%;
+    float: left;
+    position: relative;
+    height: 100%;
+
+}
+
+.right-side{
+    width: 85%;
+    float: right;
+    position: relative;
+    height: 100%;
+}
+
+.userLogInReg, .links{
+    display: inline-block;
+    float: right;
+
+}
+
+.topnav .userLogInReg button{
+    padding: 5px;
+    margin: 5px 5px;
+    border: none;
+    cursor: pointer;
+    background: #c9dcef;
+    color: #000000;
+    font-size: 20px;
+    border-radius: 8px;
+}
+
+.topnav .form-control{
+    padding: 2px;
+    margin: 8px;
+    font-size: 20px;
+    border-radius: 2px;
+    width: 130px;
+}
+
+
+.link{
+    padding: 15px 30px;
+    font-size: 20px;
+    text-align: center;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.nav{
+    float: right;
+    margin-right: 100px;
+}
+
+
+/* Responsiveness for top-navigation-bar*/
+@media screen and (max-width: 420px){
+    .link{
+        font-size: 20px;
+        padding: 5px;
+    }
+
+    .nav{
+        margin: auto;
+        float: none;
+        width: fit-content;
+    }
+
+    .topnav{
+        position: relative;
+    }
+
+    .links{
+        width: fit-content;
+        margin: auto;
+    }
+}

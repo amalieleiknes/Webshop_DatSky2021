@@ -1,10 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="Stylesheet" type="text/css" href="style.css">
+    <title>Webshop</title>
 </head>
+
 <body>
+
+    <div class="topnav">
+
+        <div class="left-side">
+            <a href="index.html" tabindex="1">
+                <div class="logo"><img src="#" alt="Webshop logo"></div> <!-- TODO: legg inn logobilde her-->
+            </a>
+        </div>
+
+        <div class ="right-side">
+            <div class="nav">
+                <div class="userLogInReg"> <!-- TODO: når bruker er logget inn kan inputfelt erstattes med "logget inn som xxx" og knappen bli til "Logg ut"-->
+                    <input type="text" class="form-control" id="username" placeholder="username" name="username"/>
+                    <input type="text" class="form-control" id="password" placeholder="password" name="password"/>
+                    <button type="submit">Log in as user</button>
+
+                    <a href="registerUser.html" tabindex="">
+                        <div class="link">Register as user</div>
+                    </a>
+                </div>
+
+                </br>
+
+                <div class="links">
+                    <a href="index.html" tabindex="">
+                        <div class="link">Browse products</div>
+                    </a>
+
+                    <a href="shoppingcart.html" tabindex="">
+                        <div class="link">Shoppingcart</div>
+                    </a>
+
+                    <a href="checkout.html" tabindex="">
+                        <div class="link">Checkout</div>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
 
 </body>
 </html>
