@@ -20,4 +20,11 @@ public class ProductController {
     public ArrayList<Product> getAllProducts(){
         return ProductRegister.getProductRegister();
     }
+
+
+    @GetMapping("/getShoppingcart")
+    public ArrayList<Product> getShoppingcart(){
+        return ShoppingCart.getProductList();
+    }
+    
 }
