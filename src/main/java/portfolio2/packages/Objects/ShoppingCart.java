@@ -23,4 +23,17 @@ public class ShoppingCart {
             }
         }
     }
+
+    public static double getTotalPrice(){
+        double total = 0.0;
+        for(Product p : productList){
+            total += p.getPrice();
+        }
+        return total;
+    }
+
+    public static int getNumberOfProductsInCart(){
+        int number = productList.size();
+        return number;
+    }
 }
