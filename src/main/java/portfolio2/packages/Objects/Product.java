@@ -1,4 +1,4 @@
-package portfolio2.packages.Object;
+package portfolio2.packages.Objects;
 
 public class Product {
     private int productID;
