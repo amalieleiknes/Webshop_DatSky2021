@@ -24,4 +24,9 @@ public class ProductRegister {
             }
         }
     }
+
+    public static int generateProductID(){
+        int productID = 0;
+        return productID;
+    }
 }

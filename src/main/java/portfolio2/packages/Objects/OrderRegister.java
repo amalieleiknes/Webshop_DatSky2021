@@ -8,4 +8,13 @@ public class OrderRegister {
     public static ArrayList<Order> getOrderlist() {
         return orderlist;
     }
+
+    public static void addOrder(Order order){
+        orderlist.add(order);
+    }
+
+    public static String generateOrderID(){
+        String orderID = "order";
+        return orderID;
+    }
 }
