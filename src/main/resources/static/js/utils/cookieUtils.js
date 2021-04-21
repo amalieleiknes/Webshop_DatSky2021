@@ -28,11 +28,11 @@ function getCookie(cookieName){
 }
 
 
-function getUser(){
-    let userID = getCookie("userID");
-    let username = getCookie("username");
+function getCustomer(){
+    let customerID = getCookie("userID");
+    let customername = getCookie("firstname") + " " + getCookie("lastname");
     return {
-        userID: userID,
-        username: username
+        customerID: customerID,
+        email: customername
     };
 }

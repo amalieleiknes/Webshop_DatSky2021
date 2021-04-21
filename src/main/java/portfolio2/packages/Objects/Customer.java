@@ -1,6 +1,11 @@
 package portfolio2.packages.Objects;
 
-public class Customer {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.RepresentationModel;
+import org.springframework.stereotype.Component;
+
+public class Customer extends RepresentationModel<Customer> {
+
     private String customerID;
     private String firstname;
     private String lastname;
