@@ -2,6 +2,7 @@
 $(function(){
     getAllProducts();
 
+    $("#adminfailedLogIn").hide();
     $("#failedLogIn").hide();
 
     // check customers login-info
@@ -32,6 +33,31 @@ $(function(){
         }
     });
 
+
+
+    // check customers login-info
+    $("#adminlogOnbtn").click(function() {
+
+        console.log("logging in admin...")
+
+        const adminusername = $("#adminusername").val();
+        const adminpassword = $("#adminpassword").val();
+
+        // if input fields are empty, show failedmsg
+        if(adminusername.length === 0 || adminusername === ' ' || adminusername === null || adminpassword.length === 0){
+            $("#adminfailedLogIn").show();
+        }
+        else{
+            $("#adminfailedLogIn").hide();
+
+            if(adminusername === "admin" && adminpassword === "admin"){
+                console.log("trying to set cookie...")
+                setCookie("adminusername", adminusername, 1);
+                setCookie("adminpassword", adminpassword, 1);
+                window.location.href= 'adminPage.js';
+            }
+        }
+    });
 
 
     function getAllProducts(){

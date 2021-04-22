@@ -1,18 +1,25 @@
-
 /* CSS for top-navigation-bar */
-.topnav{
+.topnav, .bottomnav{
     background-color: #1d3064;
     color: white;
     position: fixed;
     width: 100%;
-    top: 0;
     margin: 0;
     z-index: 1;
     transition: top 0.3s;
 }
 
+.topnav{
+    top: 0;
+}
+
+.bottomnav {
+    bottom: 0;
+}
+
 .topnav a{
     color: white;
+    text-align: center;
 }
 
 /* Top-navigation-bar links on mouse-over */
@@ -26,15 +33,14 @@
 }
 
 .left-side{
-    width: 15%;
+    width: 60%;
     float: left;
     position: relative;
     height: 100%;
-
 }
 
 .right-side{
-    width: 85%;
+    width: 40%;
     float: right;
     position: relative;
     height: 100%;
@@ -42,11 +48,9 @@
 
 .userLogInReg, .links{
     display: inline-block;
-    float: right;
-
 }
 
-.topnav .userLogInReg button{
+.topnav .userLogInReg button, .bottomnav button{
     padding: 5px;
     margin: 5px 5px;
     border: none;
@@ -54,19 +58,19 @@
     background: #c9dcef;
     color: #000000;
     font-size: 20px;
-    border-radius: 8px;
+    border-radius: 10px;
 }
 
-.topnav .form-control{
+.topnav .form-control, .bottomnav .form-control{
     padding: 2px;
     margin: 8px;
     font-size: 20px;
-    border-radius: 2px;
+    border-radius: 5px;
     width: 130px;
 }
 
 
-.link{
+.link, .bottomnav .left-side p{
     padding: 15px 30px;
     font-size: 20px;
     text-align: center;
@@ -77,6 +81,7 @@
 .nav{
     float: right;
     margin-right: 100px;
+    text-align: center;
 }
 
 
