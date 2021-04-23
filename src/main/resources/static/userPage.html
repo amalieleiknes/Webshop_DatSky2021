@@ -21,7 +21,7 @@
 <div class="topnav">
     <div class="left-side">
         <div class="links">
-            <a href="index.html" class="active" tabindex="">
+            <a href="index.html" tabindex="">
                 <div class="link">Browse products</div>
             </a>
             <a href="shoppingcart.html" tabindex="">
@@ -34,18 +34,9 @@
     </div>
 
     <div class ="right-side">
-        <div class="nav">
-            <div class="userLogInReg"> <!-- TODO: når bruker er logget inn kan inputfelt erstattes med "logget inn som xxx", link til å se profilen sin og knappen bli til "Logg ut"-->
-                <a href="registerUser.html" tabindex="">
-                    <div class="link">Register as user</div>
-                </a>
-                <input type="text" class="input" id="email" placeholder="email" name="email"/>
-                <input type="text" class="input" id="password" placeholder="password" name="password"/>
-                <button id="logOnbtn">Log in as user</button>
-                <br/>
-                <span id='failedLogIn'>Incorrect logininfo</span>
-            </div>
+        <div id="nav">
         </div>
+        <span id='failedLogIn'>Incorrect logininfo</span>
     </div>
 </div>
 
@@ -54,28 +45,28 @@
 
     </div>
 
-    <div class="bottomnav">
+<div class="bottomnav">
 
-        <div class ="left-side">
-            <p>Contact info: webshop@webshop.com</p>
-        </div>
-
-        <div class ="right-side">
-            <div class="nav">
-                <div class="adminLogInReg">
-
-                    <input type="text" class="input" id="adminusername" placeholder="username" name="adminusername"/>
-                    <input type="text" class="input" id="adminpassword" placeholder="password" name="adminpassword"/>
-                    <button id="adminlogOnbtn">Log in as admin</button>
-                    <br/>
-                    <span id='adminfailedLogIn'>Incorrect logininfo</span>
-                </div>
-
-
-            </div>
-        </div>
-
+    <div class ="left-side">
+        <p>Contact info: webshop@webshop.com</p>
     </div>
+
+    <div class ="right-side">
+        <div class="nav">
+            <div class="adminLogInReg">
+
+                <input type="text" class="input" id="adminusername" placeholder="username" name="adminusername"/>
+                <input type="text" class="input" id="adminpassword" placeholder="password" name="adminpassword"/>
+                <button id="adminlogOnbtn">Log in as admin</button>
+                <br/>
+                <span id='adminfailedLogIn'>Incorrect logininfo</span>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
 
 </body>
 </html>

@@ -18,36 +18,27 @@
 </head>
 <body>
 
-    <div class="topnav">
-        <div class="left-side">
-            <div class="links">
-                <a href="index.html" class="active" tabindex="">
-                    <div class="link">Browse products</div>
-                </a>
-                <a href="shoppingcart.html" tabindex="">
-                    <div class="link">Shoppingcart</div>
-                </a>
-                <a href="checkout.html" tabindex="">
-                    <div class="link">Checkout</div>
-                </a>
-            </div>
-        </div>
-
-        <div class ="right-side">
-            <div class="nav">
-                <div class="userLogInReg"> <!-- TODO: når bruker er logget inn kan inputfelt erstattes med "logget inn som xxx", link til å se profilen sin og knappen bli til "Logg ut"-->
-                    <a href="registerUser.html" tabindex="">
-                        <div class="link">Register as user</div>
-                    </a>
-                    <input type="text" class="input" id="email" placeholder="email" name="email"/>
-                    <input type="text" class="input" id="password" placeholder="password" name="password"/>
-                    <button id="logOnbtn">Log in as user</button>
-                    <br/>
-                    <span id='failedLogIn'>Incorrect logininfo</span>
-                </div>
-            </div>
+<div class="topnav">
+    <div class="left-side">
+        <div class="links">
+            <a href="index.html" tabindex="">
+                <div class="link">Browse products</div>
+            </a>
+            <a href="shoppingcart.html" tabindex="">
+                <div class="link">Shoppingcart</div>
+            </a>
+            <a href="checkout.html" tabindex="">
+                <div class="link">Checkout</div>
+            </a>
         </div>
     </div>
+
+    <div class ="right-side">
+        <div id="nav">
+        </div>
+        <span id='failedLogIn'>Incorrect logininfo</span>
+    </div>
+</div>
 
     <div class="container">
         <br/><br/>

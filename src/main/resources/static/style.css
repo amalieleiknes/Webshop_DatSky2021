@@ -2,7 +2,6 @@
 .topnav, .bottomnav{
     background-color: #1d3064;
     color: white;
-    position: fixed;
     width: 100%;
     margin: 0;
     z-index: 1;
@@ -11,10 +10,12 @@
 
 .topnav{
     top: 0;
+    position: fixed;
 }
 
 .bottomnav {
     bottom: 0;
+    overflow: hidden;
 }
 
 .topnav a{
@@ -87,6 +88,13 @@
     float: right;
     margin-right: 20px;
     text-align: center;
+}
+
+.productSpecificationContainer {
+    width: 50%;
+    margin-left: 15%;
+    margin-top: 10%;
+    margin-bottom: 10%;
 }
 
 

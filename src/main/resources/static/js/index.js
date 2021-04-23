@@ -20,6 +20,8 @@ $(function(){
                     "<img class='card-img' src='" + product.imageUrl + "' alt='img of a product' width='250' height='250'/>" +
                     "</br>" +
                     "<p class='card-description'>" + product.shortDescription + "</p>" +
+                    "</br>" +
+                    "<p class='card-price'>" + product.price + "</p>" +
                     "<a id='goToProduct' href='productpage.html?productID=" + product.productID + "' class='btn btn-primary'>Go to product</a>" +
                     "</div>" +
                     "</div>";
