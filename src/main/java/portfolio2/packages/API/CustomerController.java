@@ -43,4 +43,10 @@ public class CustomerController {
         return CustomerRegister.getCustomerRegister();
     }
 
+
+    @PostMapping("/logOutCustomer")
+    public void logOutCustomer(String email){
+
+    }
+
 }

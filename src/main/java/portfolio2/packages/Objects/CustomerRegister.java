@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class CustomerRegister {
 
     static Customer cust1;
-    static Customer cust2;
 
     // testing info
     public static void initialize() {

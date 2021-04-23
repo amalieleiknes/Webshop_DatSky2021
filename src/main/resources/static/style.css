@@ -83,9 +83,9 @@
     padding-left: 30px;
 }
 
-.nav{
+.nav, .userLogInReg{
     float: right;
-    margin-right: 100px;
+    margin-right: 20px;
     text-align: center;
 }
 
