@@ -16,15 +16,15 @@ public class ProductController {
         return ProductRegister.getProductByID(productID);
     }
 
+    @GetMapping("/getShoppingcart")
+    public ArrayList<Product> getShoppingcart(){
+        return ShoppingCart.getProductList();
+    }
+
     @GetMapping("/")
     public ArrayList<Product> getAllProducts(){
         return ProductRegister.getProductRegister();
     }
 
 
-    @GetMapping("/getShoppingcart")
-    public ArrayList<Product> getShoppingcart(){
-        return ShoppingCart.getProductList();
-    }
-    
 }

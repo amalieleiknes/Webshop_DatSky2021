@@ -1,7 +1,7 @@
 "use strict";
 $(function(){
 
-   // getting one product
+    // getting one product
 
 
 

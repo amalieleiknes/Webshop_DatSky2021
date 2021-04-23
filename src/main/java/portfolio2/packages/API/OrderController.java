@@ -18,7 +18,7 @@ public class OrderController {
         return OrderRegister.getOrderByID(orderID);
     }
 
-    @GetMapping("/")
+    @GetMapping("/getAllOrders")
     public ArrayList<Order> getAllOrders(){
         return OrderRegister.getOrderlist();
     }

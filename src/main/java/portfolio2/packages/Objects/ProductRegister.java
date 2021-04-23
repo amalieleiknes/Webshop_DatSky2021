@@ -9,11 +9,22 @@ import java.util.ArrayList;
 public class ProductRegister {
 
     static Product product1;
+    static Product product2;
+    static Product product3;
 
     public static void initialize() {
-        product1 = new Product(1, "kaffe", "en pose med kaffi",
-                "en stor pose med kaffi", 35.00, "../images/kaffe.jpg");
+        product1 = new Product(1, "norsk kaffe", "en norsk pose med kaffi",
+                "en stor pose med lokal kaffi", 35.00, "images/kaffe.jpg");
 
+        product2 = new Product(2, "svensk kaffe", "en svensk pose med kaffi",
+                "en stor pose med kaffi", 15.00, "images/kaffe.jpg");
+
+        product3 = new Product(3, "brasiliansk kaffe", "en pose med god kaffi",
+                "en stor pose med digg kaffi", 85.00, "images/kaffe.jpg");
+
+        productRegister.add(product1);
+        productRegister.add(product2);
+        productRegister.add(product3);
     }
 
     private static ArrayList<Product> productRegister = new ArrayList<>();

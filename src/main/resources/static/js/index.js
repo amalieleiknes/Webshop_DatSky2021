@@ -2,80 +2,33 @@
 $(function(){
     getAllProducts();
 
-    $("#adminfailedLogIn").hide();
-    $("#failedLogIn").hide();
+    // function to print out all prducts on the startpage
+    function getAllProducts() {
+        $.get("/products/", function(allProducts){
+            let productCardElement = document.getElementById("card-container");
 
-    // check customers login-info
-    $("#logOnbtn").click(function() {
+            $.each(allProducts, function(counter, product) {
 
-        console.log("logging in...")
+                const card = document.createElement("div");
+                card.classList.add('card-body');
 
-        const email = $("#email").val();
-        const password = $("#password").val();
+                let cardContent =
+                    "<div class='card' id='" + product.productID + "' style='width:30%; padding: 5px; display: inline-block; margin: 1.5%;' >" +
+                    "<div class='card-body' style='padding: 10px;'" +
+                    "<h5 class='card-title'>" + product.name + "</h5>" +
+                    "</br>" +
+                    "<img class='card-img' src='" + product.imageUrl + "' alt='img of a product' width='250' height='250'/>" +
+                    "</br>" +
+                    "<p class='card-description'>" + product.shortDescription + "</p>" +
+                    "<a id='goToProduct' href='productpage.html?productID=" + product.productID + "' class='btn btn-primary'>Go to product</a>" +
+                    "</div>" +
+                    "</div>";
 
-        // if input fields are empty, show failedmsg
-        if(email.length === 0 || email === ' ' || email === null || password.length === 0){
-            $("#failedLogIn").show();
-        }
-        else{
-            $("#failedLogIn").hide();
+                productCardElement.innerHTML += cardContent;
 
-            let userLoggingIn = {
-                email: email,
-                password: password
-            }
-            // else, send userinfo into API and find out if the info is correct
-            $.post("/customers/logOnCustomer", userLoggingIn, function(customer) {
-                console.log("trying to set cookie...")
-                setCookie("email", email, 1);
-                setCookie("userID", customer.customerID, 1);
             });
-        }
-    });
-
-
-
-    // check customers login-info
-    $("#adminlogOnbtn").click(function() {
-
-        console.log("logging in admin...")
-
-        const adminusername = $("#adminusername").val();
-        const adminpassword = $("#adminpassword").val();
-
-        // if input fields are empty, show failedmsg
-        if(adminusername.length === 0 || adminusername === ' ' || adminusername === null || adminpassword.length === 0){
-            $("#adminfailedLogIn").show();
-        }
-        else{
-            $("#adminfailedLogIn").hide();
-
-            if(adminusername === "admin" && adminpassword === "admin"){
-                console.log("trying to set cookie...")
-                setCookie("adminusername", adminusername, 1);
-                setCookie("adminpassword", adminpassword, 1);
-                window.location.href= 'adminPage.js';
-            }
-        }
-    });
-
-
-    function getAllProducts(){
-
-        $.get("/getAllProducts", function(products){
-            let output = "<table class='products'>";
-
-            for (const product of products){
-                output +=
-                    "<tr>" +
-                    "<td>" + product.name + "</td>" +
-                    "</tr>";
-            }
-            output += "</table>";
-            $("#allProducts").empty().html(output);
         });
     }
-
 
 
 });
