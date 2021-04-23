@@ -22,11 +22,7 @@
         <div class="left-side">
 
             <div class="links">
-                <a href="registerUser.html" tabindex="">
-                    <div class="link">Register as user</div>
-                </a>
-
-                <a href="index.html" tabindex="">
+                <a href="index.html" class="active" tabindex="">
                     <div class="link">Browse products</div>
                 </a>
 
@@ -43,10 +39,15 @@
 
         <div class ="right-side">
             <div class="nav">
-                <div class="userLogInReg"> <!-- TODO: når bruker er logget inn kan inputfelt erstattes med "logget inn som xxx" og knappen bli til "Logg ut"-->
+                <div class="userLogInReg"> <!-- TODO: når bruker er logget inn kan inputfelt erstattes med "logget inn som xxx", link til å se profilen sin og knappen bli til "Logg ut"-->
+                    <a href="registerUser.html" tabindex="">
+                        <div class="link">Register as user</div>
+                    </a>
+
                     <input type="text" class="form-control" id="email" placeholder="email" name="email"/>
                     <input type="text" class="form-control" id="password" placeholder="password" name="password"/>
                     <button id="logOnbtn">Log in as user</button>
+                    <br/>
                     <span id='failedLogIn'>Incorrect logininfo</span>
 
                 </div>
@@ -77,11 +78,12 @@
 
             <div class ="right-side">
                 <div class="nav">
-                    <div class="userLogInReg">
+                    <div class="adminLogInReg">
 
                     <input type="text" class="form-control" id="adminusername" placeholder="username" name="adminusername"/>
                     <input type="text" class="form-control" id="adminpassword" placeholder="password" name="adminpassword"/>
                     <button id="adminlogOnbtn">Log in as admin</button>
+                        <br/>
                     <span id='adminfailedLogIn'>Incorrect logininfo</span>
                     </div>
 

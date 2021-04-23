@@ -13,10 +13,50 @@
     <script src="js/utils/cookieUtils.js"></script>
 
     <link rel="Stylesheet" type="text/css" href="style.css">
-    <title>Webshop</title>
+    <title>Webshop - cart</title>
 </head>
 
 <body>
+
+    <div class="topnav">
+
+    <div class="left-side">
+
+        <div class="links">
+            <a href="index.html" tabindex="">
+                <div class="link">Browse products</div>
+            </a>
+
+            <a href="shoppingcart.html" class="active" tabindex="">
+                <div class="link">Shoppingcart</div>
+            </a>
+
+            <a href="checkout.html" tabindex="">
+                <div class="link">Checkout</div>
+            </a>
+        </div>
+
+    </div>
+
+    <div class ="right-side">
+        <div class="nav">
+            <div class="userLogInReg"> <!-- TODO: når bruker er logget inn kan inputfelt erstattes med "logget inn som xxx" og knappen bli til "Logg ut"-->
+                <a href="registerUser.html" tabindex="">
+                    <div class="link">Register as user</div>
+                </a>
+
+                <input type="text" class="form-control" id="email" placeholder="email" name="email"/>
+                <input type="text" class="form-control" id="password" placeholder="password" name="password"/>
+                <button id="logOnbtn">Log in as user</button>
+                <br/>
+                <span id='failedLogIn'>Incorrect logininfo</span>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
 
     <div class="content">
 
@@ -30,6 +70,29 @@
             <!-- TODO: kan ha med at egentlig kostnad blir strøket over, og at 0-beløpet blir fremhevet?-->
             <div class="totalCost"></div>
 
+        </div>
+
+    </div>
+
+    <div class="bottomnav">
+
+        <div class ="left-side">
+            <p>Contact info: webshop@webshop.com</p>
+        </div>
+
+        <div class ="right-side">
+            <div class="nav">
+                <div class="adminLogInReg">
+
+                    <input type="text" class="form-control" id="adminusername" placeholder="username" name="adminusername"/>
+                    <input type="text" class="form-control" id="adminpassword" placeholder="password" name="adminpassword"/>
+                    <button id="adminlogOnbtn">Log in as admin</button>
+                    <br/>
+                    <span id='adminfailedLogIn'>Incorrect logininfo</span>
+                </div>
+
+
+            </div>
         </div>
 
     </div>

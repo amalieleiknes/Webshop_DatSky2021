@@ -19,7 +19,6 @@
 
 .topnav a{
     color: white;
-    text-align: center;
 }
 
 /* Top-navigation-bar links on mouse-over */
@@ -33,24 +32,20 @@
 }
 
 .left-side{
-    width: 60%;
+    width: 40%;
     float: left;
     position: relative;
     height: 100%;
 }
 
 .right-side{
-    width: 40%;
+    width: 60%;
     float: right;
     position: relative;
     height: 100%;
 }
 
-.userLogInReg, .links{
-    display: inline-block;
-}
-
-.topnav .userLogInReg button, .bottomnav button{
+.topnav button, .bottomnav button{
     padding: 5px;
     margin: 5px 5px;
     border: none;
@@ -59,23 +54,26 @@
     color: #000000;
     font-size: 20px;
     border-radius: 10px;
+    width: 180px;
 }
 
-.topnav .form-control, .bottomnav .form-control{
-    padding: 2px;
-    margin: 8px;
+.form-control{
+    padding: 5px;
+    margin: 10px;
     font-size: 20px;
     border-radius: 5px;
     width: 130px;
 }
 
 
-.link, .bottomnav .left-side p{
+.link, .bottomnav, .topnav {
     padding: 15px 30px;
     font-size: 20px;
-    text-align: center;
     display: inline-block;
     transition: 0.3s;
+}
+.left-side p{
+    padding-left: 30px;
 }
 
 .nav{

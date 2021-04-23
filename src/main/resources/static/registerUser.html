@@ -2,9 +2,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/utils/cookieUtils.js"></script>
+
+    <link rel="Stylesheet" type="text/css" href="style.css">
+    <title>Webshop - register user</title>
 </head>
 <body>
+
+    <div class="topnav">
+
+    <div class="left-side">
+
+        <div class="links">
+            <a href="index.html" tabindex="">
+                <div class="link">Browse products</div>
+            </a>
+
+            <a href="shoppingcart.html" tabindex="">
+                <div class="link">Shoppingcart</div>
+            </a>
+
+            <a href="checkout.html" tabindex="">
+                <div class="link">Checkout</div>
+            </a>
+        </div>
+
+    </div>
+
+    <div class ="right-side">
+        <div class="nav">
+            <div class="userLogInReg"> <!-- TODO: når bruker er logget inn kan inputfelt erstattes med "logget inn som xxx" og knappen bli til "Logg ut"-->
+                <a href="registerUser.html" class="active" tabindex="">
+                    <div class="link">Register as user</div>
+                </a>
+
+                <input type="text" class="form-control" id="email" placeholder="email" name="email"/>
+                <input type="text" class="form-control" id="password" placeholder="password" name="password"/>
+                <button id="logOnbtn">Log in as user</button>
+                <br/>
+                <span id='failedLogIn'>Incorrect logininfo</span>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+    <div class="regUserContent">
+
+
+    </div>
+
+    <div class="bottomnav">
+
+        <div class ="left-side">
+            <p>Contact info: webshop@webshop.com</p>
+        </div>
+
+        <div class ="right-side">
+            <div class="nav">
+                <div class="adminLogInReg">
+
+                    <input type="text" class="form-control" id="adminusername" placeholder="username" name="adminusername"/>
+                    <input type="text" class="form-control" id="adminpassword" placeholder="password" name="adminpassword"/>
+                    <button id="adminlogOnbtn">Log in as admin</button>
+                    <br/>
+                    <span id='adminfailedLogIn'>Incorrect logininfo</span>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
 
 </body>
 </html>
