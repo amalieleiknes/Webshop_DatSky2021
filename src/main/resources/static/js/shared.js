@@ -8,6 +8,7 @@ $(function() {
     let navCardElement = document.getElementById("nav");
     let content;
 
+    // checking if customer is logged in or not, and then gives the dynamic navigationcontent based on this info
     if(emailcookie==="" && customerIDcookie === ""){
         content =
             "<div class='userLogInReg'>" +
@@ -20,7 +21,6 @@ $(function() {
                 "<br/>" +
             "</div>"
     }
-
     else{
         content =
             "<div class='userLogInReg'>" +
@@ -28,77 +28,70 @@ $(function() {
             "</div>";
 
     }
-
     navCardElement.innerHTML = content;
 
 
-$("#logOutbtn").click(function(){
-    $(location).attr('href', 'index.html');
-    setCookie("email", null, 0);
-    setCookie("customerID", null, 0);
-    deleteCustomerCookie();
-    location.reload();
-});
+    //logging out customer/admin
+    $("#logOutbtn").click(function(){
+        $(location).attr('href', 'index.html');
+        setCookie("email", null, 0);
+        setCookie("customerID", null, 0);
+        deleteCustomerCookie();
+        location.reload();
+    });
 
-// check customers login-info
-$("#logOnbtn").click(function() {
+    // check customers login-info
+    $("#logOnbtn").click(function() {
 
-    console.log("logging in...")
+        console.log("logging in...")
 
-    const email = $("#email").val();
-    const password = $("#password").val();
+        const email = $("#email").val();
+        const password = $("#password").val();
 
-    // if input fields are empty, show failedmsg
-    if(email.length === 0 || email === ' ' || email === null || password.length === 0){
-        $("#failedLogIn").show();
-    }
-    else{
-        $("#failedLogIn").hide();
-
-        let userLoggingIn = {
-            email: email,
-            password: password
+        // if input fields are empty, show failedmsg
+        if(email.length === 0 || email === ' ' || email === null || password.length === 0){
+            $("#failedLogIn").show();
         }
-        // else, send userinfo into API and find out if the info is correct
-        $.post("/customers/logOnCustomer", userLoggingIn, function(customer) {
-            if(customer=== null){
-                $("#failedLogIn").show();
+        else{
+            $("#failedLogIn").hide();
+
+            let userLoggingIn = {
+                email: email,
+                password: password
             }
-            else{
-                $("#failedLogIn").hide();
-                setCookie("email", email, 1);
-                setCookie("customerID", customer.customerID, 1);
-                location.reload();
-            }
-        });
-    }
-});
-
-// check admins login-info TODO: not great security
-$("#adminlogOnbtn").click(function() {
-
-    console.log("logging in admin...")
-
-
-
-    const adminusername = $("#adminusername").val();
-    const adminpassword = $("#adminpassword").val();
-
-    // if input fields are empty, show failedmsg
-    if(adminusername.length === 0 || adminusername === ' ' || adminusername === null || adminpassword.length === 0){
-        $("#adminfailedLogIn").show();
-    }
-    else{
-        $("#adminfailedLogIn").hide();
-
-        if(adminusername === "admin" && adminpassword === "admin"){
-            console.log("trying to set cookie...")
-            setCookie("adminusername", adminusername, 1);
-            setCookie("adminpassword", adminpassword, 1);
-            window.location.href= 'adminPage.js';
+            // else, send userinfo into API and find out if the info is correct
+            $.post("/customers/logOnCustomer", userLoggingIn, function(customer) {
+                if(customer=== null){
+                    $("#failedLogIn").show();
+                }
+                else{
+                    $("#failedLogIn").hide();
+                    setCookie("email", email, 1);
+                    setCookie("customerID", customer.customerID, 1);
+                    location.reload();
+                }
+            });
         }
-    }
-});
+    });
 
+    // check admins login-info TODO: ikke bra sikkerhet. Bør sjekkes i java kanskje?
+    $("#adminlogOnbtn").click(function() {
+        const adminusername = $("#adminusername").val();
+        const adminpassword = $("#adminpassword").val();
 
+        // if input fields are empty, show failedmsg
+        if(adminusername.length === 0 || adminusername === ' ' || adminusername === null || adminpassword.length === 0){
+            $("#adminfailedLogIn").show();
+        }
+        else{
+            $("#adminfailedLogIn").hide();
+
+            if(adminusername === "admin" && adminpassword === "admin"){
+                console.log("trying to set cookie...")
+                setCookie("adminusername", adminusername, 1);
+                setCookie("adminpassword", adminpassword, 1);
+                window.location.href= 'adminPage.js';
+            }
+        }
+    });
 });
