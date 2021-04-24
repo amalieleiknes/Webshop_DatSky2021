@@ -3,36 +3,43 @@ package portfolio2.packages.Objects;
 import java.util.ArrayList;
 
 public class ShoppingCart {
-    private static ArrayList<Product> productList = new ArrayList<>();
+    private static ArrayList<Product> shoppingcartList = new ArrayList<>();
 
     public static ArrayList<Product> getProductList() {
-        return productList;
+        return shoppingcartList;
     }
 
-    public static void addProductToShoppingCart(Product product){
-        productList.add(product);
+    public static boolean addProductToShoppingCart(int productID){
+        boolean added = false;
+        for(Product p : ProductRegister.getProductRegister()){
+            if(productID == p.getProductID()){
+                shoppingcartList.add(p);
+                added = true;
+            }
+        }
+        return added;
     }
 
     public static void deleteProductFromShoppingCart(Product product){
         if(product == null){
             return;
         }
-        for(Product p : productList){
+        for(Product p : shoppingcartList){
             if(product.equals(p)){
-                productList.remove(product);
+                shoppingcartList.remove(product);
             }
         }
     }
 
     public static double getTotalPrice(){
         double total = 0.0;
-        for(Product p : productList){
+        for(Product p : shoppingcartList){
             total += p.getPrice();
         }
         return total;
     }
 
     public static int getNumberOfProductsInCart(){
-        return productList.size();
+        return shoppingcartList.size();
     }
 }

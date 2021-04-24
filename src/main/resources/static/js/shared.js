@@ -2,6 +2,8 @@
 $(function() {
     $("#adminfailedLogIn").hide();
     $("#failedLogIn").hide();
+    $("#failedProductAddtoCart").hide();
+
 
     let emailcookie = getCookie("email");
     let customerIDcookie = getCookie("customerID")

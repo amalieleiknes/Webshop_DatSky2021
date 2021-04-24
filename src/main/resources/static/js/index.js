@@ -24,9 +24,24 @@ $(function(){
                     "</br>" +
                     "<p class='card-price'>" + product.price + "</p>" +
                     "<a id='goToProduct' href='productpage.html?productID=" + product.productID + "' class='btn btn-primary'>Go to product</a>" +
-                    "<button id='addToCart'>Add to cart</button>" +
+                    "</br>" +
+                    "<button class='btn btn-primary' onclick='addToCart()' id='addToCartbtn' >Add to cart</button>" +
                     "</div>" +
-                    "</div>";
+                    "</div>" +
+
+                    // TODO: denne fungerer heller ikke som ønsket. Skjer ingenting når knappen trykkes
+                    // adding product to cart if button is pressed
+                    "<script>" +
+                        "function addToCart(){" +
+                            "console.log('Inni add to cart');" +
+                            "$.post('/cart/addToCart/" + product.productID + "', function(added){" +
+                                "if(added===false){" +
+                                    "$('#failedProductAddtoCart').show();" +
+                                "}" +
+                            "});" +
+                        "}" +
+                    "</script>"
+                ;
 
                 productCardElement.innerHTML += cardContent;
 
@@ -34,17 +49,14 @@ $(function(){
         });
     }
 
-    // TODO: finne produktID til produktet tilhørende knappen og sende det inn i java så produktet legges til i array
-    // adding product to cart if button is pressed
-    $("#addToCart").click(function(){
-        $.post("/cart/addToCart", function(){
 
-        });
+    // TODO: fungerer ikke atm? fordi vi ikke har definert btn i html men at den er dynamisk
+    $("addToCartbtn").click(function() {
         getNumberofItemsInCart();
+        console.log("updating shoppingcart");
     });
 
-
-    // function to print out all prducts on the startpage
+    // function to print out all prducts on the startpage (OK)
     function getNumberofItemsInCart() {
         $.get("/cart/", function(numberOfProducts){
             let element = document.getElementById("numberOfCartItems");

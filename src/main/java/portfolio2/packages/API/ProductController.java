@@ -11,6 +11,7 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("/products")
 public class ProductController {
+
     @GetMapping("/{productID}")
     public Product getProductByID(@PathVariable int productID){
         return ProductRegister.getProductByID(productID);
