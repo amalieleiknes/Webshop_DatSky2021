@@ -22,6 +22,12 @@
     color: white;
 }
 
+.cartOverview{
+    margin-top: 1%;
+    margin-right: 5%;
+    float: right;
+}
+
 /* Top-navigation-bar links on mouse-over */
 .topnav a:hover {
     background-color: #1d3040;

@@ -33,7 +33,6 @@ public class ShoppingCart {
     }
 
     public static int getNumberOfProductsInCart(){
-        int number = productList.size();
-        return number;
+        return productList.size();
     }
 }
