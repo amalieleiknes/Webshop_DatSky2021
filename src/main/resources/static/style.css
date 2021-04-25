@@ -23,9 +23,18 @@
 }
 
 .cartOverview{
-    margin-top: 1%;
     margin-right: 5%;
     float: right;
+    position: sticky;
+    display: inline-block;
+}
+
+img{
+    vertical-align: middle;
+}
+
+.numberOfCartItems{
+    border: none;
 }
 
 /* Top-navigation-bar links on mouse-over */

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 // kan ikke ha requestbody når vi skal bruke et post-kall
 @RestController
+
 public class CartController {
 
     @GetMapping("/cart/")
@@ -20,7 +21,7 @@ public class CartController {
         return ShoppingCart.getProductList();
     }
 
-    @PostMapping("/addToCart/{productID}")
+    @GetMapping("/cart/addToCart/{productID}")
     public boolean addToCart(@PathVariable int productID){
         return ShoppingCart.addProductToShoppingCart(productID);
     }
