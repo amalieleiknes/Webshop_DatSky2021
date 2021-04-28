@@ -1,18 +1,24 @@
 package portfolio2.packages.API;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.web.bind.annotation.*;
+import portfolio2.packages.DAL.CustomerRepository;
 import portfolio2.packages.Objects.Customer;
-import portfolio2.packages.Objects.CustomerRegister;
 import portfolio2.packages.Objects.Order;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 @RestController
 @RequestMapping(value = "/customers")
 public class CustomerController {
 
+    @Autowired
+    CustomerRepository repository;
+
+/*
     @GetMapping("/{customerID}")
     public Customer getCustomerByID(@PathVariable String customerID){
         return CustomerRegister.getCustomerByID(customerID);
@@ -37,10 +43,20 @@ public class CustomerController {
         }
         return cust;
     }
+*/
 
-    @GetMapping("/getAllCustomers")
-    public ArrayList<Customer> getAllCustomers(){
-        return CustomerRegister.getCustomerRegister();
+    @GetMapping("/getCustomers")
+    public List<Customer> getCustomers() {
+        return repository.getCustomers();
+    }
+
+    @PostMapping("/addCustomer")
+    public String addCustomer(Customer customer){
+        if(customer == null){
+            return "Could not add customer (customer is null)";
+        }
+        repository.addCustomer(customer);
+        return "Customer added succsessfull";
     }
 
 
@@ -48,5 +64,6 @@ public class CustomerController {
     public void logOutCustomer(String email){
 
     }
+
 
 }

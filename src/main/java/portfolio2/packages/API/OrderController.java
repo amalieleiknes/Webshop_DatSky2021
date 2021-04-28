@@ -1,25 +1,44 @@
 package portfolio2.packages.API;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import portfolio2.packages.DAL.OrderRepository;
 import portfolio2.packages.Objects.Order;
-import portfolio2.packages.Objects.OrderRegister;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping("/order")
 public class OrderController {
+
+    @Autowired
+    OrderRepository repository;
+/*
 
     @GetMapping("/{orderID}")
     public Order getOrderByID(@PathVariable String orderID){
         return OrderRegister.getOrderByID(orderID);
     }
+*/
 
-    @GetMapping("/getAllOrders")
-    public ArrayList<Order> getAllOrders(){
-        return OrderRegister.getOrderlist();
+    @GetMapping("/getOrderByID")
+    public Order getOrderByID(String orderID){
+        if(orderID.isBlank() || orderID.isEmpty()){
+            return null;
+        }
+        return repository.getOrderByID(orderID);
+    }
+
+    @GetMapping("/getOrders")
+    public List<Order> getAllOrders(){
+        return repository.getOrders();
+    }
+
+    @PostMapping("/addOrder")
+    public String addOrder(Order order){
+        if(order == null){
+            return "Could not add order (order is null)";
+        }
+        return repository.addOrder(order);
     }
 }
