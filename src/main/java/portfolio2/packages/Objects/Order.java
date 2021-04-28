@@ -9,6 +9,9 @@ public class Order {
     private int amount;
     private int customerID;
 
+    //POJO
+    public Order(){}
+
     public Order(String orderID, Date orderDate, Double totalPrice, int amount, int customerID) {
         this.orderID = orderID;
         this.orderDate = orderDate;

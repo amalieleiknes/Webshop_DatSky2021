@@ -1,3 +1,9 @@
+//TODO: Lar denne stå fordi vi kan ha en handlekurv som lagres i et Array,
+//todo: og når kunden har trykket på "fullfør betaling", så lagres Arrayet i databasen
+
+//todo: Dette for å unngå at databasen fylles opp med informasjon om kjøp som ikke er gjennomført
+
+/*
 package portfolio2.packages.Objects;
 
 import java.util.ArrayList;
@@ -43,3 +49,4 @@ public class ShoppingCart {
         return shoppingcartList.size();
     }
 }
+*/
