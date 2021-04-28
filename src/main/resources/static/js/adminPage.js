@@ -2,7 +2,9 @@
 $(function(){
 
     // getting all products
-
+    $.get("products/getProducts", function(products){
+        formatProductData(products)
+    });
 
 
     // function to format the table
@@ -12,7 +14,8 @@ $(function(){
             "<th>image</th><th>Change and Save</th><th>Delete</th><th>Copy</th></thead><tbody>";
         let line=1;
         $.each(products, function( key, product) {
-            table+="<tr><td><input type='text' readonly id='productID"+line+"' size='10' value='"+product.productID+"'/></td>" +
+            table+=
+                "<tr><td><input type='text' readonly id='productID"+line+"' size='10' value='"+product.productID+"'/></td>" +
                 "<td><input type='text' id='name"+line+"' value='"+product.name+"'/></td>" +
                 "<td><input type='text' id='shortDescription"+line+"' value='"+product.shortDescription+"'/></td>" +
                 "<td><input type='text' id='longDescription"+line+"' value='"+product.longDescription+"'/></td>" +

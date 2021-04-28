@@ -4,7 +4,7 @@ $(window).on('load', function(){
     let urlObject = new URL(window.location.href);
     let productID = urlObject.searchParams.get('productID');
 
-    $.get("/products/" + productID, function(product){
+    $.get("/products/getProductByID", {productID: productID}, function(product){
 
         // printing out the one product that is chosen
         let productcontent = document.getElementById("productcontent");
@@ -15,11 +15,12 @@ $(window).on('load', function(){
         // getting the content of the product
         let content;
         if(product.name!=="") {
+            console.log("Inne i formater-produktinfo", product);
             content =
                 "<div class='product' style='width:80%; padding: 5px; display: inline-block; margin: 1.5%;'>" +
-                    "<h2 class='card-title'>" + product.name + "</h2>" +
+                    "<h2 class='card-title'>" + product.productName + "</h2>" +
                     "</br>" +
-                    "<img class='card-img' src='" + product.imageUrl + "' alt='img of a product' width='300px' height='300px'/>" +
+                    "<img class='card-img' src='" + product.imageURL + "' alt='img of a product' width='300px' height='300px'/>" +
                     "</br>" +
                     "<p>Description of the product:</p>" +
                     "</br>" +

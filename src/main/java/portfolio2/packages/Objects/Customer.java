@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class Customer{
 
-    private final String customerID;
+    private String customerID;
     private String firstname;
     private String lastname;
     private String address;
@@ -16,9 +16,12 @@ public class Customer{
     private String email;
     private String password;
 
+    //POJO
+    public Customer(){}
+
     public Customer(String firstname, String lastname, String address, String postnumber, String postoffice,
                     String tlphNumber, String email, String password) {
-        this.customerID = UUID.randomUUID().toString();;
+        this.customerID = UUID.randomUUID().toString();
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;

@@ -6,7 +6,7 @@ $(function() {
 
 
     let emailcookie = getCookie("email");
-    let customerIDcookie = getCookie("customerID")
+    let customerIDcookie = getCookie("customerID");
     let navCardElement = document.getElementById("nav");
     let content;
 
@@ -92,7 +92,7 @@ $(function() {
                 console.log("trying to set cookie...")
                 setCookie("adminusername", adminusername, 1);
                 setCookie("adminpassword", adminpassword, 1);
-                window.location.href= 'adminPage.js';
+                window.location.href= 'adminPage.html';
             }
         }
     });
