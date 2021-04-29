@@ -3,7 +3,6 @@
 
 //todo: Dette for å unngå at databasen fylles opp med informasjon om kjøp som ikke er gjennomført
 
-/*
 package portfolio2.packages.Objects;
 
 import java.util.ArrayList;
@@ -15,15 +14,14 @@ public class ShoppingCart {
         return shoppingcartList;
     }
 
-    public static boolean addProductToShoppingCart(int productID){
-        boolean added = false;
-        for(Product p : ProductRegister.getProductRegister()){
-            if(productID == p.getProductID()){
-                shoppingcartList.add(p);
-                added = true;
-            }
+    public static boolean addProductToShoppingCart(Product product){
+        try{
+            shoppingcartList.add(product);
+            return true;
         }
-        return added;
+        catch(Exception e){
+            return false;
+        }
     }
 
     public static void deleteProductFromShoppingCart(Product product){
@@ -49,4 +47,3 @@ public class ShoppingCart {
         return shoppingcartList.size();
     }
 }
-*/

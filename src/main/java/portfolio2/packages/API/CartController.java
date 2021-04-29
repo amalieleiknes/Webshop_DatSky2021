@@ -2,8 +2,9 @@ package portfolio2.packages.API;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import portfolio2.packages.DAL.CartRepository;
+import portfolio2.packages.DAL.ProductRepository;
 import portfolio2.packages.Objects.Product;
+import portfolio2.packages.Objects.ShoppingCart;
 
 import java.util.ArrayList;
 
@@ -13,21 +14,25 @@ import java.util.ArrayList;
 public class CartController {
 
     @Autowired
-    CartRepository repository;
+    ProductRepository repository;
 
     @GetMapping("/cart/")
     public int getNumberOfCartItems(){
-        return 1;
+        return ShoppingCart.getNumberOfProductsInCart();
     }
 
     @GetMapping("/cart/allItems")
     public ArrayList<Product> getAllCartItems(){
-        return null;
+        return ShoppingCart.getProductList();
     }
 
     @GetMapping("/cart/addToCart/{productID}")
     public boolean addToCart(@PathVariable int productID){
+        for(Product p : repository.getProducts()){
+            if(productID == p.getProductID()){
+                return ShoppingCart.addProductToShoppingCart(p);
+            }
+        }
         return false;
     }
-
 }
