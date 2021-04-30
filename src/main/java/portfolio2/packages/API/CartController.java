@@ -31,16 +31,11 @@ public class CartController {
         }
         return cart.getProductsInCart().size();
     }
-
     @GetMapping("/cart/allItems")
     public ArrayList<Product> getAllCartItems() {
         return null;
     }
 
-    /*    @GetMapping("/cart/addToCart/{productID}")
-        public boolean addToCart(@PathVariable int productID){
-            return false;
-        }*/
     @PostMapping("/addPurchaseToDatabase")
     public String addPurchaseToDatabase(String customerID, Cart cart) {
         if (customerID.isBlank() || customerID.isEmpty()) {
@@ -49,7 +44,7 @@ public class CartController {
         if (cart == null) {
             return "Not a valid cart (cart is null)";
         }
-        cartRepository.addPurchaseToDatabase(cart, customerID);
+        //cartRepository.addPurchaseToDatabase(cart, customerID);
         return "OK";
     }
 
@@ -75,17 +70,4 @@ public class CartController {
         return "Customers list has " + cart.getProductsInCart().size() + " products in it.";
     }
 }
-/*
-        List<Product> sessionObjectBEFORE = (List<Product>)request.getSession().getAttribute("CART");
-
-        List<Product> cart = new ArrayList<>();
-        Product productToAdd = new Product(1337,"Kaffegrut","Fakka kaffe","Wow much coffee",42,"");
-        cart.add(productToAdd);
-
-
-        request.getSession().setAttribute("CART",cart);
-
-
-        List<Product> sessionObject = (List<Product>)request.getSession().getAttribute("CART");*/
-
 
