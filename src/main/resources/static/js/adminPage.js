@@ -16,7 +16,7 @@ $(function(){
         $.each(products, function( key, product) {
             table+=
                 "<tr><td><input type='text' readonly id='productID"+line+"' size='10' value='"+product.productID+"'/></td>" +
-                "<td><input type='text' id='name"+line+"' value='"+product.name+"'/></td>" +
+                "<td><input type='text' id='name"+line+"' value='"+product.productName+"'/></td>" +
                 "<td><input type='text' id='shortDescription"+line+"' value='"+product.shortDescription+"'/></td>" +
                 "<td><input type='text' id='longDescription"+line+"' value='"+product.longDescription+"'/></td>" +
                 "<td><input type='text' id='price"+line+"' value='"+product.price+"'/></td>"+

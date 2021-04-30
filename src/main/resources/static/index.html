@@ -17,34 +17,6 @@
 </head>
 
 <body>
-
-<script>
-    function addToCart(productID){
-        console.log('Inni add to cart');
-        console.log(productID);
-        $.get('/cart/addToCart/' + productID, function(added){
-            if(added===false){
-                $('#failedProductAddtoCart').show();
-            }
-            else{
-                getNumberofItemsInCart();
-                console.log("updating shoppingcart");
-            }
-        });
-    }
-
-    // function to print out all prducts on the startpage
-    function getNumberofItemsInCart() {
-        $.get("/cart/", function(numberOfProducts){
-            let element = document.getElementById("cartOverview");
-
-            element.innerHTML =
-                "<img src='images/cart.png' alt='shoppingcart' width='50' height='50'>" +
-                "<span style='font-size: 30px'>" + numberOfProducts + "</span>";
-        });
-    }
-</script>
-
     <div class="topnav">
         <div class="left-side">
             <div class="links">
@@ -72,6 +44,8 @@
     <div class="productsContainer">
         <div id="card-container"></div>
     </div>
+<!--
+<button id="buttonaddcart">KNAPP</button>-->
 
     <div class="bottomnav">
 

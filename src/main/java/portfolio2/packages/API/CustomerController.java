@@ -19,31 +19,31 @@ public class CustomerController {
     CustomerRepository repository;
 
 /*
-    @GetMapping("/{customerID}")
-    public Customer getCustomerByID(@PathVariable String customerID){
-        return CustomerRegister.getCustomerByID(customerID);
-    }
-
-
     @GetMapping(value = "/{customerID}/orders", produces = { "application/hal+json"})
     public CollectionModel<Order> getaCustomersOrders(@PathVariable final String customerID){
         //List<Order> orders =
         return null;
     }
+*/
+
+    @GetMapping("/{customerID}")
+    public Customer getCustomerByID(@PathVariable String customerID){
+        return repository.getCustomerByID(customerID);
+    }
+
 
     @PostMapping("/logOnCustomer")
-    public Customer checkLogIn(String email, String password){
-        Customer cust = null;
-        ArrayList<Customer> customers = CustomerRegister.getCustomerRegister();
-
-        for(Customer c : customers){
-            if(c.getEmail().equals(email) && c.getPassword().equals(password)){
-                cust = c;
-            }
+    public Customer logOnCustomer(String email, String password){
+        if(email.isEmpty() || email.isBlank() || password.isBlank() || password.isEmpty()){
+            return null;
         }
-        return cust;
+        Customer customer = repository.getLoggedInCustomer(email, password);
+        if(customer == null){
+            return null;
+        }
+        System.out.println("CustomerID fra controller: " + customer.getCustomerID());
+        return customer;
     }
-*/
 
     @GetMapping("/getCustomers")
     public List<Customer> getCustomers() {

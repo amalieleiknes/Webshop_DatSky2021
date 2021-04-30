@@ -4,51 +4,40 @@ $(function() {
     $("#failedLogIn").hide();
     $("#failedProductAddtoCart").hide();
 
-
     let emailcookie = getCookie("email");
     let customerIDcookie = getCookie("customerID");
     let navCardElement = document.getElementById("nav");
     let content;
 
+
     // checking if customer is logged in or not, and then gives the dynamic navigationcontent based on this info
-    if(emailcookie==="" && customerIDcookie === ""){
+    if (emailcookie === "" && customerIDcookie === "") {
         content =
             "<div class='userLogInReg'>" +
                 "<a href='registerUser.html' tabIndex=''>" +
                     "<div class='link'>Register as user</div>" +
                 "</a>" +
-                "<input type='text' class='input' id='email' placeholder='email' name='email'/>" +
-                "<input type='text' class='input' id='password' placeholder='password' name='password'/>" +
-                "<button id='logOnbtn'>Log in as user</button>"+
+                "<input type='text' class='input' id='customeremail' placeholder='email' name='email'/>" +
+                "<input type='text' class='input' id='customerpassword' placeholder='password' name='password'/>" +
+                "<button id='customerLogOnBtn'>Log in as user</button>" +
                 "<br/>" +
             "</div>"
-    }
-    else{
+    } else {
         content =
             "<div class='userLogInReg'>" +
-                "<button id='logOutbtn'>Log out</button>" +
+            "<button id='logOutbtn'>Log out</button>" +
             "</div>";
 
     }
     navCardElement.innerHTML = content;
 
 
-    //logging out customer/admin
-    $("#logOutbtn").click(function(){
-        $(location).attr('href', 'index.html');
-        setCookie("email", null, 0);
-        setCookie("customerID", null, 0);
-        deleteCustomerCookie();
-        location.reload();
-    });
-
     // check customers login-info
-    $("#logOnbtn").click(function() {
+    $("#customerLogOnBtn").click(function() {
+        console.log("logging in...");
 
-        console.log("logging in...")
-
-        const email = $("#email").val();
-        const password = $("#password").val();
+        const email = $("#customeremail").val();
+        const password = $("#customerpassword").val();
 
         // if input fields are empty, show failedmsg
         if(email.length === 0 || email === ' ' || email === null || password.length === 0){
@@ -60,42 +49,81 @@ $(function() {
             let userLoggingIn = {
                 email: email,
                 password: password
-            }
+            };
             // else, send userinfo into API and find out if the info is correct
-            $.post("/customers/logOnCustomer", userLoggingIn, function(customer) {
-                if(customer=== null){
+            $.post("/customers/logOnCustomer", {email: userLoggingIn.email, password: userLoggingIn.password}, function(foundCustomer) {
+                if(foundCustomer === null){
                     $("#failedLogIn").show();
                 }
                 else{
                     $("#failedLogIn").hide();
+                    console.log("CustomerID til customer som ble funnet: ", foundCustomer.customerID);
                     setCookie("email", email, 1);
-                    setCookie("customerID", customer.customerID, 1);
+                    setCookie("customerID", foundCustomer.customerID, 1);
                     location.reload();
                 }
             });
         }
+
     });
+
+    //logging out customer/admin
+    $("#logOutbtn").click(function(){
+        logOut();
+    });
+
 
     // check admins login-info TODO: ikke bra sikkerhet. Bør sjekkes i java kanskje?
     $("#adminlogOnbtn").click(function() {
-        const adminusername = $("#adminusername").val();
-        const adminpassword = $("#adminpassword").val();
-
-        // if input fields are empty, show failedmsg
-        if(adminusername.length === 0 || adminusername === ' ' || adminusername === null || adminpassword.length === 0){
-            $("#adminfailedLogIn").show();
-        }
-        else{
-            $("#adminfailedLogIn").hide();
-
-            if(adminusername === "admin" && adminpassword === "admin"){
-                console.log("trying to set cookie...")
-                setCookie("adminusername", adminusername, 1);
-                setCookie("adminpassword", adminpassword, 1);
-                window.location.href= 'adminPage.html';
-            }
-        }
+        logOnAdmin();
     });
-
-
 });
+
+
+// function to print out all prducts on the startpage
+function getNumberofItemsInCart() {
+    console.log("In cartItems, ");
+    let customerIDcookie = getCookie("customerID");
+    console.log("CustomerID: ",customerIDcookie);
+    $.get("/getNumberOfCartItems", customerIDcookie, function(numberOfProducts){
+        console.log("Antall i cart: ", numberOfProducts);
+        let element = document.getElementById("cartOverview");
+
+        element.innerHTML =
+            "<img src='images/cart.png' alt='shoppingcart' width='50' height='50'>" +
+            "<span style='font-size: 30px'>" + numberOfProducts + "</span>";
+    });
+}
+
+function logOut(){
+    $(location).attr('href', 'index.html');
+    setCookie("email", null, 0);
+    setCookie("customerID", null, 0);
+    deleteCustomerCookie();
+    location.reload();
+}
+
+function logOnAdmin(){
+    const adminusername = $("#adminusername").val();
+    const adminpassword = $("#adminpassword").val();
+
+    // if input fields are empty, show failedmsg
+    if(adminusername.length === 0 || adminusername === ' ' || adminusername === null || adminpassword.length === 0){
+        $("#adminfailedLogIn").show();
+    }
+    else{
+        $("#adminfailedLogIn").hide();
+
+        if(adminusername === "admin" && adminpassword === "admin"){
+            console.log("trying to set cookie...")
+            setCookie("adminusername", adminusername, 1);
+            setCookie("adminpassword", adminpassword, 1);
+            window.location.href= 'adminPage.html';
+        }
+    }
+}
+
+function logOnUser(){
+
+}
+

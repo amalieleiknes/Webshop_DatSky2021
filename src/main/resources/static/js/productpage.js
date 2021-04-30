@@ -27,6 +27,7 @@ $(window).on('load', function(){
                     "<p class='card-description'>" + product.longDescription + "</p>" +
                     "</br>" +
                     "<p class='card-price'>Price in NOK: " + product.price + ",-</p>" +
+                    "<a onclick='blabla()'></a>" +
                 "</div>"
         }
         else{
@@ -41,4 +42,9 @@ $(window).on('load', function(){
         //shoppingcartcontent.innerHTML = cartcontent;
 
     });
+    
 });
+
+function blabla() {
+
+}

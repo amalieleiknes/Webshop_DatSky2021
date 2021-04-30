@@ -3,13 +3,14 @@
 
 //todo: Dette for å unngå at databasen fylles opp med informasjon om kjøp som ikke er gjennomført
 
-/*
 package portfolio2.packages.Objects;
 
-import java.util.ArrayList;
+
+import java.util.List;
 
 public class ShoppingCart {
-    private static ArrayList<Product> shoppingcartList = new ArrayList<>();
+
+/*    private static ArrayList<Product> shoppingcartList = new ArrayList<>();
 
     public static ArrayList<Product> getProductList() {
         return shoppingcartList;
@@ -47,6 +48,7 @@ public class ShoppingCart {
 
     public static int getNumberOfProductsInCart(){
         return shoppingcartList.size();
-    }
+    }*/
 }
-*/
+
+

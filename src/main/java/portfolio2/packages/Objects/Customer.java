@@ -2,10 +2,10 @@ package portfolio2.packages.Objects;
 
 import org.springframework.hateoas.RepresentationModel;
 
+import java.util.List;
 import java.util.UUID;
 
 public class Customer{
-
     private String customerID;
     private String firstname;
     private String lastname;
@@ -15,11 +15,26 @@ public class Customer{
     private String tlphNumber;
     private String email;
     private String password;
+    private List<Product> cart;
 
     //POJO
     public Customer(){}
 
-    public Customer(String firstname, String lastname, String address, String postnumber, String postoffice,
+    //A constructor for when a customer is get from the database
+    public Customer(String customerID, String firstname, String lastname, String address, String postnumber, String postoffice,
+                    String tlphNumber, String email, String password) {
+        this.customerID = customerID;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.address = address;
+        this.postnumber = postnumber;
+        this.postoffice = postoffice;
+        this.tlphNumber = tlphNumber;
+        this.email = email;
+        this.password = password;
+    }
+
+/*    public Customer(String firstname, String lastname, String address, String postnumber, String postoffice,
                     String tlphNumber, String email, String password) {
         this.customerID = UUID.randomUUID().toString();
         this.firstname = firstname;
@@ -30,7 +45,7 @@ public class Customer{
         this.tlphNumber = tlphNumber;
         this.email = email;
         this.password = password;
-    }
+    }*/
 
     public String getCustomerID() {
         return customerID;
@@ -98,5 +113,17 @@ public class Customer{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setCustomerID(String customerID) {
+        this.customerID = customerID;
+    }
+
+    public List<Product> getCart() {
+        return cart;
+    }
+
+    public void setCart(List<Product> cart) {
+        this.cart = cart;
     }
 }
