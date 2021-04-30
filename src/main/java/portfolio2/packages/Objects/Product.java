@@ -1,7 +1,7 @@
 package portfolio2.packages.Objects;
 
 public class Product {
-    private int productID;
+    private Integer productID;
     private String productName;
     private String shortDescription;
     private String longDescription;

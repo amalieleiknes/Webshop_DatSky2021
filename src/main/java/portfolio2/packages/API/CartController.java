@@ -54,7 +54,7 @@ public class CartController {
     }
 
     @PostMapping("/addToCart")
-    public String addToCart(String customerID, String productID) {
+    public String addToCart(String customerID, Integer productID) {
         if (customerID.isEmpty() || customerID.isBlank()) {
             return "Not valid customerID";
         }

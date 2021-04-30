@@ -24,13 +24,24 @@ public class ProductController {
         return ShoppingCart.getProductList();
     }*/
 
+    @PostMapping("/changeProduct")
+    public String changeProduct(Product product){
+        if(product == null){
+            return "Product is null.";
+        }
+        if(getProductByID(product.getProductID()) == null){
+            return "Can't find product in database.";
+        }
+        return repository.changeProductByID(product);
+    }
+
     @GetMapping("/getProducts")
     public List<Product> getProducts(){
         return repository.getProducts();
     }
 
     @GetMapping("/getProductByID")
-    public Product getProductByID(String productID){
+    public Product getProductByID(Integer productID){
         if(productID == null){
             return null;
         }
