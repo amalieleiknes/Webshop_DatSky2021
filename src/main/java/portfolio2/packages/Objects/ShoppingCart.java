@@ -16,15 +16,14 @@ public class ShoppingCart {
         return shoppingcartList;
     }
 
-    public static boolean addProductToShoppingCart(int productID){
-        boolean added = false;
-        for(Product p : ProductRegister.getProductRegister()){
-            if(productID == p.getProductID()){
-                shoppingcartList.add(p);
-                added = true;
-            }
+    public static boolean addProductToShoppingCart(Product product){
+        try{
+            shoppingcartList.add(product);
+            return true;
         }
-        return added;
+        catch(Exception e){
+            return false;
+        }
     }
 
     public static void deleteProductFromShoppingCart(Product product){
