@@ -1,16 +1,13 @@
 "use strict";
 $(function() {
     getProducts();
-    getNumberofItemsInCart();
+    getNumberOfCartItems();
 });
 
     function addToCart(productID){
-        console.log('Inni add to cart');
-        console.log("ProductID: ", productID);
-
         let user = getCustomer();
-        console.log("CustomerID: ", user.customerID);
         $.post("/addToCart", {customerID : user.customerID, productID: productID}, function(result){
+            window.location.reload();
             console.log(result);
         });
     }
@@ -21,7 +18,6 @@ $(function() {
         $.get("products/getProducts/", function (allProducts) {
 
             let productCardElement = document.getElementById("card-container");
-
 
             $.each(allProducts, function (counter, product) {
                 const card = document.createElement("div");

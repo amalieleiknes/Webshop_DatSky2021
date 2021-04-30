@@ -81,11 +81,9 @@ $(function() {
 
 
 // function to print out all prducts on the startpage
-function getNumberofItemsInCart() {
-    console.log("In cartItems, ");
-    let customerIDcookie = getCookie("customerID");
-    console.log("CustomerID: ",customerIDcookie);
-    $.get("/getNumberOfCartItems", customerIDcookie, function(numberOfProducts){
+function getNumberOfCartItems() {
+    let customerID = getCookie("customerID");
+    $.get("/getNumberOfCartItems", {customerID: customerID}, function(numberOfProducts){
         console.log("Antall i cart: ", numberOfProducts);
         let element = document.getElementById("cartOverview");
 

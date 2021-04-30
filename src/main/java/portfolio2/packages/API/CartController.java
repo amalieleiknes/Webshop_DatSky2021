@@ -23,7 +23,7 @@ public class CartController {
     ProductRepository productRepository;
 
 
-    @GetMapping("/getNumberOfCartItems/")
+    @GetMapping("/getNumberOfCartItems")
     public int getNumberOfCartItems(String customerID) {
         Cart cart = Carts.getCart(customerID);
         if (cart == null) {
