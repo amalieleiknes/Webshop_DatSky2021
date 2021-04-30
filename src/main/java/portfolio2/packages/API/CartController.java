@@ -31,9 +31,17 @@ public class CartController {
         }
         return cart.getProductsInCart().size();
     }
-    @GetMapping("/cart/allItems")
-    public ArrayList<Product> getAllCartItems() {
-        return null;
+    @GetMapping("/getCartItems")
+    public List<Product> getAllCartItems(String customerID) {
+      /*  if(customerID.isBlank() || customerID.isEmpty()){
+            return null;
+        }*/
+        Cart cart = Carts.getCart(customerID);
+        if (cart == null) {
+            return null;
+        }
+        return cart.getProductsInCart();
+
     }
 
     @PostMapping("/addPurchaseToDatabase")

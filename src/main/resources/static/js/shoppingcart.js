@@ -2,7 +2,9 @@ $(function(){
     getShoppingcart();
 
     function getShoppingcart(){
-        $.get("/getShoppingcart", function(products){
+        let customer = getCustomer();
+        $.get("/getCartItems", {customerID : customer.customerID} ,function(products){
+            console.log("products in cart",products);
             let output =
                 "<table class='table table-striped table-bordered'>" +
                 "<tr>" +
@@ -14,13 +16,13 @@ $(function(){
             for (const product of products){
                 output +=
                     "<tr>" +
-                    "<td>" + product.name + "</td>" +
+                    "<td>" + product.productName + "</td>" +
                     "<td>" + product.shortDescription + "</td>" +
                     "<td>" + product.price + "</td>" +
                     "</tr>";
             }
             output += "</table>";
-            $("#shoppingcart").empty().html(output);
+            $("#itemsInCart").empty().html(output);
         });
     }
 

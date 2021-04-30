@@ -10,7 +10,7 @@
 
 .topnav{
     top: 0;
-    position: fixed;
+    position: static;
 }
 
 .bottomnav {
@@ -82,10 +82,8 @@ img{
 }
 
 .productsContainer{
-    width: 70%;
-    margin-left: 15%;
-    margin-top: 10%;
-    margin-bottom: 10%;
+    margin: 0 auto;
+    padding: 25px 10px;
 }
 
 
@@ -134,4 +132,21 @@ img{
         width: fit-content;
         margin: auto;
     }
+}
+
+.button-wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+
+#card-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card{
+    width: 300px;
+    padding: 5px;
+    margin: 10px;
 }

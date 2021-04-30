@@ -24,18 +24,18 @@ $(function() {
                 card.classList.add('card-body');
 
                 let cardContent  =
-                    "<div class='card' id='" + product.productID + "' style='width:30%; padding: 5px; display: inline-block; margin: 1.5%;' >" +
+                    "<div class='card' id='" + product.productID + "'>" +
                         "<div class='card-body' style='padding: 10px;'" +
                             "<h5 class='card-title'>" + product.productName + "</h5>" +
                             "</br>" +
-                            "<img class='card-img' src= '" + product.imageURL + "' alt='img of a product' width='250' height='250'/>" +
+                            "<img class='card-img' src= '" + product.imageURL + "' alt='img of a product' width='250' height='auto'/>" +
                             "</br>" +
                             "<p class='card-description'>" + product.shortDescription + "</p>" +
-                            "</br>" +
-                            "<p class='card-price'>" + product.price + "</p>" +
-                            "<a id='goToProduct' href='productpage.html?productID=" + product.productID + "' class='btn btn-primary'>Go to product</a>" +
-                            "</br>" +
-                            "<button class='btn btn-primary' id='buttonaddcart' onclick='addToCart("+product.productID+")' value='" + product.productID + "'>Add to cart</button>" +
+                            "<p class='card-price'>" + product.price + ",-</p>" +
+                            "<div class='button-wrapper'>" +
+                                "<a id='goToProduct' href='productpage.html?productID=" + product.productID + "' class='btn btn-primary'>Go to product</a>" +
+                                "<button class='btn btn-primary' id='buttonaddcart' onclick='addToCart("+product.productID+")' value='" + product.productID + "'>Add to cart</button>" +
+                            "</div>" +
                         "</div>" +
                     "</div>";
                 productCardElement.innerHTML += cardContent;
