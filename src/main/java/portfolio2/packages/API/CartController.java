@@ -44,7 +44,7 @@ public class CartController {
         if (cart == null) {
             return "Not a valid cart (cart is null)";
         }
-        //cartRepository.addPurchaseToDatabase(cart, customerID);
+        cartRepository.addPurchaseToDatabase(cart, customerID);
         return "OK";
     }
 
