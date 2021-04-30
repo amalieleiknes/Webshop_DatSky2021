@@ -18,7 +18,6 @@ public class ProductRepository {
         try{
             String sql = "SELECT * FROM Product";
             List<Product> products = db.query(sql, new BeanPropertyRowMapper(Product.class));
-            System.out.println(products.toString());
             return products;
         }catch(Exception e){
             return null;

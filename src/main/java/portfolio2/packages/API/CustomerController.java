@@ -41,7 +41,6 @@ public class CustomerController {
         if(customer == null){
             return null;
         }
-        System.out.println("CustomerID fra controller: " + customer.getCustomerID());
         return customer;
     }
 
