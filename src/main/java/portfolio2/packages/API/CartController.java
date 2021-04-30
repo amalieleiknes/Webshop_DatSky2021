@@ -33,9 +33,6 @@ public class CartController {
     }
     @GetMapping("/getCartItems")
     public List<Product> getAllCartItems(String customerID) {
-      /*  if(customerID.isBlank() || customerID.isEmpty()){
-            return null;
-        }*/
         Cart cart = Carts.getCart(customerID);
         if (cart == null) {
             return null;
