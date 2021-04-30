@@ -14,16 +14,32 @@ import java.util.ArrayList;
 public class CartController {
 
     @Autowired
+    @GetMapping("/getNumberOfCartItems/")
+    public int getNumberOfCartItems(String customerID) {
+        Cart cart = Carts.getCart(customerID);
+        if (cart == null) {
+            return 0;
+        }
+        return cart.getProductsInCart().size();
     ProductRepository repository;
-
-    @GetMapping("/cart/")
-    public int getNumberOfCartItems(){
-        return ShoppingCart.getNumberOfProductsInCart();
+    
+    }
+    @GetMapping("/cart/allItems")
+    public ArrayList<Product> getAllCartItems() {
+        return null;
     }
 
-    @GetMapping("/cart/allItems")
-    public ArrayList<Product> getAllCartItems(){
-        return ShoppingCart.getProductList();
+
+    @PostMapping("/addPurchaseToDatabase")
+    public String addPurchaseToDatabase(String customerID, Cart cart) {
+        if (customerID.isBlank() || customerID.isEmpty()) {
+            return "Not valid customerID (customerID is null)";
+        }
+        if (cart == null) {
+            return "Not a valid cart (cart is null)";
+        }
+        cartRepository.addPurchaseToDatabase(cart, customerID);
+        return "OK";
     }
 
     @GetMapping("/cart/addToCart/{productID}")
