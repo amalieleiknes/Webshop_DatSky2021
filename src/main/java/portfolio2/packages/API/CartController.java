@@ -31,9 +31,14 @@ public class CartController {
         }
         return cart.getProductsInCart().size();
     }
+
     @GetMapping("/cart/allItems")
-    public ArrayList<Product> getAllCartItems() {
-        return null;
+    public List<Product> getAllCartItems(String customerID) {
+        Cart cart = Carts.getCart(customerID);
+        if(cart == null){
+            return null;
+        }
+        return cart.getProductsInCart();
     }
 
     @PostMapping("/addPurchaseToDatabase")
