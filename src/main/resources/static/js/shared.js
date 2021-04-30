@@ -121,7 +121,3 @@ function logOnAdmin(){
     }
 }
 
-function logOnUser(){
-
-}
-
