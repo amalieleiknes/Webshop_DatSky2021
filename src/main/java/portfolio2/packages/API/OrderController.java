@@ -41,4 +41,15 @@ public class OrderController {
         }
         return repository.addOrder(order);
     }
+
+
+    // TODO: må fikse denne
+    @GetMapping("/getOrdersByCustomer")
+    public List<Order> getOrdersByCustomer(){
+        return repository.getOrders();
+    }
+
+
+
+
 }
