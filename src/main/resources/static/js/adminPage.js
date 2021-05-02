@@ -81,6 +81,7 @@ $(function() {
 
     // adding a new blank line that can be edited
     function addProduct(){
+        //starting now
 
     }
 
