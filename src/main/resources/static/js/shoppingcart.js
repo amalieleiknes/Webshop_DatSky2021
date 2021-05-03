@@ -1,5 +1,6 @@
 $(function(){
     getShoppingcart();
+    getTotalPrice();
 
     function getShoppingcart(){
         let customer = getCustomer();
@@ -18,7 +19,7 @@ $(function(){
                     "<tr>" +
                     "<td>" + product.productName + "</td>" +
                     "<td>" + product.shortDescription + "</td>" +
-                    "<td>" + product.price + "</td>" +
+                    "<td>" + product.price + " NOK" + "</td>" +
                     "</tr>";
             }
             output += "</table>";
@@ -26,5 +27,10 @@ $(function(){
         });
     }
 
-
+    function getTotalPrice(){
+        let customer = getCustomer();
+        $.get("/getTotalPrice", {customerID : customer.customerID} ,function(totalprice){
+            $("#totalCost").empty().html("Total price: " + totalprice + " NOK");
+        });
+    }
 });

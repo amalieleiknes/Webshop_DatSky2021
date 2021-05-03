@@ -31,6 +31,16 @@ public class CartController {
         }
         return cart.getProductsInCart().size();
     }
+
+    @GetMapping("/getTotalPrice")
+    public double getTotalPrice(String customerID){
+        Cart cart = Carts.getCart(customerID);
+        if (cart == null) {
+            return 0;
+        }
+        return cart.getTotalPrice();
+    }
+
     @GetMapping("/getCartItems")
     public List<Product> getAllCartItems(String customerID) {
         Cart cart = Carts.getCart(customerID);

@@ -12,73 +12,57 @@
     <script src="js/shoppingcart.js"></script>
     <script src="js/shared.js"></script>
 
-
     <title>Webshop - cart</title>
 </head>
 
 <body>
+    <div class="topnav">
+        <div class="left-side">
+            <div class="links">
+                <a href="index.html" tabindex="">
+                    <div class="link">Browse products</div>
+                </a>
+                <a href="shoppingcart.html" class="active" tabindex="">
+                    <div class="link">Shoppingcart</div>
+                </a>
+                <a href="checkout.html" tabindex="">
+                    <div class="link">Checkout</div>
+                </a>
+            </div>
+        </div>
 
-<div class="topnav">
-    <div class="left-side">
-        <div class="links">
-            <a href="index.html" tabindex="">
-                <div class="link">Browse products</div>
-            </a>
-            <a href="shoppingcart.html" class="active" tabindex="">
-                <div class="link">Shoppingcart</div>
-            </a>
-            <a href="checkout.html" tabindex="">
-                <div class="link">Checkout</div>
-            </a>
+        <div class ="right-side">
+            <div id="nav">
+            </div>
+            <span id='failedLogIn'>Incorrect logininfo</span>
         </div>
     </div>
-
-    <div class ="right-side">
-        <div id="nav">
-        </div>
-        <span id='failedLogIn'>Incorrect logininfo</span>
-    </div>
-</div>
 
     <div class="content">
-
         <div class="cart">
             <h1>Shoppingcart</h1>
             <div id="itemsInCart"></div>
-
             </br>
-            <!-- TODO: legge inn totalbeløp + -->
-            <h1>Total to pay</h1>
-            </br>
-            <div class="totalCost"></div>
+            <h3><div id="totalCost"></div></h3>
+        </div>
+    </div>
 
+    <div class="bottomnav">
+        <div class ="left-side">
+            <p>Contact info: webshop@webshop.com</p>
         </div>
 
-    </div>
-
-<div class="bottomnav">
-
-    <div class ="left-side">
-        <p>Contact info: webshop@webshop.com</p>
-    </div>
-
-    <div class ="right-side">
-        <div class="nav">
-            <div class="adminLogInReg">
-
-                <input type="text" class="input" id="adminusername" placeholder="username" name="adminusername"/>
-                <input type="text" class="input" id="adminpassword" placeholder="password" name="adminpassword"/>
-                <button id="adminlogOnbtn">Log in as admin</button>
-                <br/>
-                <span id='adminfailedLogIn'>Incorrect logininfo</span>
+        <div class ="right-side">
+            <div class="nav">
+                <div class="adminLogInReg">
+                    <input type="text" class="input" id="adminusername" placeholder="username" name="adminusername"/>
+                    <input type="text" class="input" id="adminpassword" placeholder="password" name="adminpassword"/>
+                    <button id="adminlogOnbtn">Log in as admin</button>
+                    <br/>
+                    <span id='adminfailedLogIn'>Incorrect logininfo</span>
+                </div>
             </div>
-
-
         </div>
     </div>
-
-</div>
-
-
 </body>
 </html>

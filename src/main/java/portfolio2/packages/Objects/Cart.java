@@ -26,4 +26,12 @@ public class Cart {
         productsInCart.add(product);
         return "Product added in customers cart.";
     }
+
+    public double getTotalPrice(){
+        double total = 0.0;
+        for(Product p : productsInCart){
+            total += p.getPrice();
+        }
+        return total;
+    }
 }
