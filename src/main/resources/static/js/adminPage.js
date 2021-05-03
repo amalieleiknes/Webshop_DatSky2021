@@ -105,6 +105,9 @@ $(function() {
 
     }
 
+
+    //Fortsetter på "addProduct"
+
     //Add new product
     function addProduct(line){
         const newProduct = {
