@@ -29,12 +29,14 @@
     display: inline-block;
 }
 
-img{
-    vertical-align: middle;
+a.cartOverview{
+    color: black;
+    text-decoration: none;
+    font-size: 40px;
 }
 
-.numberOfCartItems{
-    border: none;
+img{
+    vertical-align: middle;
 }
 
 /* Top-navigation-bar links on mouse-over */
@@ -153,4 +155,8 @@ img{
 
 .content{
     padding: 20px;
+}
+
+#itemsInCart{
+    margin-top: 20px;
 }

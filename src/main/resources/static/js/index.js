@@ -7,7 +7,8 @@ $(function() {
     function addToCart(productID){
         let user = getCustomer();
         $.post("/addToCart", {customerID : user.customerID, productID: productID}, function(result){
-            window.location.reload();
+            /*window.location.reload();*/
+            getNumberOfCartItems();
             console.log(result);
         });
     }
