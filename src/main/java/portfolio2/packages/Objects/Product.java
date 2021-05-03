@@ -11,14 +11,14 @@ public class Product {
     //POJO
     public Product(){}
 
-    public Product(int productID, String productName, String shortDescription, String longDescription, double price, String imageURL) {
-        this.productID = productID;
+    public Product( String productName, String shortDescription, String longDescription, double price, String imageURL) {
+        System.out.println("ImageURL : " + imageURL);
         this.productName = productName;
         this.shortDescription = shortDescription;
         this.longDescription = longDescription;
         this.price = price;
-        if(imageURL == null){
-            this.imageURL = "static/images/kaffe.jpg";
+        if(imageURL.isBlank() || imageURL.isEmpty()){
+            this.imageURL = "/images/kaffe.jpg";
         }else {
             this.imageURL = imageURL;
         }

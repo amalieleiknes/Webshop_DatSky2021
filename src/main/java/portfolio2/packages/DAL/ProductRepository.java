@@ -59,8 +59,8 @@ public class ProductRepository {
 
     public String addProduct(Product product){
         try{
-            String sql = "INSERT INTO Product (ProductName, shortDescription, longDescription, Price) VALUES (?,?,?,?)";
-            db.update(sql, product.getProductName(), product.getShortDescription(), product.getLongDescription(), product.getPrice());
+            String sql = "INSERT INTO Product (ProductName, shortDescription, longDescription, Price, ImageURL) VALUES (?,?,?,?,?)";
+            db.update(sql, product.getProductName(), product.getShortDescription(), product.getLongDescription(), product.getPrice(), product.getImageURL());
         }catch(Exception e){
             return "Could not add new product";
         }

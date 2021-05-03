@@ -2,7 +2,10 @@
 $(function() {
     // getting all products
     viewProducts();
+
+
 });
+
 
     function viewProducts(){
         $.get("products/getProducts", function (products) {
@@ -13,7 +16,7 @@ $(function() {
     }
 
     // function to format the table
-    function formatProductData(products){
+    function formatProductData(products, appendNew){
         let table=
             "<table class='table table-condensed'>" +
                 "<thead>" +
@@ -45,6 +48,19 @@ $(function() {
                 "</tr>";
             line++;
         });
+        if(appendNew){
+            table+=
+                "<tr>" +
+                "<td><input type='text' disabled readonly id='productID"+line+"' size='10' value=''/></td>" +
+                "<td><input type='text' id='productName"+line+"' value=''/></td>" +
+                "<td><input type='text' id='shortDescription"+line+"' value=''/></td>" +
+                "<td><input type='text' id='longDescription"+line+"' value=''/></td>" +
+                "<td><input type='text' id='price"+line+"' value=''/></td>"+
+                "<td><input type='file' disabled id='imageURL"+line+"' size=12 /></td>" +
+                "<td><a class='btn btn-success' onclick='addProduct("+line+")'>Add product</button></td>" +
+                "</tr>";
+            line++;
+        }
         table +="</tbody></table>";
         return table;
     }
@@ -60,6 +76,7 @@ $(function() {
             price            : $("#price" + line).val(),
             imageURL         : $("#imageURL" + line).val()
         };
+
     $.post("/products/changeProduct", newInformation, function(result){
         if(result === "Product updated!"){
             viewProducts();
@@ -74,15 +91,54 @@ $(function() {
 
     }
 
-    // copying a line that will be added with a new productnumber at the end of the line
+    //Add new line to add productinformation
+    function newProductline(){
+        $.get("products/getProducts", function (products) {
+            const table = formatProductData(products, true);
+            $("#modifyProducts").html(table);
+        });
+    }
+
+
+// copying a line that will be added with a new productnumber at the end of the line
     function copyProduct(line){
 
     }
 
-    // adding a new blank line that can be edited
-    function addProduct(){
-        //starting now
 
+    //Fortsetter på "addProduct"
+
+    //Add new product
+    function addProduct(line){
+        const newProduct = {
+            productName      : $("#productName" + line).val(),
+            shortDescription : $("#shortDescription" + line).val(),
+            longDescription  : $("#longDescription" + line).val(),
+            price            : $("#price" + line).val(),
+            imageURL         : $("#imageURL" + line).val()
+        };
+
+        console.log("ImageURL: ",newProduct.imageURL);
+
+        if(isNaN(newProduct.price)){
+            console.log("Not accepted price-value");
+            return;
+        }
+
+        if (newProduct.productName.length === 0 ||
+            newProduct.longDescription.length === 0||
+            newProduct.shortDescription.length === 0 ||
+            newProduct.price.length === 0){
+            console.log("Some fields are need to be filled in.");
+        }else{
+            $.post("products/addProduct", newProduct, function(result){
+                if(result !== "Product added!"){
+                    console.log("Could not add product (product is null)")
+                }else{
+                    viewProducts();
+                }
+                })
+        }
     }
 
 

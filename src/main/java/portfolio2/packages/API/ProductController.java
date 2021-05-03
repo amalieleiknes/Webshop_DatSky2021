@@ -53,7 +53,12 @@ public class ProductController {
         if(product == null){
             return "Could not add product (product is null)";
         }
-        return repository.addProduct(product);
+        Product newProduct = new Product(product.getProductName(),
+                product.getShortDescription(),
+                product.getLongDescription(),
+                product.getPrice(),
+                product.getImageURL());
+        return repository.addProduct(newProduct);
     }
 
 
