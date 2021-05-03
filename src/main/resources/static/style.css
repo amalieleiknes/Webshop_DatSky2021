@@ -88,7 +88,6 @@ img{
     padding: 25px 10px;
 }
 
-
 .link, .bottomnav, .topnav {
     padding: 15px 30px;
     font-size: 20px;
@@ -111,7 +110,6 @@ img{
     margin-top: 10%;
     margin-bottom: 10%;
 }
-
 
 /* Responsiveness for top-navigation-bar*/
 @media screen and (max-width: 420px){
@@ -153,10 +151,34 @@ img{
     margin: 10px;
 }
 
+/* shoppingcart.html: */
 .content{
     padding: 20px;
 }
 
 #itemsInCart{
     margin-top: 20px;
+}
+
+/* The total price and the checkout button */
+.priceAndCheckout{
+    padding: 15px 30px;
+    font-size: 20px;
+    display: inline-block;
+    transition: 0.3s;
+    width: 100%;
+}
+
+a.goToCheckout{
+    padding: 5px;
+    margin: 5px 5px;
+    border: none;
+    cursor: pointer;
+    background: #e77338;
+    color: #000000;
+    font-size: 20px;
+    border-radius: 10px;
+    width: 170px;
+    float: right;
+    text-align: center;
 }
