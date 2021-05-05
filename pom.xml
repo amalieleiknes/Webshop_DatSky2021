@@ -22,12 +22,12 @@
             <artifactId>spring-boot-starter-hateoas</artifactId>
         </dependency>
 
-        <!--Lagt til for å teste oauth2-->
+        <!--Lagt til for å teste oauth2. Mangler en del her for å få den til å godta kall
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-client</artifactId>
         </dependency>
-        <!--Ferdig-->
+        Ferdig-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
