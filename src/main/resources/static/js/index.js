@@ -2,15 +2,35 @@
 $(function() {
     getProducts();
     getNumberOfCartItems();
+    //When user is not logged in, generate a temporary userID
+    //so user can add products to their cart.
+    let user = getCustomer();
+    console.log("CustomerID :", user.customerID);
+    if(user.customerID === null || user.customerID.length === 0){
+        let tempUserID = Math.random().toString(36).substring(7);
+        setCookie("tempUserID", tempUserID, 1);
+        let cookieTemp = getCookie("tempUserID");
+        console.log("CookieTemp: ", cookieTemp);
+    }
 });
 
     function addToCart(productID){
         let user = getCustomer();
-        $.post("/addToCart", {customerID : user.customerID, productID: productID}, function(result){
-            /*window.location.reload();*/
-            getNumberOfCartItems();
-            console.log(result);
-        });
+        //If user is not logged in (just visiting website and want to add product to cart),
+        //get their temporary userID and add to cart attached to their ID.
+        if(user.customerID === null || user.customerID.length === 0){
+            let tempUserId = getCookie("tempUserID");
+            console.log("TempUserID", tempUserId);
+            $.post("/addToCart", {customerID : tempUserId, productID : productID}, function(result){
+                getNumberOfCartItems();
+                console.log(result);
+            });
+        }else{
+            $.post("/addToCart", {customerID : user.customerID, productID: productID}, function(result){
+                getNumberOfCartItems();
+                console.log(result);
+            });
+        }
     }
 
 

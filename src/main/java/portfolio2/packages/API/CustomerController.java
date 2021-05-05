@@ -4,8 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.web.bind.annotation.*;
 import portfolio2.packages.DAL.CustomerRepository;
-import portfolio2.packages.Objects.Customer;
-import portfolio2.packages.Objects.Order;
+import portfolio2.packages.Objects.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,14 +32,19 @@ public class CustomerController {
 
 
     @PostMapping("/logOnCustomer")
-    public Customer logOnCustomer(String email, String password){
-        if(email.isEmpty() || email.isBlank() || password.isBlank() || password.isEmpty()){
+    public Customer logOnCustomer(String email, String password, String tempUserID){
+        if( email.isEmpty()      || email.isBlank()     ||
+            password.isBlank()   || password.isEmpty()  ||
+            tempUserID.isEmpty() || tempUserID.isBlank() ){
             return null;
         }
+
         Customer customer = repository.getLoggedInCustomer(email, password);
         if(customer == null){
             return null;
         }
+
+        mergeTempUser(customer, tempUserID);
         return customer;
     }
 
@@ -65,4 +69,31 @@ public class CustomerController {
     }
 
 
+    // **** Helper methods ****
+    private void mergeTempUser(Customer customer, String tempUserID){
+        if(tempUserID.isBlank() || tempUserID.isEmpty()){
+            return;
+        }
+
+        Cart tempCart = Carts.getCart(tempUserID);
+        if(tempCart == null || tempCart.getProductsInCart().size() == 0) {
+            return;
+        }
+
+        //Get or create cart for customer
+        Cart customerCart = Carts.getCart(customer.getCustomerID());
+
+        if(customerCart == null){
+            customerCart = Carts.addCart(customer.getCustomerID());
+        }
+
+        //Add products from the temporary cart to customers cart
+        for(Product product : tempCart.getProductsInCart()){
+            customerCart.addProductToCart(product);
+        }
+
+        //Remove temporary cart from list of carts after products
+        //has been moved to customers cart after logging in
+        Carts.deleteCart(tempUserID);
+    }
 }

@@ -28,8 +28,8 @@ function getCookie(cookieName){
 }
 
 // code to delete cookies from browser when logging out
-function deleteCustomerCookie(){
-    document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+function deleteCookie(cookieName){
+    document.cookie = cookieName +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 
 }
 

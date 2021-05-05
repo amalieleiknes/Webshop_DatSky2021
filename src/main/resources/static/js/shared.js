@@ -34,6 +34,7 @@ $(function() {
 
     // check customers login-info
     $("#customerLogOnBtn").click(function() {
+        let tempUserID = getCookie("tempUserID");
         console.log("logging in...");
 
         const email = $("#customeremail").val();
@@ -51,7 +52,7 @@ $(function() {
                 password: password
             };
             // else, send userinfo into API and find out if the info is correct
-            $.post("/customers/logOnCustomer", {email: userLoggingIn.email, password: userLoggingIn.password}, function(foundCustomer) {
+            $.post("/customers/logOnCustomer", {email: userLoggingIn.email, password: userLoggingIn.password, tempUserID: tempUserID}, function(foundCustomer) {
                 if(foundCustomer === null){
                     $("#failedLogIn").show();
                 }
@@ -60,6 +61,8 @@ $(function() {
                     console.log("CustomerID til customer som ble funnet: ", foundCustomer.customerID);
                     setCookie("email", email, 1);
                     setCookie("customerID", foundCustomer.customerID, 1);
+                    deleteCookie("tempUserID");
+
                     location.reload();
                 }
             });
@@ -83,21 +86,38 @@ $(function() {
 // function to print out all prducts on the startpage
 function getNumberOfCartItems() {
     let customerID = getCookie("customerID");
-    $.get("/getNumberOfCartItems", {customerID: customerID}, function(numberOfProducts){
-        console.log("Antall i cart: ", numberOfProducts);
-        let element = document.getElementById("cartOverview");
 
-        element.innerHTML =
-            "<img src='images/cart.png' alt='shoppingcart' width='50' height='50'>" +
-            "<span style='font-size: 30px'>" + numberOfProducts + "</span>";
-    });
+    //If user is not logged in, get items from temporary cart
+    if(customerID.length === 0){
+        let tempUserID = getCookie("tempUserID");
+        $.get("/getNumberOfCartItems", {customerID: tempUserID}, function(numberOfProducts){
+            console.log("Antall i cart: ", numberOfProducts);
+            let element = document.getElementById("cartOverview");
+
+            element.innerHTML =
+                "<img src='images/cart.png' alt='shoppingcart' width='50' height='50'>" +
+                "<span style='font-size: 30px'>" + numberOfProducts + "</span>";
+        });
+
+    //User is logged in
+    }else {
+        $.get("/getNumberOfCartItems", {customerID: customerID}, function (numberOfProducts) {
+            console.log("Antall i cart: ", numberOfProducts);
+            let element = document.getElementById("cartOverview");
+
+            element.innerHTML =
+                "<img src='images/cart.png' alt='shoppingcart' width='50' height='50'>" +
+                "<span style='font-size: 30px'>" + numberOfProducts + "</span>";
+        });
+    }
 }
 
 function logOut(){
     $(location).attr('href', 'index.html');
     setCookie("email", null, 0);
     setCookie("customerID", null, 0);
-    deleteCustomerCookie();
+    deleteCookie("customerID");
+    deleteCookie("tempUserID");
     location.reload();
 }
 
@@ -116,6 +136,7 @@ function logOnAdmin(){
             console.log("trying to set cookie...")
             setCookie("adminusername", adminusername, 1);
             setCookie("adminpassword", adminpassword, 1);
+            deleteCookie()
             window.location.href= 'adminPage.html';
         }
     }

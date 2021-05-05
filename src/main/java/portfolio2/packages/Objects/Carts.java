@@ -27,4 +27,13 @@ public class Carts {
         carts.add(cart);
         return cart;
     }
+
+    public static void deleteCart(String owner){
+        for(int i = 0; i < carts.size(); i++){
+            if(carts.get(i).getOwner().equals(owner)){
+                carts.remove(i);
+                return;
+            }
+        }
+    }
 }
