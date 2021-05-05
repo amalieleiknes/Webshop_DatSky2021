@@ -14,17 +14,21 @@
     <name>packages</name>
     <description>Portfolio-2-DatSky-2021</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>14</java.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-hateoas</artifactId>
         </dependency>
-        <!--<dependency>
+
+        <!--Lagt til for å teste oauth2-->
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-client</artifactId>
-        </dependency>-->
+        </dependency>
+        <!--Ferdig-->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

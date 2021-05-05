@@ -169,6 +169,12 @@ img{
     width: 100%;
 }
 
+#totalCost{
+    padding: 5px;
+    margin: 5px 5px;
+    float: left;
+}
+
 a.goToCheckout{
     padding: 5px;
     margin: 5px 5px;
@@ -181,4 +187,32 @@ a.goToCheckout{
     width: 170px;
     float: right;
     text-align: center;
+}
+
+/* checkout.html: */
+.checkoutcontent{
+    padding: 20px;
+}
+
+.checkoutCart{
+    width: 60%;
+    float: left;
+}
+
+.priceSummary{
+    width: 30%;
+    float: right;
+    border: black;
+}
+
+.deliveryDetails{
+    float: left;
+}
+
+.deliveryDetails input{
+    color: grey;
+}
+
+.table td{
+    border-top: none;
 }

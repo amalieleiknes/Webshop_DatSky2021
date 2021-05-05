@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="Stylesheet" type="text/css" href="style.css">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="js/index.js"></script>
-    <script src="js/shared.js"></script>
     <script src="js/utils/cookieUtils.js"></script>
+    <script src="js/checkout.js"></script>
+    <script src="js/shoppingcart.js"></script>
+    <script src="js/shared.js"></script>
 
-    <link rel="Stylesheet" type="text/css" href="style.css">
     <title>Webshop - checkout</title>
 </head>
 <body>
@@ -38,12 +39,42 @@
     </div>
 </div>
 
-
-
-    <div class="checkoutcontent">
-
-
+<div class="checkoutcontent">
+    <h1>Checkout</h1>
+    <div class="checkoutCart">
+        <h2>Items in cart</h2>
+        <div id="itemsInCart"></div>
+        </br>
     </div>
+    <div class="priceSummary">
+        <div id="summaryPrice"></div>
+        <div id="summaryDiscount"></div>
+        <div id="summaryTotalPrice"></div>
+        <button id="registerOrder"></button>
+    </div>
+
+</div>
+
+<div class="deliveryDetails">
+    <h2>Shipping address</h2>
+    <table class='table'>
+        <tr>
+            <td><input type='text' id="firstname" value="First name"/></td>
+            <td><input type='text' id="lastname" value="Last name"/></td>
+        </tr>
+        <tr>
+            <td><input type='text' id="address" value="Street address"/></td>
+        </tr>
+        <tr>
+            <td><input type='text' id="zipcode" value="Zip code"/></td>
+            <td><input type='text' id="city" value="City"/></td>
+        </tr>
+        <tr>
+            <td><input type='text' id="phone" value="Phone"/></td>
+            <td><input type='text' id="email" value="Email address"/></td>
+        </tr>
+    </table>
+</div>
 
 <div class="bottomnav">
 
