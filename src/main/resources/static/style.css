@@ -94,6 +94,7 @@ img{
     display: inline-block;
     transition: 0.3s;
 }
+
 .left-side p{
     padding-left: 30px;
 }
@@ -197,22 +198,77 @@ a.goToCheckout{
 .checkoutCart{
     width: 60%;
     float: left;
+    margin-top: 35px;
 }
 
 .priceSummary{
-    width: 30%;
+    padding: 35px;
+    margin-right: 5%;
+    width: 25%;
     float: right;
-    border: black;
+    background: #c9dcef;
 }
 
+.priceSummarySubtotal, .summaryOfferNotice, .priceSummaryDiscount, .priceSummaryTotalPrice, .registerOrder{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: large;
+}
+
+.priceSummaryText{
+    float: left;
+}
+
+.priceSummaryPrice{
+    float: right;
+}
+
+.summaryOfferNotice{
+    color: red;
+}
+
+.priceSummaryDiscount{
+    color: red;
+}
+
+.priceSummary button{
+    padding: 5px;
+    margin-top: 25px;
+    border: none;
+    cursor: pointer;
+    background: #e77338;
+    color: #000000;
+    font-size: 20px;
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.bottomCheckoutContent{
+    width: 60%;
+    float: left;
+}
 .deliveryDetails{
     float: left;
 }
 
 .deliveryDetails input{
     color: grey;
+    width: 250px;
 }
 
 .table td{
     border-top: none;
+}
+
+.deliveryDetails button{
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+    background: #e77338;
+    color: #000000;
+    font-size: 17px;
+    border-radius: 10px;
+    width: 225px;
+    text-align: center;
 }

@@ -47,34 +47,55 @@
         </br>
     </div>
     <div class="priceSummary">
-        <div id="summaryPrice"></div>
-        <div id="summaryDiscount"></div>
-        <div id="summaryTotalPrice"></div>
-        <button id="registerOrder"></button>
+        <h2>Price summary</h2>
+        <div class="priceSummarySubtotal">
+            <div class="priceSummaryText">Sub total:</div>
+            <div class="priceSummaryPrice" id="summarySubtotal"></div>
+        </div>
+        </br>
+
+        <div class="summaryOfferNotice">Special offer only for today!</div>
+        <div class="priceSummaryDiscount">
+            <div class="priceSummaryText">Discount:</div>
+            <div class="priceSummaryPrice" id="summaryDiscount"></div>
+        </div>
+        </br>
+        <div class="priceSummaryTotalPrice">
+            <h4><div class="priceSummaryText">Total to pay:</div></h4>
+            <h4><div class="priceSummaryPrice" id="summaryTotalPrice">0 NOK</div></h4>
+        </div>
+        <div class="registerOrder">
+            <button id="registerOrderBtn">Register and pay</button>
+        </div>
     </div>
-
+    <div class="bottomCheckoutContent">
+        <div class="deliveryDetails">
+            <h2>Shipping address</h2>
+            <table class='table'>
+                <tr>
+                    <td><input type='text' id="firstname" value="First name"/></td>
+                    <td><input type='text' id="lastname" value="Last name"/></td>
+                </tr>
+                <tr>
+                    <td><input type='text' id="address" value="Street address"/></td>
+                </tr>
+                <tr>
+                    <td><input type='text' id="zipcode" value="Zip code"/></td>
+                    <td><input type='text' id="city" value="City"/></td>
+                </tr>
+                <tr>
+                    <td><input type='text' id="phone" value="Phone"/></td>
+                    <td><input type='text' id="email" value="Email address"/></td>
+                </tr>
+                <tr>
+                    <td><button id="updateAddress">Update shipping address</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>
 
-<div class="deliveryDetails">
-    <h2>Shipping address</h2>
-    <table class='table'>
-        <tr>
-            <td><input type='text' id="firstname" value="First name"/></td>
-            <td><input type='text' id="lastname" value="Last name"/></td>
-        </tr>
-        <tr>
-            <td><input type='text' id="address" value="Street address"/></td>
-        </tr>
-        <tr>
-            <td><input type='text' id="zipcode" value="Zip code"/></td>
-            <td><input type='text' id="city" value="City"/></td>
-        </tr>
-        <tr>
-            <td><input type='text' id="phone" value="Phone"/></td>
-            <td><input type='text' id="email" value="Email address"/></td>
-        </tr>
-    </table>
-</div>
+
 
 <div class="bottomnav">
 

@@ -60,6 +60,8 @@ $(function(){
         let customer = getCustomer();
         $.get("/getTotalPrice", {customerID : customer.customerID} ,function(totalprice){
             $("#totalCost").empty().html("Total price: " + totalprice + " NOK");
+            $("#summarySubtotal").empty().html(totalprice + " NOK");
+            $("#summaryDiscount").empty().html("- " + totalprice + " NOK");
         });
     }
 });
