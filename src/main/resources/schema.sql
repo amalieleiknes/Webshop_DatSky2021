@@ -48,22 +48,11 @@ CREATE TABLE IF NOT EXISTS `Product` (
 DROP TABLE IF EXISTS Ordercontent;
 
 CREATE TABLE IF NOT EXISTS `Ordercontent` (
-    PurchaseID INT (100) NOT NULL AUTO_INCREMENT,
+    CounterID INT (100) NOT NULL AUTO_INCREMENT,
     OrderID INT (30) NOT NULL,
-    CustomerID VARCHAR (20) NOT NULL,
     ProductID INT(10) NOT NULL,
-    PRIMARY KEY (PurchaseID),
+    ProductPrice FLOAT NOT NULL,
+    PRIMARY KEY (CounterID),
     FOREIGN KEY (ProductID) REFERENCES Product(ProductID),
     FOREIGN KEY (OrderID) REFERENCES `Order`(OrderID)
-);
-
-DROP TABLE IF EXISTS `Purchase`;
-
-CREATE TABLE IF NOT EXISTS `Purchase` (
-    PurchaseID INT (30) AUTO_INCREMENT,
-    CustomerID INTEGER (20) NOT NULL,
-    ProductID INT (30) NOT NULL,
-    PRIMARY KEY (PurchaseID),
-    FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID),
-    FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
 );
