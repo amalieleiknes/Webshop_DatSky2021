@@ -1,5 +1,5 @@
-CREATE DATABASE webshop;
-USE webshop;
+CREATE DATABASE test;
+USE test;
 
 CREATE TABLE IF NOT EXISTS `Postoffice` (
                                             Postnumber VARCHAR (4) NOT NULL,

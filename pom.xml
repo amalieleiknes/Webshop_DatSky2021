@@ -29,8 +29,6 @@
         </dependency>-->
         <!-- Ferdig Oauth2-->
 
-
-        <!--Lagt til for å teste databaseoppsett-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -40,6 +38,8 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <!--Lagt til for å teste databaseoppsett-->
+
 
         <dependency>
             <groupId>mysql</groupId>
@@ -57,9 +57,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
         </dependency>
-
-
-
         <!--Databaseoppsett ender her-->
 
 
