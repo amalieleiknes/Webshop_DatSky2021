@@ -42,11 +42,13 @@ img{
 /* Top-navigation-bar links on mouse-over */
 .topnav a:hover {
     background-color: #1d3040;
+    text-decoration: none;
 }
 
 /* Active link */
 .topnav a.active {
     background-color: #2a6cde;
+    text-decoration: none;
 }
 
 .left-side{
@@ -54,6 +56,7 @@ img{
     float: left;
     position: relative;
     height: 100%;
+    text-decoration: none;
 }
 
 .right-side{
@@ -271,4 +274,28 @@ a.goToCheckout{
     border-radius: 10px;
     width: 225px;
     text-align: center;
+}
+
+.regUserContent, .table{
+    padding-left: 60px;
+}
+
+.table-registeruser{
+    width: 40%;
+}
+
+.table-registeruser td {
+    padding-right: 10px;
+    padding-top: 10px;
+}
+
+.registerbtn {
+    border: none;
+    margin-bottom: 30px;
+    cursor: pointer;
+    background: #d0efc9;
+    color: #000000;
+    font-size: 20px;
+    border-radius: 10px;
+    width: 170px;
 }
