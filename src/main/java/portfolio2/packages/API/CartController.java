@@ -1,6 +1,7 @@
 package portfolio2.packages.API;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import portfolio2.packages.DAL.CartRepository;
 import portfolio2.packages.DAL.ProductRepository;
@@ -13,7 +14,7 @@ import java.util.List;
 
 // kan ikke ha requestbody når vi skal bruke et post-kall
 @RestController
-
+@Service
 public class CartController {
 
     @Autowired

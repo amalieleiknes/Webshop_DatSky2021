@@ -1,6 +1,7 @@
 package portfolio2.packages.API;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import portfolio2.packages.DAL.OrderRepository;
 import portfolio2.packages.Objects.Order;
@@ -8,6 +9,7 @@ import portfolio2.packages.Objects.Order;
 import java.util.List;
 
 @RestController
+@Service
 @RequestMapping("/order")
 public class OrderController {
 

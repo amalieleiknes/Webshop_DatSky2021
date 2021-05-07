@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `Product` (
     longDescription VARCHAR (100) NOT NULL,
     Price FLOAT NOT NULL,
     ImageURL VARCHAR (100),
-    PRIMARY KEY (ProductID),
+    PRIMARY KEY (ProductID)
 );
 
 DROP TABLE IF EXISTS Ordercontent;

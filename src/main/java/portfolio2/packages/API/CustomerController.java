@@ -2,6 +2,7 @@ package portfolio2.packages.API;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import portfolio2.packages.DAL.CustomerRepository;
 import portfolio2.packages.Objects.Customer;
@@ -12,6 +13,7 @@ import java.util.List;
 
 
 @RestController
+@Service
 @RequestMapping(value = "/customers")
 public class CustomerController {
 
