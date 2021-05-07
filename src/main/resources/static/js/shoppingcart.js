@@ -58,8 +58,20 @@ $(function(){
 
     function getTotalPrice(){
         let customer = getCustomer();
-        $.get("/getTotalPrice", {customerID : customer.customerID} ,function(totalprice){
-            $("#totalCost").empty().html("Total price: " + totalprice + " NOK");
-        });
+        let tempUserID = getCookie("tempUserID");
+
+        if(customer.customerID === null || customer.customerID.length === 0){
+            $.get("/getTotalPrice", {customerID : tempUserID} ,function(totalprice){
+                $("#totalCost").empty().html("Total price: " + totalprice + " NOK");
+                $("#summarySubtotal").empty().html(totalprice + " NOK");
+                $("#summaryDiscount").empty().html("- " + totalprice + " NOK");
+            });
+        }else{
+            $.get("/getTotalPrice", {customerID : customer.customerID} ,function(totalprice){
+                $("#totalCost").empty().html("Total price: " + totalprice + " NOK");
+                $("#summarySubtotal").empty().html(totalprice + " NOK");
+                $("#summaryDiscount").empty().html("- " + totalprice + " NOK");
+            });
+        }
     }
 });
