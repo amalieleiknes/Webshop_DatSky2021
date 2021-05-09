@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="Stylesheet" type="text/css" href="style.css">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/utils/cookieUtils.js"></script>
+    <script src="js/checkout.js"></script>
+    <script src="js/confirmation.js"></script>
+    <script src="js/shared.js"></script>
+
+    <title>Webshop - order confirmation</title>
+</head>
+<body>
+
+<div class="topnav">
+    <div class="left-side">
+        <div class="links">
+            <a href="index.html" tabindex="">
+                <div class="link">Browse products</div>
+            </a>
+            <a href="shoppingcart.html" tabindex="">
+                <div class="link">Shoppingcart</div>
+            </a>
+            <a href="checkout.html" class="active" tabindex="">
+                <div class="link">Checkout</div>
+            </a>
+        </div>
+    </div>
+
+    <div class ="right-side">
+        <div id="nav">
+        </div>
+        <span id='failedLogIn'>Incorrect logininfo</span>
+    </div>
+</div>
+
+<div class="confContent">
+    <div class="printConf">
+        <h2>Thank you for your order!</h2>
+        <div class="confOrderID">
+            <div class="confOrderIDText">OrderID: </div>
+            <div class="confOrderIDValue" id="confOrderIDValue"></div>
+        </div>
+        <div class="confOrderDate">
+            <div class="confOrderDateText">Order date: </div>
+            <div class="confOrderDateValue" id="confOrderDateValue"></div>
+        </div>
+        <div class="confAmount">
+            <div class="confOrderAmountText">OrderID: </div>
+            <div class="confOrderAmountValue" id="confOrderAmountValue"></div>
+        </div>
+        <div class="confTotalPrice">
+            <div class="confOrderTotalPriceText">OrderID: </div>
+            <div class="confOrderTotalPriceValue" id="confOrderTotalPriceValue"></div>
+        </div>
+        <div class="confOrdercontent">
+            <h4>Order content: </h4>
+            <div id="itemsInCart"></div>
+        </div>
+        <div class="confContinue">
+            <button id="continueShoppingBtn">Continue shopping</button>
+        </div>
+    </div>
+</div>
+
+<div class="bottomnav">
+
+    <div class ="left-side">
+        <p>Contact info: webshop@webshop.com</p>
+    </div>
+
+    <div class ="right-side">
+        <div class="nav">
+            <div class="adminLogInReg">
+
+                <input type="text" class="input" id="adminusername" placeholder="username" name="adminusername"/>
+                <input type="text" class="input" id="adminpassword" placeholder="password" name="adminpassword"/>
+                <button id="adminlogOnbtn">Log in as admin</button>
+                <br/>
+                <span id='adminfailedLogIn'>Incorrect logininfo</span>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
