@@ -6,6 +6,7 @@ import portfolio2.packages.DAL.OrderRepository;
 import portfolio2.packages.Objects.Order;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/order")
@@ -49,7 +50,11 @@ public class OrderController {
         return repository.getOrders();
     }
 
-
+    @GetMapping("/generateOrderID")
+    public String generateOrderID(){
+        //return repository.generateOrderID();
+        return UUID.randomUUID().toString();
+    }
 
 
 }

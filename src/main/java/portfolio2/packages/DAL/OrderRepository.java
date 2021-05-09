@@ -44,15 +44,38 @@ public class OrderRepository {
 
 
     public String addOrder(Order order){
+        String sql;
         if(order == null){
             return "Could not add order. (Order is null)";
         }
         try{
-            String sql = "INSERT INTO Order (Date, Totalprice, Amount, CustomerID) VALUES (?,?,?,?)";
-            db.update(sql, order.getOrderDate(), order.getTotalPrice(), order.getAmount(), order.getCustomerID());
+            sql = "INSERT INTO `Order` (OrderID, OrderDate, Totalprice, Amount, CustomerID) VALUES (?,?,?,?,?)";
+            db.update(sql, order.getOrderID(), order.getOrderDate(), order.getTotalPrice(), order.getAmount(), order.getCustomerID());
             return "Order added!";
         }catch(Exception e){
             return "Something went wrong. Could not add order.";
         }
     }
+
+    //Method that checks if an integer is used as orderID in the database, and returns the integer if not
+    //Denne fungerer foreløpig ikke, klarer ikke å hente ut fra databasen virker det som, så kommenterer den ut og
+    // bruker randomUUID i Controlleren i stedet
+    /*public String generateOrderID(){
+        for(int i = 1; i < 100; i++){
+            String sql;
+            int duplicateOrder;
+
+            try{
+                sql = "SELECT count(*) FROM Order WHERE OrderID = ?";
+                duplicateOrder = db.queryForObject(sql, Integer.class, i);
+            } catch(Exception e){
+                return "Error: klarte ikke å hente fra databasen";
+            }
+
+            if(duplicateOrder == 0){
+                return String.valueOf(i);
+            }
+        }
+        return "Error: ute av løkken";
+    }*/
 }

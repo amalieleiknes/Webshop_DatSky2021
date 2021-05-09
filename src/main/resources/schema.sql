@@ -25,8 +25,8 @@ CREATE TABLE IF NOT EXISTS `Customer` (
 DROP TABLE IF EXISTS `Order`;
 
 CREATE TABLE IF NOT EXISTS `Order` (
-    OrderID INT (30) NOT NULL AUTO_INCREMENT,
-    Date varchar (10) NOT NULL,
+    OrderID VARCHAR (100) NOT NULL,
+    OrderDate varchar (10) NOT NULL,
     Totalprice DECIMAL (10) NOT NULL,
     Amount INTEGER (100) NOT NULL,
     CustomerID VARCHAR (20) NOT NULL,

@@ -1,40 +1,48 @@
 $(function(){
     let customer = getCustomer();
     let tempUserID = getCookie("tempUserID");
-    let todaysDate = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+    let todaysDate = new Date().toJSON().slice(0,10).replace(/-/g,'/');;
 
-    //TODO: generere ordreID
     //TODO: få opp bekreftelse på ordre med all ordreinformasjon
     $("#registerOrderBtn").click(function(){
-        //If user on website is not logged in, check for products in temporary cart
-        if(customer.customerID === null || customer.customerID.length === 0){
-            $.get("/getCartItems", {customerID : tempUserID} ,function(products){
-                const newOrder = {
-                    orderID: 100,
-                    orderDate: todaysDate,
-                    totalPrice: 0,
-                    amount: products.length,
-                    customerID: tempUserID,
-                    productsInCart: products,
-                };
-                console.log("Order: " + newOrder.orderID + ", " + newOrder.amount + ", " + newOrder.productsInCart);
-                $.post("/addOrder", newOrder);
-            });
+        $.get("/order/generateOrderID", function(orderID){
+            console.log("OrderID: " + orderID);
+
+            //If user on website is not logged in, check for products in temporary cart
+            if(customer.customerID === null || customer.customerID.length === 0){
+                $.get("/getCartItems", {customerID : tempUserID} ,function(products){
+                    const newOrder = {
+                        orderID: orderID,
+                        orderDate: todaysDate,
+                        totalPrice: 0,
+                        amount: products.length,
+                        customerID: tempUserID
+                    };
+
+                    console.log("Order: " + newOrder.orderID + ", " + newOrder.amount + ", " + newOrder.orderDate + ", " + newOrder.customerID);
+                    $.post("/order/addOrder", newOrder, function(message){
+                        console.log(message);
+                    });
+                });
 
             //If user is logged in, get products from customers cart
-        }else{
-            $.get("/getCartItems", {customerID : customer.customerID} ,function(products){
-                const newOrder = {
-                    orderID: 100,
-                    orderDate: todaysDate,
-                    totalPrice: 0,
-                    amount: products.length,
-                    customerID: customer.customerID,
-                    productsInCart: products,
-                };
-                console.log("Order: " + newOrder.orderID + ", " + newOrder.amount + ", " + newOrder.productsInCart);
-                $.post("/addOrder", newOrder);
-            });
-        }
+            }else{
+                $.get("/getCartItems", {customerID : customer.customerID} ,function(products){
+                    const newOrder = {
+                        orderID: orderID,
+                        orderDate: todaysDate,
+                        totalPrice: 0,
+                        amount: products.length,
+                        customerID: customer.customerID
+                    };
+
+                    console.log("Order: " + newOrder.orderID + ", " + newOrder.amount + ", " + newOrder.orderDate + ", " + newOrder.customerID);
+                    $.post("/order/addOrder", newOrder, function(message){
+                        console.log(message);
+                    });
+                });
+                //window.location.href="confirmation.html";
+            }
+        });
     });
 });

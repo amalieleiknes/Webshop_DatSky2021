@@ -8,10 +8,10 @@ INSERT INTO `Customer` (`CustomerID`, `Firstname`, `Lastname`,
 (2, 'Caroline', 'Jetteberg', 'Løkkaveien 2', '0286', '01020304', 'caroline@mail.com', 'password'),
 (3, 'Amalie', 'Leiknes', 'Løkkaveien 3', '0286', '81828384', 'amalie@mail.com', 'password');
 
-INSERT INTO `Order` (`OrderID`, `Date`, `Totalprice`, `Amount`, `CustomerID`) VALUES
-(1, '26.04.2021', 100.00, 2, 1),
-(2, '26.04.2021', 3000.00, 10, 2),
-(3, '28.04.2021', 1500.00, 6, 3);
+INSERT INTO `Order` (`OrderID`, `OrderDate`, `Totalprice`, `Amount`, `CustomerID`) VALUES
+('1', '26.04.2021', 100.00, 2, 1),
+('2', '26.04.2021', 3000.00, 10, 2),
+('3', '28.04.2021', 1500.00, 6, 3);
 
 
 INSERT INTO `Product` (`ProductID`, `ProductName`, `shortDescription`,

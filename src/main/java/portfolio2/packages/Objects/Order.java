@@ -10,18 +10,16 @@ public class Order {
     private Double totalPrice;
     private int amount;
     private int customerID;
-    private List<Product> productsInCart = new ArrayList<>();
 
     //POJO
     public Order(){}
 
-    public Order(String orderID, Date orderDate, Double totalPrice, int amount, int customerID, List<Product> productsInCart) {
+    public Order(String orderID, Date orderDate, Double totalPrice, int amount, int customerID) {
         this.orderID = orderID;
         this.orderDate = orderDate;
         this.totalPrice = totalPrice;
         this.amount = amount;
         this.customerID = customerID;
-        this.productsInCart = productsInCart;
     }
 
     public String getOrderID() {
@@ -62,13 +60,5 @@ public class Order {
 
     public void setCustomerID(int customerID) {
         this.customerID = customerID;
-    }
-
-    public List<Product> getProductsInCart() {
-        return productsInCart;
-    }
-
-    public void setProductsInCart(List<Product> productsInCart) {
-        this.productsInCart = productsInCart;
     }
 }
