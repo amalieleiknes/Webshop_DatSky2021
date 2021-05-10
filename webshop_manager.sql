@@ -29,7 +29,6 @@ CREATE TABLE Customer (
                                           password VARCHAR (20) NOT NULL,
                                           PRIMARY KEY (customerID),
                                           FOREIGN KEY (zipcode) REFERENCES City(zipcode)
-                      ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -67,11 +66,11 @@ CREATE TABLE Ordercontent (
 
 CREATE TABLE Purchase (
                                           PurchaseID INT (30) AUTO_INCREMENT,
-                                          CustomerID INTEGER (20) NOT NULL,
+                                          CustomerID VARCHAR (20) NOT NULL,
                                           ProductID INT (30) NOT NULL,
                                           PRIMARY KEY (PurchaseID),
-                                          FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID),
-                                          FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
+                                          FOREIGN KEY (ProductID) REFERENCES Product(ProductID),
+                                          FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
