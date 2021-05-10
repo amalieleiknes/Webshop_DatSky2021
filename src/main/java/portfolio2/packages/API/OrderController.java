@@ -1,6 +1,7 @@
 package portfolio2.packages.API;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.*;
 import portfolio2.packages.DAL.OrderRepository;
 import portfolio2.packages.Objects.Order;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@EnableScheduling
 @RequestMapping("/order")
 public class OrderController {
 

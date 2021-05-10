@@ -2,6 +2,7 @@ package portfolio2.packages.API;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.*;
 import portfolio2.packages.DAL.CustomerRepository;
 import portfolio2.packages.Objects.*;
@@ -11,6 +12,7 @@ import java.util.List;
 
 
 @RestController
+@EnableScheduling
 @RequestMapping(value = "/customers")
 public class CustomerController {
 
