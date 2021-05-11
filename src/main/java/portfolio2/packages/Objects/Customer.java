@@ -1,39 +1,39 @@
 package portfolio2.packages.Objects;
 
-import org.springframework.hateoas.RepresentationModel;
-
 import java.util.List;
-import java.util.UUID;
 
 public class Customer{
     private String customerID;
     private String firstname;
     private String lastname;
     private String address;
-    private String postnumber;
-    private String postoffice;
+    private String zipcode;
+    private String city;
     private String tlphNumber;
     private String email;
     private String password;
     private List<Product> cart;
 
-    //POJO
-    public Customer(){}
-
     //A constructor for when a customer is get from the database
-    public Customer(String customerID, String firstname, String lastname, String address, String postnumber, String postoffice,
+    public Customer(String customerID, String firstname, String lastname, String address, String zipcode, String city,
                     String tlphNumber, String email, String password) {
         this.customerID = customerID;
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
-        this.postnumber = postnumber;
-        this.postoffice = postoffice;
+        this.zipcode = zipcode;
+        this.city = city;
         this.tlphNumber = tlphNumber;
         this.email = email;
         this.password = password;
+        this.cart = null;
     }
 
+    //POJO
+    public Customer(){}
+
+
+// TODO: Må finne riktig konstruktør som skal brukes her?
 /*    public Customer(String firstname, String lastname, String address, String postnumber, String postoffice,
                     String tlphNumber, String email, String password) {
         this.customerID = UUID.randomUUID().toString();
@@ -75,20 +75,20 @@ public class Customer{
         this.address = address;
     }
 
-    public String getPostnumber() {
-        return postnumber;
+    public String getZipcode() {
+        return zipcode;
     }
 
-    public void setPostnumber(String postnumber) {
-        this.postnumber = postnumber;
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
     }
 
-    public String getPostoffice() {
-        return postoffice;
+    public String getCity() {
+        return city;
     }
 
-    public void setPostoffice(String postoffice) {
-        this.postoffice = postoffice;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getTlphNumber() {

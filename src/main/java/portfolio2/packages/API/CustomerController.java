@@ -61,7 +61,7 @@ public class CustomerController {
             return "Could not add customer (customer is null)";
         }
         repository.addCustomer(customer);
-        return "Customer added succsessfull";
+        return "Customer added succsessfully";
     }
 
 

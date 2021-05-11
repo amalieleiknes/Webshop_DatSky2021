@@ -35,11 +35,11 @@ public class CustomerRepository {
         try {
             sql = "INSERT INTO Customer (firstname, lastname, addresse, postnumber, tlfnumber, email, password) VALUES (?,?,?,?,?,?,?)";
             db.update(sql, customer.getFirstname(), customer.getLastname(), customer.getAddress(),
-                    customer.getPostnumber(), customer.getTlphNumber(), customer.getEmail(), customer.getPassword());
+                    customer.getZipcode(), customer.getTlphNumber(), customer.getEmail(), customer.getPassword());
         } catch (Exception e) {
             return "Something went wrong trying to add customer.";
         }
-        return "Customer added!";
+        return "OK";
     }
 
     public Customer getLoggedInCustomer(String email, String password){
