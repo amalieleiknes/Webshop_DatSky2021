@@ -18,12 +18,12 @@ public class ProductRepository {
         String sql;
         int productFound;
         try{
-            sql = "SELECT count(*) FROM Product WHERE ProductID = ?";
+            sql = "SELECT count(*) FROM Product WHERE productID = ?";
             productFound = db.queryForObject(sql, Integer.class, product.getProductID());
             if(productFound == 0){
                 return "No product matching in database";
             }
-            sql = "UPDATE Product SET ProductID = ?, ProductName = ?, shortDescription = ?, longDescription = ?, Price = ?, ImageURL = ? WHERE ProductID = ?";
+            sql = "UPDATE Product SET productID = ?, productName = ?, shortDescription = ?, longDescription = ?, price = ?, imageURL = ? WHERE productID = ?";
             db.update(sql, product.getProductID(), product.getProductName(), product.getShortDescription(), product.getLongDescription(), product.getPrice(), product.getImageURL(), product.getProductID());
         }catch(Exception e){
             return "Could not update product.";
@@ -44,13 +44,13 @@ public class ProductRepository {
     public Product getProductByID(Integer productID){
         String sql;
         try{
-            sql = "SELECT count(*) FROM Product WHERE ProductID = ?";
+            sql = "SELECT count(*) FROM Product WHERE productID = ?";
             int productsFound = db.queryForObject(sql, Integer.class, productID);
             if(productsFound == 0){
                 return null;
             }
 
-            sql = "SELECT * FROM Product WHERE ProductID = ?";
+            sql = "SELECT * FROM Product WHERE productID = ?";
             return db.queryForObject(sql, new BeanPropertyRowMapper<>(Product.class), productID);
         }catch(Exception e){
             return null;
@@ -59,7 +59,7 @@ public class ProductRepository {
 
     public String addProduct(Product product){
         try{
-            String sql = "INSERT INTO Product (ProductName, shortDescription, longDescription, Price, ImageURL) VALUES (?,?,?,?,?)";
+            String sql = "INSERT INTO Product (productName, shortDescription, longDescription, price, imageURL) VALUES (?,?,?,?,?)";
             db.update(sql, product.getProductName(), product.getShortDescription(), product.getLongDescription(), product.getPrice(), product.getImageURL());
         }catch(Exception e){
             return "Could not add new product";

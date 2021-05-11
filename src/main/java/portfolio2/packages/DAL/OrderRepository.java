@@ -17,7 +17,7 @@ public class OrderRepository {
     public List<Order> getOrders(){
         try{
             String sql =    "SELECT * FROM `Order` " +
-                            "JOIN Customer ON Customers.CustomerID = Order.CustomerID " +
+                            "JOIN Customer ON Customer.customerID = Order.customerID " +
                             "ORDER BY CustomerID";
             List<Order> orders = db.query(sql, new BeanPropertyRowMapper<>(Order.class));
             return orders;
@@ -30,12 +30,12 @@ public class OrderRepository {
         String sql;
         int orderFound;
         try{
-            sql = "SELECT count(*) FROM Order WHERE OrderID = ?";
+            sql = "SELECT count(*) FROM `Order` WHERE orderID = ?";
             orderFound = db.queryForObject(sql, Integer.class, orderID);
             if(orderFound == 0){
                 return null;
             }
-            sql = "SELECT * FROM Order WHERE OrderID = ?";
+            sql = "SELECT * FROM `Order` WHERE orderID = ?";
             return db.queryForObject(sql, Order.class, orderID);
         }catch(Exception e){
             return null;
@@ -49,7 +49,7 @@ public class OrderRepository {
             return "Could not add order. (Order is null)";
         }
         try{
-            sql = "INSERT INTO `Order` (OrderID, OrderDate, Totalprice, Amount, CustomerID) VALUES (?,?,?,?,?)";
+            sql = "INSERT INTO `Order` (orderID, orderDate, totalprice, amount, customerID) VALUES (?,?,?,?,?)";
             db.update(sql, order.getOrderID(), order.getOrderDate(), order.getTotalPrice(), order.getAmount(), order.getCustomerID());
             return "Order added!";
         }catch(Exception e){
@@ -66,7 +66,7 @@ public class OrderRepository {
             int duplicateOrder;
 
             try{
-                sql = "SELECT count(*) FROM Order WHERE OrderID = ?";
+                sql = "SELECT count(*) FROM `Order` WHERE orderID = ?";
                 duplicateOrder = db.queryForObject(sql, Integer.class, i);
             } catch(Exception e){
                 return "Error: klarte ikke å hente fra databasen";

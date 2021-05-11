@@ -18,7 +18,7 @@ public class CartRepository {
         String sql;
         try {
             for (Product product : cart.getProductsInCart()) {
-                sql = "INSERT INTO Purchase (CustomerID, ProductID) VALUES (?,?)";
+                sql = "INSERT INTO Purchase (customerID, productID) VALUES (?,?)";
                 db.update(sql, customerID, product.getProductID());
             }
         }catch(Exception e){
@@ -31,14 +31,14 @@ public class CartRepository {
         String sql;
         int customerFound;
         try {
-            sql = "SELECT COUNT(*) FROM Customer WHERE CustomerID = ?";
+            sql = "SELECT COUNT(*) FROM Customer WHERE customerID = ?";
             customerFound = db.queryForObject(sql, Integer.class, customerID);
             if (customerFound == 0) {
                 return "No customer with customerID " + customerID + " found.";
             }
             try{
                 for(Product product : productsInCart){
-                    sql = "INSERT INTO Ordercontent (ProductID)";
+                    sql = "INSERT INTO Ordercontent (productID)";
                 }
             }
 

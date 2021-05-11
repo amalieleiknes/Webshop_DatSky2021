@@ -33,7 +33,7 @@ public class CustomerRepository {
             }
         }*/
         try {
-            sql = "INSERT INTO Customer (Firstname, Lastname, Addresse, Postnumber, Tlfnumber, Email, Password) VALUES (?,?,?,?,?,?,?)";
+            sql = "INSERT INTO Customer (firstname, lastname, addresse, postnumber, tlfnumber, email, password) VALUES (?,?,?,?,?,?,?)";
             db.update(sql, customer.getFirstname(), customer.getLastname(), customer.getAddress(),
                     customer.getPostnumber(), customer.getTlphNumber(), customer.getEmail(), customer.getPassword());
         } catch (Exception e) {
@@ -47,7 +47,7 @@ public class CustomerRepository {
             return null;
         }
         try{
-            String sql = "SELECT * FROM Customer WHERE Email = ? AND Password = ?";
+            String sql = "SELECT * FROM Customer WHERE email = ? AND password = ?";
             List<Customer> loggedOnCustomers = db.query(sql, new BeanPropertyRowMapper<>(Customer.class), email, password);
             return loggedOnCustomers.get(0);
         }catch(Exception e){
@@ -60,7 +60,7 @@ public class CustomerRepository {
             return null;
         }
         try{
-            String sql = "SELECT * FROM Customer WHERE CustomerID = ?";
+            String sql = "SELECT * FROM Customer WHERE customerID = ?";
             List<Customer> customers = db.query(sql, new BeanPropertyRowMapper<>(Customer.class));
             return customers.get(0);
         }catch(Exception e){
@@ -70,9 +70,9 @@ public class CustomerRepository {
 
     public List<Customer> getCustomers() {
         try {
-            String sql = "SELECT * FROM Customers " +
-                    "JOIN Postoffice ON Customers.Postnumber = Postoffice.Postnumber " +
-                    "ORDER BY CustomerID";
+            String sql = "SELECT * FROM Customer " +
+                    "JOIN Postoffice ON Customer.zipcode = City.zipcode " +
+                    "ORDER BY customerID";
             List<Customer> customers = db.query(sql, new BeanPropertyRowMapper<>(Customer.class));
             return customers;
         } catch (Exception e) {
