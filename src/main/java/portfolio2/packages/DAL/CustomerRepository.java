@@ -70,8 +70,8 @@ public class CustomerRepository {
 
     public List<Customer> getCustomers() {
         try {
-            String sql = "SELECT * FROM Customers " +
-                    "JOIN Postoffice ON Customers.Postnumber = Postoffice.Postnumber " +
+            String sql = "SELECT * FROM Customer " +
+                    "JOIN City ON Customer.zipcode = City.zipcode " +
                     "ORDER BY CustomerID";
             List<Customer> customers = db.query(sql, new BeanPropertyRowMapper<>(Customer.class));
             return customers;
