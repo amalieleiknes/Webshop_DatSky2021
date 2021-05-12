@@ -42,7 +42,8 @@ public class OrderController {
         if(order == null){
             return "Could not add order (order is null)";
         }
-        return repository.addOrder(order);
+        Order newOrder = new Order(order.getOrderID(), order.getOrderDate(), order.getTotalPrice(), order.getAmount(), order.getCustomerID());
+        return repository.addOrder(newOrder);
     }
 
 
@@ -54,8 +55,8 @@ public class OrderController {
 
     @GetMapping("/generateOrderID")
     public String generateOrderID(){
-        //return repository.generateOrderID();
-        return UUID.randomUUID().toString();
+        String orderID = UUID.randomUUID().toString();
+        return orderID;
     }
 
 

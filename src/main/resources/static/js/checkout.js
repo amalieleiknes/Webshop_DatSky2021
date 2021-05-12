@@ -1,12 +1,13 @@
 $(function(){
     let customer = getCustomer();
     let tempUserID = getCookie("tempUserID");
-    let todaysDate = new Date().toJSON().slice(0,10).replace(/-/g,'/');;
 
     //TODO: få opp bekreftelse på ordre med all ordreinformasjon
     $("#registerOrderBtn").click(function(){
+        let todaysDate = new Date();
         $.get("/order/generateOrderID", function(orderID){
             console.log("OrderID: " + orderID);
+            setCookie("orderID", orderID, 1);
 
             //If user on website is not logged in, check for products in temporary cart
             if(customer.customerID === null || customer.customerID.length === 0){
@@ -41,7 +42,7 @@ $(function(){
                         console.log(message);
                     });
                 });
-                //window.location.href="confirmation.html";
+                window.location.href="confirmation.html";
             }
         });
     });

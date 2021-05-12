@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import portfolio2.packages.Objects.Order;
+import portfolio2.packages.Objects.Product;
 
 import java.util.List;
 
@@ -32,12 +33,15 @@ public class OrderRepository {
         try{
             sql = "SELECT count(*) FROM `Order` WHERE orderID = ?";
             orderFound = db.queryForObject(sql, Integer.class, orderID);
+            System.out.println("getOrderByID: orderFound = " + orderFound);
             if(orderFound == 0){
+                System.out.println("getOrderByID: orderFound == 0, returnerer null");
                 return null;
             }
             sql = "SELECT * FROM `Order` WHERE orderID = ?";
-            return db.queryForObject(sql, Order.class, orderID);
+            return db.queryForObject(sql,new BeanPropertyRowMapper<>(Order.class), orderID);
         }catch(Exception e){
+            System.out.println("getOrderByID: Catch: " + e.getMessage());
             return null;
         }
     }
@@ -53,7 +57,7 @@ public class OrderRepository {
             db.update(sql, order.getOrderID(), order.getOrderDate(), order.getTotalPrice(), order.getAmount(), order.getCustomerID());
             return "Order added!";
         }catch(Exception e){
-            return "Something went wrong. Could not add order.";
+            return "Something went wrong. Could not add order." + e.getMessage();
         }
     }
 
