@@ -72,7 +72,7 @@ CREATE TABLE `Order` (
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE Product (
+CREATE TABLE `Product` (
                                         productID INT (11) NOT NULL AUTO_INCREMENT,
                                         productName VARCHAR (20) NOT NULL,
                                         shortDescription VARCHAR (100) NOT NULL,
