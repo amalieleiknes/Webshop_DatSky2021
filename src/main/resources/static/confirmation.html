@@ -9,8 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="js/utils/cookieUtils.js"></script>
-    <script src="js/checkout.js"></script>
     <script src="js/confirmation.js"></script>
+    <script src="js/checkout.js"></script>
     <script src="js/shared.js"></script>
 
     <title>Webshop - order confirmation</title>
@@ -41,29 +41,39 @@
 
 <div class="confContent">
     <div class="printConf">
-        <h2>Thank you for your order!</h2>
+        <div class="confHeader">
+            <h2>Thank you for your order!</h2>
+        </div>
         <div class="confOrderID">
-            <div class="confOrderIDText">OrderID: </div>
-            <div class="confOrderIDValue" id="confOrderIDValue"></div>
+            <div class="orderConfText">OrderID: </div>
+            <div class="orderConfValue" id="confOrderIDValue"></div>
         </div>
+        </br>
         <div class="confOrderDate">
-            <div class="confOrderDateText">Order date: </div>
-            <div class="confOrderDateValue" id="confOrderDateValue"></div>
+            <div class="orderConfText">Order date: </div>
+            <div class="orderConfValue" id="confOrderDateValue"></div>
         </div>
+        </br>
         <div class="confAmount">
-            <div class="confOrderAmountText">OrderID: </div>
-            <div class="confOrderAmountValue" id="confOrderAmountValue"></div>
+            <div class="orderConfText">Amount of products: </div>
+            <div class="orderConfValue" id="confOrderAmountValue"></div>
         </div>
+        </br>
         <div class="confTotalPrice">
-            <div class="confOrderTotalPriceText">OrderID: </div>
-            <div class="confOrderTotalPriceValue" id="confOrderTotalPriceValue"></div>
+            <div class="orderConfText">Total price: </div>
+            <div class="orderConfValue" id="confOrderTotalPriceValue"></div>
         </div>
+        </br>
         <div class="confOrdercontent">
-            <h4>Order content: </h4>
+            <div class="confOrdercontentHeader">
+                <h4>Order content: </h4>
+            </div>
+            </br>
             <div id="itemsInCart"></div>
         </div>
+        </br>
         <div class="confContinue">
-            <button id="continueShoppingBtn">Continue shopping</button>
+            <a href="index.html" id="confContinue">Continue shopping</a>
         </div>
     </div>
 </div>
