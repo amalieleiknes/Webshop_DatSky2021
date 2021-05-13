@@ -52,6 +52,7 @@ public class CustomerController {
 
     @GetMapping("/getCustomers")
     public List<Customer> getCustomers() {
+        System.out.println("Get customers - kommer inn i controllermetoden");
         return repository.getCustomers();
     }
 
@@ -61,6 +62,7 @@ public class CustomerController {
             return "Could not add customer (customer is null)";
         }
         repository.addCustomer(customer);
+        System.out.println("Add customer fungerer i controller");
         return "Customer added succsessfully";
     }
 

@@ -28,7 +28,6 @@ public class Customer{
         this.lastname = lastname;
         this.address = address;
         this.zipcode = zipcode;
-        this.city = getCity();
         this.tlphNumber = tlphNumber;
         this.email = email;
         this.password = password;

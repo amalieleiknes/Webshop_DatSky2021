@@ -32,13 +32,17 @@ public class CustomerRepository {
                 return "Could not add customer with their postoffice";
             }
         }*/
+
+        // TODO: Noe er feil i repositoriet her... Men hva?
         try {
             sql = "INSERT INTO Customer (firstname, lastname, address, zipcode, tlfnumber, email, password) VALUES (?,?,?,?,?,?,?)";
             db.update(sql, customer.getFirstname(), customer.getLastname(), customer.getAddress(),
                     customer.getZipcode(), customer.getTlphNumber(), customer.getEmail(), customer.getPassword());
         } catch (Exception e) {
+            System.out.println("Feil i add customer i repository");
             return "Something went wrong trying to add customer.";
         }
+        System.out.println("Add customer i repository fungerer");
         return "OK";
     }
 
@@ -68,13 +72,13 @@ public class CustomerRepository {
         }
     }
 
+    // getting the customers, but not showing the passwords as a privacy-concern
     public List<Customer> getCustomers() {
         try {
-            String sql = "SELECT * FROM Customer " +
-                    "JOIN Postoffice ON Customer.zipcode = City.zipcode " +
+            String sql = "SELECT customerID, firstname, lastname, address, Customer.zipcode, city, tlfnumber, email FROM Customer " +
+                    "INNER JOIN City ON Customer.zipcode = City.zipcode " +
                     "ORDER BY customerID";
-            List<Customer> customers = db.query(sql, new BeanPropertyRowMapper<>(Customer.class));
-            return customers;
+            return db.query(sql, new BeanPropertyRowMapper<>(Customer.class));
         } catch (Exception e) {
             return null;
         }
