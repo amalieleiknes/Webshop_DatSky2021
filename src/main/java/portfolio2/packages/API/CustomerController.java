@@ -98,4 +98,8 @@ public class CustomerController {
         //has been moved to customers cart after logging in
         Carts.deleteCart(tempUserID);
     }
+
+    public String getCity(String zipcode){
+        return repository.getCity(zipcode);
+    }
 }

@@ -18,22 +18,22 @@ public class CustomerRepository {
         int postoffice;
         //TODO: Kan sjekke opp mot postnummer og adresse senere.
    /*     try {
-            sql = "SELECT count(*) FROM Postoffice WHERE Postnumber =?";
-            postoffice = db.queryForObject(sql, Integer.class, customer.getPostnumber());
+            sql = "SELECT count(*) FROM City WHERE zipcode=?";
+            City = db.queryForObject(sql, Integer.class, customer.getZipcode());
         } catch (Exception e) {
             return "Could not connect to database, failed adding customer.";
         }
         if (postoffice == 0) {
             //If postoffice not in database, add this postoffice
             try {
-                sql = "INSERT INTO Postoffice (Postnumber, Postoffice) VALUES (?,?)";
+                sql = "INSERT INTO City (Postnumber, Postoffice) VALUES (?,?)";
                 db.update(sql, customer.getPostnumber(), customer.getPostoffice());
             } catch (Exception e) {
                 return "Could not add customer with their postoffice";
             }
         }*/
         try {
-            sql = "INSERT INTO Customer (firstname, lastname, addresse, postnumber, tlfnumber, email, password) VALUES (?,?,?,?,?,?,?)";
+            sql = "INSERT INTO Customer (firstname, lastname, address, zipcode, tlfnumber, email, password) VALUES (?,?,?,?,?,?,?)";
             db.update(sql, customer.getFirstname(), customer.getLastname(), customer.getAddress(),
                     customer.getZipcode(), customer.getTlphNumber(), customer.getEmail(), customer.getPassword());
         } catch (Exception e) {
@@ -78,5 +78,16 @@ public class CustomerRepository {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public String getCity(String zipcode){
+        //try {
+            //String sql = "SELECT city FROM City " +
+                    //"WHERE ? = City.zipcode";
+            // TODO: String city = db.query(sql, zipcode);
+            // return city;
+        //} catch (Exception e) {
+            return null;
+        //}
     }
 }

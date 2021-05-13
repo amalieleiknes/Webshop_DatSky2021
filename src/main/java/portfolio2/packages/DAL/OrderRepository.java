@@ -14,18 +14,36 @@ public class OrderRepository {
     @Autowired
     JdbcTemplate db;
 
-    public List<Order> getOrders(){
+    // getting all orders made
+    public List<Order> getAllOrders(){
         try{
             String sql =    "SELECT * FROM `Order` " +
-                            "JOIN Customer ON Customer.customerID = Order.customerID " +
-                            "ORDER BY CustomerID";
+                            "ORDER BY customerID";
             List<Order> orders = db.query(sql, new BeanPropertyRowMapper<>(Order.class));
+            System.out.println("Getting all orders");
             return orders;
         }catch(Exception e){
             return null;
         }
     }
 
+    // getting the orders where customerID in order-table is the same as given customerID
+    public List<Order> getCustomersOrders(String customerID) {
+        try{
+            String sql =    "SELECT * FROM `Order`" +
+                            "WHERE " + customerID + " = `Order`.customerID";
+
+            List<Order> orders = db.query(sql, new BeanPropertyRowMapper<>(Order.class));
+            System.out.println("Getting customers orders");
+            return orders;
+        } catch(Exception e){
+            return null;
+        }
+
+
+    }
+
+    // getting one order based on orderID
     public Order getOrderByID(String orderID){
         String sql;
         int orderFound;
@@ -42,7 +60,7 @@ public class OrderRepository {
         }
     }
 
-
+    // adding one order to the database
     public String addOrder(Order order){
         String sql;
         if(order == null){

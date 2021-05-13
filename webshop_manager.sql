@@ -68,8 +68,7 @@ CREATE TABLE `Order` (
                                        totalprice DECIMAL (10) NOT NULL,
                                        amount INTEGER (100) NOT NULL,
                                        customerID VARCHAR (20) NOT NULL,
-                                       PRIMARY KEY (orderID),
-                                       FOREIGN KEY (customerID) REFERENCES Customer(customerID)
+                                       PRIMARY KEY (orderID)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

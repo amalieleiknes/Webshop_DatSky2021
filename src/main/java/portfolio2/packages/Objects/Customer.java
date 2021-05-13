@@ -1,6 +1,10 @@
 package portfolio2.packages.Objects;
 
+import portfolio2.packages.API.CustomerController;
+import portfolio2.packages.DAL.CustomerRepository;
+
 import java.util.List;
+import java.util.UUID;
 
 public class Customer{
     private String customerID;
@@ -14,38 +18,29 @@ public class Customer{
     private String password;
     private List<Product> cart;
 
+    private CustomerController customercontroller;
+
     //A constructor for when a customer is get from the database
-    public Customer(String customerID, String firstname, String lastname, String address, String zipcode, String city,
+    public Customer(String firstname, String lastname, String address, String zipcode,
                     String tlphNumber, String email, String password) {
-        this.customerID = customerID;
+        this.customerID = UUID.randomUUID().toString();
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
         this.zipcode = zipcode;
-        this.city = city;
+        this.city = getCity();
         this.tlphNumber = tlphNumber;
         this.email = email;
         this.password = password;
-        this.cart = null;
     }
+
 
     //POJO
     public Customer(){}
 
 
 // TODO: Må finne riktig konstruktør som skal brukes her?
-/*    public Customer(String firstname, String lastname, String address, String postnumber, String postoffice,
-                    String tlphNumber, String email, String password) {
-        this.customerID = UUID.randomUUID().toString();
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.address = address;
-        this.postnumber = postnumber;
-        this.postoffice = postoffice;
-        this.tlphNumber = tlphNumber;
-        this.email = email;
-        this.password = password;
-    }*/
+
 
     public String getCustomerID() {
         return customerID;
@@ -84,6 +79,7 @@ public class Customer{
     }
 
     public String getCity() {
+        customercontroller.getCity(zipcode);
         return city;
     }
 

@@ -40,7 +40,7 @@ public class UnittestCustomerController {
 
     @BeforeClass
     public static void initialize(){
-        customer1 = new Customer("1", "navn", "navnesen", "adresse", "1001", "city", "94849484", "test@test.no", "password");
+        customer1 = new Customer("navn", "navnesen", "adresse", "1001", "94849484", "test@test.no", "password");
         List<Customer> customers = new ArrayList<>();
 
         customers.add(customer1);
