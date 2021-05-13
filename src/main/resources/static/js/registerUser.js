@@ -1,6 +1,9 @@
 
 // Add new customer/user
 function addCustomer(){
+    let welcomeElement = document.getElementById("registerInfo");
+    welcomeElement.innerHTML = "";
+
     const newCustomer = {
         firstName        : $("#firstname").val(),
         lastName         : $("#lastname").val(),
@@ -9,7 +12,7 @@ function addCustomer(){
         telephone        : $("#phone").val(),
         email            : $("#email").val(),
         password         : $("#pwd").val(),
-        passwordcheck    : $("#pwdcheck").val()
+
     };
 
     if (newCustomer.firstName.length === 0 ||
@@ -19,19 +22,34 @@ function addCustomer(){
         newCustomer.telephone.length === 0 ||
         newCustomer.email.length === 0 ||
         newCustomer.password.length === 0){
-        console.log("Some fields need to be filled in.");
+        console.log("Some more fields need to be filled in.");
+        welcomeElement.innerHTML = "Some more fields need to be filled in. Please check";
     }
-    if (newCustomer.password!== newCustomer.passwordcheck){
+
+    if (newCustomer.password!== $("#pwdcheck").val()){
         console.log("Passwords are not equal");
+        welcomeElement.innerHTML = "Passwords are not equal. Please check";
     }
 
     else{
         $.post("customers/addCustomer", newCustomer, function(result){
-            if(result !== "Customer added succsessfully"){
-                console.log("Could not add customer (customer is null)")
+            if(result === "Customer added succsessfully"){
+                console.log("Success!");
+                customerAdded(newCustomer);
             }
-            else {console.log("Success!")}
-        })
+            else {
+                console.log("Could not add customer (customer is null)");
+            }
+        });
     }
+}
+
+
+// function to display message about successful adding of customer
+function customerAdded(cust){
+    const content = "<h2> Welcome, " + cust.firstName + "! Please sign in in the top navigation-bar, or continue as a guest if you don" +
+        "t want to link your orders to your account. </h2>";
+    let welcomeElement = document.getElementById("registerInfo");
+    welcomeElement.innerHTML = content;
 }
 

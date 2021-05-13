@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS City;
 DROP TABLE IF EXISTS Customer;
 DROP TABLE IF EXISTS `Order`;
 DROP TABLE IF EXISTS Ordercontent;
-DROP TABLE IF EXISTS Product;
+DROP TABLE IF EXISTS `Product`;
 SET FOREIGN_KEY_CHECKS = 1;
 
 
@@ -57,8 +57,7 @@ CREATE TABLE Customer (
                                           tlfnumber VARCHAR (8),
                                           email VARCHAR (20) NOT NULL,
                                           password VARCHAR (20) NOT NULL,
-                                          PRIMARY KEY (customerID),
-                                          FOREIGN KEY (zipcode) REFERENCES City(zipcode)
+                                          PRIMARY KEY (customerID)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

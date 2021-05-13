@@ -334,17 +334,34 @@ a.goToCheckout{
 
 /*registerUser.html: */
 .regUserContent, .table{
-    padding-left: 60px;
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-top: 4%;
 }
 
-.table-registeruser{
+/* content on left side */
+.userDetails{
     width: 40%;
+    float: left;
+}
+
+/* content on right side */
+.registerInfo{
+    width: 40%;
+    float: right;
+}
+
+
+.table-registeruser td {
+    padding-right: 40px;
+    margin: 20px;
+    padding-top: 10px;
 }
 
 .table-registeruser td {
-    padding-right: 10px;
     padding-top: 10px;
 }
+
 
 .registerbtn {
     border: none;
