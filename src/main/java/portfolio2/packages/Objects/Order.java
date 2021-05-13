@@ -1,20 +1,18 @@
 package portfolio2.packages.Objects;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class Order {
     private String orderID;
     private Date orderDate;
     private Double totalPrice;
     private int amount;
-    private int customerID;
+    private String customerID;
 
     //POJO
     public Order(){}
 
-    public Order(String orderID, Date orderDate, Double totalPrice, int amount, int customerID) {
+    public Order(String orderID, Date orderDate, Double totalPrice, int amount, String customerID) {
         this.orderID = orderID;
         this.orderDate = orderDate;
         this.totalPrice = totalPrice;
@@ -54,11 +52,11 @@ public class Order {
         this.amount = amount;
     }
 
-    public int getCustomerID() {
+    public String getCustomerID() {
         return customerID;
     }
 
-    public void setCustomerID(int customerID) {
+    public void setCustomerID(String customerID) {
         this.customerID = customerID;
     }
 }

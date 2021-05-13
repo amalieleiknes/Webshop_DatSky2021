@@ -191,6 +191,7 @@ a.goToCheckout{
     width: 170px;
     float: right;
     text-align: center;
+    text-decoration: none;
 }
 
 /* checkout.html: */
@@ -276,6 +277,62 @@ a.goToCheckout{
     text-align: center;
 }
 
+/*confirmation.html: */
+.printConf{
+    width: 40%;
+    padding: 50px 70px;
+    margin-left: 30%;
+    margin-top: 4%;
+    margin-bottom: 4%;
+    background: #c9dcef;
+}
+
+.confHeader{
+    text-align: center;
+}
+
+.confOrderID, .confOrderDate, .confAmount, .confTotalPrice{
+    width: 100%;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-size: large;
+}
+
+.orderConfText{
+    float: left;
+}
+
+.orderConfValue{
+    float: right;
+}
+
+.confOrdercontentHeader{
+    width: 100%;
+    float: left;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.confContinue{
+    width: 100%;
+    text-align: center;
+}
+
+#confContinue{
+    padding: 10px;
+    margin: 5px 5px;
+    border: none;
+    cursor: pointer;
+    background: #e77338;
+    color: #000000;
+    font-size: 20px;
+    border-radius: 10px;
+    width: 250px;
+    text-align: center;
+    text-decoration: none;
+}
+
+/*registerUser.html: */
 .regUserContent, .table{
     padding-left: 60px;
 }

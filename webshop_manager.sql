@@ -63,10 +63,10 @@ CREATE TABLE Customer (
 
 
 CREATE TABLE `Order` (
-                                       orderID VARCHAR (30) NOT NULL,
-                                       orderDate varchar (10) NOT NULL,
+                                       orderID VARCHAR (100) NOT NULL,
+                                       orderDate varchar (100) NOT NULL,
                                        totalprice DECIMAL (10) NOT NULL,
-                                       amount INTEGER (100) NOT NULL,
+                                       amount INTEGER (5) NOT NULL,
                                        customerID VARCHAR (20) NOT NULL,
                                        PRIMARY KEY (orderID)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
