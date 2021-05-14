@@ -15,8 +15,9 @@ public class CustomerRepository {
 
     public String addCustomer(Customer customer) {
         String sql;
-        int postoffice;
         //TODO: Kan sjekke opp mot postnummer og adresse senere.
+        // Vi kan legge inn alle postnumre og byer inn som default -
+        // så sjekke om skrevet inn postnummer faktisk finnes når man registrerer seg, ellers få feilmelding
    /*     try {
             sql = "SELECT count(*) FROM City WHERE zipcode=?";
             City = db.queryForObject(sql, Integer.class, customer.getZipcode());
@@ -33,16 +34,16 @@ public class CustomerRepository {
             }
         }*/
 
-        // TODO: Noe er feil i repositoriet her... Men hva?
         try {
-            sql = "INSERT INTO Customer (firstname, lastname, address, zipcode, tlfnumber, email, password) VALUES (?,?,?,?,?,?,?)";
-            db.update(sql, customer.getFirstname(), customer.getLastname(), customer.getAddress(),
+            customer.setCustomerID();
+            sql = "INSERT INTO Customer (customerID, firstname, lastname, address, zipcode, tlfnumber, email, password) VALUES (?,?,?,?,?,?,?,?)";
+
+            db.update(sql, customer.getCustomerID(), customer.getFirstname(), customer.getLastname(), customer.getAddress(),
                     customer.getZipcode(), customer.getTlphNumber(), customer.getEmail(), customer.getPassword());
         } catch (Exception e) {
-            System.out.println("Feil i add customer i repository");
+            System.out.println("Customer repository has an exception: " + e);
             return "Something went wrong trying to add customer.";
         }
-        System.out.println("Add customer i repository fungerer");
         return "OK";
     }
 
