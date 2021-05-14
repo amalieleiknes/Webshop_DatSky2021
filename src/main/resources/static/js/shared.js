@@ -22,7 +22,8 @@ $(function() {
                 "<button id='customerLogOnBtn'>Log in as user</button>" +
                 "<br/>" +
             "</div>"
-    } else {
+    }
+    else {
         content =
             "<div class='userLogInReg'>" +
             "<button id='logOutbtn'>Log out</button>" +
@@ -47,14 +48,12 @@ $(function() {
         else{
             $("#failedLogIn").hide();
 
-            let userLoggingIn = {
-                email: email,
-                password: password
-            };
             // else, send userinfo into API and find out if the info is correct
-            $.post("/customers/logOnCustomer", {email: userLoggingIn.email, password: userLoggingIn.password, tempUserID: tempUserID}, function(foundCustomer) {
+            $.post("/customers/logOnCustomer", {email: email,
+                password: password, tempUserID: tempUserID}, function(foundCustomer) {
                 if(foundCustomer === null){
                     $("#failedLogIn").show();
+                    console.log("The user does not exist");
                 }
                 else{
                     $("#failedLogIn").hide();

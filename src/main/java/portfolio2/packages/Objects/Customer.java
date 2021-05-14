@@ -23,6 +23,7 @@ public class Customer{
     //A constructor for when a customer is get from the database
     public Customer(String firstname, String lastname, String address, String zipcode,
                     String tlphNumber, String email, String password) {
+        this.customerID = UUID.randomUUID().toString();
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
@@ -44,8 +45,8 @@ public class Customer{
         return customerID;
     }
 
-    public void setCustomerID() {
-        this.customerID = UUID.randomUUID().toString();
+    public void setCustomerID(String customerID) {
+        this.customerID = customerID;
     }
 
     public String getFirstname() {
@@ -81,7 +82,6 @@ public class Customer{
     }
 
     public String getCity() {
-        customercontroller.getCity(zipcode);
         return city;
     }
 

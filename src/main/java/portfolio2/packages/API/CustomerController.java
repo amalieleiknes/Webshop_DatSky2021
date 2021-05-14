@@ -41,13 +41,17 @@ public class CustomerController {
             return null;
         }
 
-        Customer customer = repository.getLoggedInCustomer(email, password);
-        if(customer == null){
-            return null;
-        }
+        else {
+            System.out.println("linje 44 i logOnCustomer i Controller");
 
-        mergeTempUser(customer, tempUserID);
-        return customer;
+            Customer customer = repository.getLoggedInCustomer(email, password);
+            if (customer == null) {
+                return null;
+            } else {
+                mergeTempUser(customer, tempUserID);
+                return customer;
+            }
+        }
     }
 
     @GetMapping("/getCustomers")
@@ -62,7 +66,6 @@ public class CustomerController {
             return "Could not add customer (customer is null)";
         }
         repository.addCustomer(customer);
-        System.out.println("Add customer fungerer i controller");
         return "Customer added succsessfully";
     }
 
@@ -101,7 +104,16 @@ public class CustomerController {
         Carts.deleteCart(tempUserID);
     }
 
-    public String getCity(String zipcode){
-        return repository.getCity(zipcode);
+
+    @PostMapping("/checkZipcode")
+    public String checkZipcode(String zipcode){
+        List<String> list = repository.checkZipcode(zipcode);
+        if(list.size()>0){
+            return "OK";
+        }
+        else{return "Fail";}
     }
+
+
+
 }

@@ -15,27 +15,7 @@ public class CustomerRepository {
 
     public String addCustomer(Customer customer) {
         String sql;
-        //TODO: Kan sjekke opp mot postnummer og adresse senere.
-        // Vi kan legge inn alle postnumre og byer inn som default -
-        // så sjekke om skrevet inn postnummer faktisk finnes når man registrerer seg, ellers få feilmelding
-   /*     try {
-            sql = "SELECT count(*) FROM City WHERE zipcode=?";
-            City = db.queryForObject(sql, Integer.class, customer.getZipcode());
-        } catch (Exception e) {
-            return "Could not connect to database, failed adding customer.";
-        }
-        if (postoffice == 0) {
-            //If postoffice not in database, add this postoffice
-            try {
-                sql = "INSERT INTO City (Postnumber, Postoffice) VALUES (?,?)";
-                db.update(sql, customer.getPostnumber(), customer.getPostoffice());
-            } catch (Exception e) {
-                return "Could not add customer with their postoffice";
-            }
-        }*/
-
         try {
-            customer.setCustomerID();
             sql = "INSERT INTO Customer (customerID, firstname, lastname, address, zipcode, tlfnumber, email, password) VALUES (?,?,?,?,?,?,?,?)";
 
             db.update(sql, customer.getCustomerID(), customer.getFirstname(), customer.getLastname(), customer.getAddress(),
@@ -54,7 +34,16 @@ public class CustomerRepository {
         try{
             String sql = "SELECT * FROM Customer WHERE email = ? AND password = ?";
             List<Customer> loggedOnCustomers = db.query(sql, new BeanPropertyRowMapper<>(Customer.class), email, password);
-            return loggedOnCustomers.get(0);
+
+            if(loggedOnCustomers.size() == 0){
+                return null;
+            }
+            else{
+                System.out.println("getLoggedInCustomer: " + loggedOnCustomers.get(0).getCustomerID() + ", "
+                + loggedOnCustomers.get(0).getFirstname());
+
+                return loggedOnCustomers.get(0);
+            }
         }catch(Exception e){
             return null;
         }
@@ -85,14 +74,13 @@ public class CustomerRepository {
         }
     }
 
-    public String getCity(String zipcode){
-        //try {
-            //String sql = "SELECT city FROM City " +
-                    //"WHERE ? = City.zipcode";
-            // TODO: String city = db.query(sql, zipcode);
-            // return city;
-        //} catch (Exception e) {
+    public List<String> checkZipcode(String zipcode){
+        try {
+            String sql = "SELECT zipcode FROM City " +
+                    "WHERE zipcode = ?";
+            return db.query(sql,new BeanPropertyRowMapper<>(String.class), zipcode);
+        } catch (Exception e) {
             return null;
-        //}
+        }
     }
 }
