@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <script src="js/shared.js"></script>
     <script src="js/adminPage.js"></script>
     <script src="js/utils/cookieUtils.js"></script>
 
@@ -39,36 +40,37 @@
     </div>
 </div>
 
-    <div class="container">
-        <br/><br/>
-        <h2>Modify products</h2>
-        <button id="newProductline" onclick="newProductline()">Add product</button>
-        <div id="modifyProducts"></div>
+<div class="admproductContainer" id="admproductContainer">
+    <br/><br/>
+    <h2>Modify products</h2>
+    <button id="newProductline" onclick="newProductline()">Add product</button>
+    <br/><br/>
+    <div id="modifyProducts">hei</div>
 
+</div>
+
+
+<div class="bottomnav">
+
+    <div class ="left-side">
+        <p>Contact info: webshop@webshop.com</p>
     </div>
 
+    <div class ="right-side">
+        <div class="nav">
+            <div class="adminLogInReg">
 
-    <div class="bottomnav">
-
-        <div class ="left-side">
-            <p>Contact info: webshop@webshop.com</p>
-        </div>
-
-        <div class ="right-side">
-            <div class="nav">
-                <div class="adminLogInReg">
-
-                    <input type="text" class="input" id="adminusername" placeholder="username" name="adminusername"/>
-                    <input type="text" class="input" id="adminpassword" placeholder="password" name="adminpassword"/>
-                    <button id="adminlogOnbtn">Log in as admin</button>
-                    <br/>
-                    <span id='adminfailedLogIn'>Incorrect logininfo</span>
-                </div>
-
-
+                <input type="text" class="input" id="adminusername" placeholder="username" name="adminusername"/>
+                <input type="text" class="input" id="adminpassword" placeholder="password" name="adminpassword"/>
+                <button id="adminlogOnbtn">Log in as admin</button>
+                <br/>
+                <span id='adminfailedLogIn'>Incorrect logininfo</span>
             </div>
-        </div>
 
+
+        </div>
     </div>
+
+</div>
 </body>
 </html>

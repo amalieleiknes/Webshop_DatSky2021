@@ -27,9 +27,8 @@ $(function() {
                     "<th>Long Description</th>" +
                     "<th>Price</th>" +
                     "<th>image</th>" +
-                    "<th>Change and Save</th>" +
+                    "<th>Save changes</th>" +
                     "<th>Delete</th>" +
-                    "<th>Copy</th>" +
                 "</thead>" +
             "<tbody>";
         let line=1;
@@ -44,7 +43,6 @@ $(function() {
                     "<td><input type='text' readonly id='imageURL"+line+"' value='"+product.imageURL+"'/></td>" +
                     "<td><a class='btn btn-success' onclick='changeProduct("+line+")'>Save</button></td>" +
                     "<td><a class='btn btn-danger' onclick='deleteProduct("+line+")'>Delete</button></td>" +
-                    "<td><a class='' onclick='copyProduct("+line+")'>Copy</button></td>" +
                 "</tr>";
             line++;
         });
@@ -99,14 +97,6 @@ $(function() {
         });
     }
 
-
-// copying a line that will be added with a new productnumber at the end of the line
-    function copyProduct(line){
-
-    }
-
-
-    //Fortsetter på "addProduct"
 
     //Add new product
     function addProduct(line){

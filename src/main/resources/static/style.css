@@ -144,6 +144,8 @@ img{
 }
 
 #card-container{
+    width:80%;
+    margin-left: 10%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -160,6 +162,11 @@ img{
     padding: 20px;
 }
 
+.cart{
+    width: 80%;
+    margin-left: 10%;
+}
+
 #itemsInCart{
     margin-top: 20px;
 }
@@ -171,6 +178,11 @@ img{
     display: inline-block;
     transition: 0.3s;
     width: 100%;
+}
+
+.checkoutcontent{
+    width: 80%;
+    margin-left: 10%;
 }
 
 #totalCost{
@@ -333,7 +345,7 @@ a.goToCheckout{
 }
 
 /*registerUser.html: */
-.regUserContent, .table{
+.regUserContent table{
     padding-left: 10%;
     padding-right: 10%;
     margin-top: 4%;
@@ -372,4 +384,39 @@ a.goToCheckout{
     font-size: 20px;
     border-radius: 10px;
     width: 170px;
+}
+
+
+/* adminpage */
+
+div#admproductContainer.admproductContainer {
+    margin-left: 10%;
+    width: 80%;
+    float: left;
+}
+
+.modifyProducts input {
+    size: 15px;
+    padding: 5px;
+    margin: 10px;
+    font-size: 20px;
+    border-radius: 5px;
+    width: 150px;
+}
+
+.modifyProducts table{
+
+}
+
+.admproductContainer button{
+    padding: 5px;
+    margin-top: 25px;
+    border: none;
+    cursor: pointer;
+    background: #e77338;
+    color: #000000;
+    font-size: 20px;
+    border-radius: 10px;
+    width: 10%;
+    text-align: center;
 }
