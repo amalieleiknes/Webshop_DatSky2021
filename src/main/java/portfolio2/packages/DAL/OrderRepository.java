@@ -5,8 +5,10 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import portfolio2.packages.Objects.Order;
+import portfolio2.packages.Objects.OrderContent;
 import portfolio2.packages.Objects.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -59,6 +61,26 @@ public class OrderRepository {
         }catch(Exception e){
             return "Something went wrong. Could not add order." + e.getMessage();
         }
+    }
+
+    public String addOrdercontent(OrderContent ordercontent){
+        String sql;
+        String orderID = ordercontent.getOrderID();
+        List<Product> orderProductList = ordercontent.getOrderProductList();
+        if(orderProductList.size() == 0){
+            return "Could not add order content, order content is null";
+        }
+
+        for(Product product : orderProductList){
+            try{
+                sql ="INSERT INTO Ordercontent (orderID, productID) VALUES (?,?)";
+                db.update(sql, orderID, product.getProductID());
+                return "Order content added!";
+            }catch(Exception e){
+                return "Could not add order content. Exception: " + e.getMessage();
+            }
+        }
+        return "addOrderContent failed";
     }
 
     //Method that checks if an integer is used as orderID in the database, and returns the integer if not

@@ -83,11 +83,10 @@ CREATE TABLE `Product` (
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE Ordercontent (
-                                          purchaseID INT (100) NOT NULL AUTO_INCREMENT,
+                                          orderItemID INT (100) NOT NULL AUTO_INCREMENT,
                                           orderID VARCHAR (30) NOT NULL,
-                                          customerID VARCHAR (20) NOT NULL,
                                           productID INT(10) NOT NULL,
-                                          PRIMARY KEY (purchaseID),
+                                          PRIMARY KEY (orderItemID),
                                           FOREIGN KEY (productID) REFERENCES Product(productID),
                                           FOREIGN KEY (orderID) REFERENCES `Order`(orderID)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;

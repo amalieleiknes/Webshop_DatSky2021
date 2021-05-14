@@ -4,8 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.*;
 import portfolio2.packages.DAL.OrderRepository;
+import portfolio2.packages.Objects.Cart;
 import portfolio2.packages.Objects.Order;
+import portfolio2.packages.Objects.OrderContent;
+import portfolio2.packages.Objects.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,6 +48,22 @@ public class OrderController {
         }
         Order newOrder = new Order(order.getOrderID(), order.getOrderDate(), order.getTotalPrice(), order.getAmount(), order.getCustomerID());
         return repository.addOrder(newOrder);
+    }
+
+    @PostMapping("/addOrderContent")
+    public String addOrdercontent(OrderContent ordercontent) {
+        System.out.println("OrderController - addOrdercontent: Orderconent.getOrderID(): " + ordercontent.getOrderID());
+        List<Product> orderContentList = new ArrayList<>();
+        System.out.println(ordercontent.getOrderProductList());
+        for(Product p : ordercontent.getOrderProductList()){
+            System.out.println("Order content: Product name: " + p.getProductName());
+            orderContentList.add(p);
+        }
+        if (orderContentList.size() == 0) {
+            return "Order content is null";
+        }
+        OrderContent newOrdercontent = new OrderContent(ordercontent.getOrderID(), orderContentList);
+        return repository.addOrdercontent(newOrdercontent);
     }
 
 
