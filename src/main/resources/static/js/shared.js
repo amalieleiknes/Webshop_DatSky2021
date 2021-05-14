@@ -49,31 +49,36 @@ $(function() {
             $("#failedLogIn").hide();
 
             // else, send userinfo into API and find out if the info is correct
-            $.post("/customers/logOnCustomer", {email: email,
-                password: password, tempUserID: tempUserID}, function(foundCustomer) {
-                if(foundCustomer === null){
-                    $("#failedLogIn").show();
-                    console.log("The user does not exist");
+            const login  = {
+                email       : email,
+                password    : password,
+                tempUserID  : tempUserID
+            }
+
+            $.post("customers/checkIfValidCustomerLoginInfo", login, function(customerID){
+                if(customerID!=="FAIL"){
+                    console.log("Setting cookie, user exists...")
+                    $("#failedLogIn").hide();
+
+                    setCookie("email", email, 1);
+                    setCookie("customerID", customerID, 1);
+                    deleteCookie("adminusername");
+                    deleteCookie("adminpassword");
+
+                    deleteCookie("tempUserID");
+                    location.reload();
                 }
                 else{
-                    $("#failedLogIn").hide();
-                    console.log("CustomerID til customer som ble funnet: ", foundCustomer.customerID);
-                    setCookie("email", email, 1);
-                    setCookie("customerID", foundCustomer.customerID, 1);
-                    deleteCookie("tempUserID");
-
-                    location.reload();
+                    $("#failedLogIn").show();
                 }
             });
         }
-
     });
 
     //logging out customer/admin
     $("#logOutbtn").click(function(){
         logOut();
     });
-
 
     // check admins login-info TODO: ikke bra sikkerhet. Bør sjekkes i java kanskje?
     $("#adminlogOnbtn").click(function() {
@@ -117,6 +122,8 @@ function logOut(){
     setCookie("customerID", null, 0);
     deleteCookie("customerID");
     deleteCookie("tempUserID");
+    deleteCookie("adminusername");
+    deleteCookie("adminpassword");
     location.reload();
 }
 
@@ -133,6 +140,8 @@ function logOnAdmin(){
 
         if(adminusername === "admin" && adminpassword === "admin"){
             console.log("trying to set cookie...")
+            deleteCookie("customerID");
+            deleteCookie("tempUserID");
             setCookie("adminusername", adminusername, 1);
             setCookie("adminpassword", adminpassword, 1);
             deleteCookie()

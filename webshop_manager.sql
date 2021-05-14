@@ -54,7 +54,7 @@ CREATE TABLE Customer (
                                           lastname VARCHAR (30),
                                           address VARCHAR (50),
                                           zipcode VARCHAR (4),
-                                          tlfnumber VARCHAR (20),
+                                          telephone VARCHAR (20),
                                           email VARCHAR (50) NOT NULL,
                                           password VARCHAR (20) NOT NULL,
                                           PRIMARY KEY (customerID)
@@ -95,7 +95,7 @@ CREATE TABLE Ordercontent (
 
 #Inserting some test data for customers
 INSERT INTO `Customer` (`customerID`, `firstname`, `lastname`,
-                        `address`, `zipcode`, `tlfnumber`, `email`, `password`) VALUES
+                        `address`, `zipcode`, `telephone`, `email`, `password`) VALUES
 (1, 'Per', 'Hansen', 'Frognerveien 1', '0273', '97969594', 'per@mail.com', 'password'),
 (2, 'Hans', 'Persen', 'Løkkaveien 2', '0286', '01020304', 'hans@mail.com', 'password'),
 (3, 'Lise', 'Luring', 'Løkkaveien 3', '0286', '81828384', 'lise@mail.com', 'password');

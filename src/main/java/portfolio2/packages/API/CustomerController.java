@@ -32,41 +32,31 @@ public class CustomerController {
         return repository.getCustomerByID(customerID);
     }
 
-
-    @PostMapping("/logOnCustomer")
-    public Customer logOnCustomer(String email, String password, String tempUserID){
-        if( email.isEmpty()      || email.isBlank()     ||
-            password.isBlank()   || password.isEmpty()  ||
-            tempUserID.isEmpty() || tempUserID.isBlank() ){
-            return null;
-        }
-
-        else {
-            System.out.println("linje 44 i logOnCustomer i Controller");
-
-            Customer customer = repository.getLoggedInCustomer(email, password);
+    @PostMapping("/checkIfValidCustomerLoginInfo")
+    public String checkIfValidCustomerLoginInfo(String email, String password, String tempUserID){
+            Customer customer = repository.checkIfValidCustomerLogin(email, password);
             if (customer == null) {
-                return null;
+                return "FAIL";
             } else {
                 mergeTempUser(customer, tempUserID);
-                return customer;
+                return customer.getCustomerID();
             }
-        }
     }
+
+
 
     @GetMapping("/getCustomers")
     public List<Customer> getCustomers() {
-        System.out.println("Get customers - kommer inn i controllermetoden");
         return repository.getCustomers();
     }
 
     @PostMapping("/addCustomer")
     public String addCustomer(Customer customer){
         if(customer == null){
-            return "Could not add customer (customer is null)";
+            return "FAIL";
         }
         repository.addCustomer(customer);
-        return "Customer added succsessfully";
+        return "OK";
     }
 
 

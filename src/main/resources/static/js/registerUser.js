@@ -9,7 +9,7 @@ function addCustomer(){
         lastname         : $("#lastname").val(),
         address          : $("#address").val(),
         zipcode          : $("#zipcode").val(),
-        tlphNumber       : $("#phone").val(),
+        telephone       : $("#phone").val(),
         email            : $("#email").val(),
         password         : $("#pwd").val(),
 
@@ -19,7 +19,7 @@ function addCustomer(){
         newCustomer.lastname.length === 0 ||
         newCustomer.address.length === 0||
         newCustomer.zipcode.length === 0 ||
-        newCustomer.tlphNumber.length === 0 ||
+        newCustomer.telephone.length === 0 ||
         newCustomer.email.length === 0 ||
         newCustomer.password.length === 0){
         welcomeElement.innerHTML = "Some more fields need to be filled in. Please check";
@@ -30,22 +30,32 @@ function addCustomer(){
     }
 
     else{
-        $.post("customers/checkZipcode", $("#zipcode").val(), function (status) {
-            if(status==="OK") {
-                $.post("customers/addCustomer", newCustomer, function (result) {
-                    if (result === "Customer added succsessfully") {
-                        customerAdded(newCustomer);
-                        document.getElementById("firstname").innerText = "";
-                        $("#lastname").val("");
-                    } else {
-                        console.log("Could not add customer (customer is null)");
-                    }
-                });
-            }
-            else{
-                welcomeElement.innerHTML = "That zipcode is not valid. Please check";
-            }
-        });
+        //$.post("customers/checkZipcode", $("#zipcode").val(), function (status) {
+            //if(status==="OK") {
+            $.post("customers/addCustomer", newCustomer, function (result) {
+                if (result === "OK") {
+                    customerAdded(newCustomer);
+
+
+                    // setting fields to empty after registering
+                    $("#firstname").val("");
+                    $("#lastname").val("");
+                    $("#address").val("");
+                    $("#zipcode").val("");
+                    $("#phone").val("");
+                    $("#email").val("");
+                    $("#pwd").val("");
+                    $("#pwdcheck").val("");
+
+                } else {
+                    console.log("Could not add customer (customer is null)");
+                }
+            });
+            //}
+            //else{
+                //welcomeElement.innerHTML = "That zipcode is not valid. Please check";
+            //}
+        //});
     }
 }
 

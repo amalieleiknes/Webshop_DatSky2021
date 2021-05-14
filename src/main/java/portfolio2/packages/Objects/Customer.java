@@ -1,7 +1,6 @@
 package portfolio2.packages.Objects;
 
 import portfolio2.packages.API.CustomerController;
-import portfolio2.packages.DAL.CustomerRepository;
 
 import java.util.List;
 import java.util.UUID;
@@ -13,7 +12,7 @@ public class Customer{
     private String address;
     private String zipcode;
     private String city;
-    private String tlphNumber;
+    private String telephone;
     private String email;
     private String password;
     private List<Product> cart;
@@ -22,13 +21,13 @@ public class Customer{
 
     //A constructor for when a customer is get from the database
     public Customer(String firstname, String lastname, String address, String zipcode,
-                    String tlphNumber, String email, String password) {
+                    String telephone, String email, String password) {
         this.customerID = UUID.randomUUID().toString();
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
         this.zipcode = zipcode;
-        this.tlphNumber = tlphNumber;
+        this.telephone = telephone;
         this.email = email;
         this.password = password;
     }
@@ -38,11 +37,12 @@ public class Customer{
     public Customer(){}
 
 
-// TODO: Må finne riktig konstruktør som skal brukes her?
-
-
     public String getCustomerID() {
         return customerID;
+    }
+
+    public void setNewCustomerID(){
+        this.customerID = UUID.randomUUID().toString();
     }
 
     public void setCustomerID(String customerID) {
@@ -89,12 +89,12 @@ public class Customer{
         this.city = city;
     }
 
-    public String getTlphNumber() {
-        return tlphNumber;
+    public String getTelephone() {
+        return telephone;
     }
 
-    public void setTlphNumber(String tlphNumber) {
-        this.tlphNumber = tlphNumber;
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
     public String getEmail() {

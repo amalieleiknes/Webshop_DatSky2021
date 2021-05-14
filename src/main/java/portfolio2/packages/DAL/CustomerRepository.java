@@ -16,37 +16,16 @@ public class CustomerRepository {
     public String addCustomer(Customer customer) {
         String sql;
         try {
-            sql = "INSERT INTO Customer (customerID, firstname, lastname, address, zipcode, tlfnumber, email, password) VALUES (?,?,?,?,?,?,?,?)";
+            customer.setNewCustomerID();
+            sql = "INSERT INTO Customer (customerID, firstname, lastname, address, zipcode, telephone, email, password) VALUES (?,?,?,?,?,?,?,?)";
 
             db.update(sql, customer.getCustomerID(), customer.getFirstname(), customer.getLastname(), customer.getAddress(),
-                    customer.getZipcode(), customer.getTlphNumber(), customer.getEmail(), customer.getPassword());
+                    customer.getZipcode(), customer.getTelephone(), customer.getEmail(), customer.getPassword());
         } catch (Exception e) {
             System.out.println("Customer repository has an exception: " + e);
             return "Something went wrong trying to add customer.";
         }
         return "OK";
-    }
-
-    public Customer getLoggedInCustomer(String email, String password){
-        if(email.isBlank() || email.isEmpty() || password.isEmpty() || password.isBlank()){
-            return null;
-        }
-        try{
-            String sql = "SELECT * FROM Customer WHERE email = ? AND password = ?";
-            List<Customer> loggedOnCustomers = db.query(sql, new BeanPropertyRowMapper<>(Customer.class), email, password);
-
-            if(loggedOnCustomers.size() == 0){
-                return null;
-            }
-            else{
-                System.out.println("getLoggedInCustomer: " + loggedOnCustomers.get(0).getCustomerID() + ", "
-                + loggedOnCustomers.get(0).getFirstname());
-
-                return loggedOnCustomers.get(0);
-            }
-        }catch(Exception e){
-            return null;
-        }
     }
 
     public Customer getCustomerByID(String customerID){
@@ -72,6 +51,23 @@ public class CustomerRepository {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public Customer checkIfValidCustomerLogin(String email, String password){
+        try{
+            String sql = "SELECT customerID, email FROM Customer WHERE email = ? AND password = ?";
+            List<Customer> loggedOnCustomers = db.query(sql, new BeanPropertyRowMapper<>(Customer.class), email, password);
+
+            if(loggedOnCustomers.size()>0) {
+                return loggedOnCustomers.get(0);
+            }
+            else{return null;}
+
+        }catch(Exception e){
+            return null;
+        }
+
+
     }
 
     public List<String> checkZipcode(String zipcode){
