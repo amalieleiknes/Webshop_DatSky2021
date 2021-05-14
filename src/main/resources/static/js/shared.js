@@ -75,7 +75,7 @@ $(function() {
         }
     });
 
-    //logging out customer/admin
+    //logging out customer
     $("#logOutbtn").click(function(){
         logOut();
     });
@@ -122,8 +122,6 @@ function logOut(){
     setCookie("customerID", null, 0);
     deleteCookie("customerID");
     deleteCookie("tempUserID");
-    deleteCookie("adminusername");
-    deleteCookie("adminpassword");
     location.reload();
 }
 

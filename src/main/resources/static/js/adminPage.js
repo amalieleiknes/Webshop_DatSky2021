@@ -97,6 +97,12 @@ $(function() {
         });
     }
 
+    function logOutAdmin(){
+        deleteCookie("adminpassword");
+        deleteCookie("adminusername");
+        window.location.href = "index.html";
+    };
+
 
     //Add new product
     function addProduct(line){
