@@ -96,12 +96,16 @@ public class CustomerController {
 
 
     @PostMapping("/checkZipcode")
-    public String checkZipcode(String zipcode){
+    public String checkZipcode(Customer customer){
+        String zipcode = customer.getZipcode();
         List<String> list = repository.checkZipcode(zipcode);
+
         if(list.size()>0){
             return "OK";
         }
-        else{return "Fail";}
+        else{
+            return "Fail";
+        }
     }
 
 

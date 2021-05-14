@@ -9,11 +9,13 @@ function addCustomer(){
         lastname         : $("#lastname").val(),
         address          : $("#address").val(),
         zipcode          : $("#zipcode").val(),
-        telephone       : $("#phone").val(),
+        telephone        : $("#phone").val(),
         email            : $("#email").val(),
         password         : $("#pwd").val(),
 
     };
+
+
 
     if (newCustomer.firstname.length === 0 ||
         newCustomer.lastname.length === 0 ||
@@ -29,9 +31,13 @@ function addCustomer(){
         welcomeElement.innerHTML = "Passwords are not equal. Please check";
     }
 
+
+
     else{
-        //$.post("customers/checkZipcode", $("#zipcode").val(), function (status) {
-            //if(status==="OK") {
+        $.post("customers/checkZipcode", newCustomer, function(status) {
+            console.log(newCustomer.zipcode);
+            console.log(status);
+        if(status==="OK"){
             $.post("customers/addCustomer", newCustomer, function (result) {
                 if (result === "OK") {
                     customerAdded(newCustomer);
@@ -51,11 +57,13 @@ function addCustomer(){
                     console.log("Could not add customer (customer is null)");
                 }
             });
-            //}
-            //else{
-                //welcomeElement.innerHTML = "That zipcode is not valid. Please check";
-            //}
-        //});
+        }
+        else {
+            welcomeElement.innerHTML = "That zipcode is not valid. Please check";
+        }
+
+
+        });
     }
 }
 
