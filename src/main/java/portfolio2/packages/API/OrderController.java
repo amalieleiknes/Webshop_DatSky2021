@@ -20,7 +20,8 @@ public class OrderController {
 
     @Autowired
     OrderRepository repository;
-/*
+
+/* TODO: Kan vi bare slette dette?
 
     @GetMapping("/{orderID}")
     public Order getOrderByID(@PathVariable String orderID){
@@ -28,6 +29,7 @@ public class OrderController {
     }
 */
 
+    // getting a order, based on order ID
     @GetMapping("/getOrderByID")
     public Order getOrderByID(String orderID){
         if(orderID.isBlank() || orderID.isEmpty()){
@@ -36,11 +38,13 @@ public class OrderController {
         return repository.getOrderByID(orderID);
     }
 
-    @GetMapping("/getOrders")
+    // getting all the orders ever made
+    @GetMapping("/getAllOrders")
     public List<Order> getAllOrders(){
-        return repository.getOrders();
+        return repository.getAllOrders();
     }
 
+    // adding one order to the database
     @PostMapping("/addOrder")
     public String addOrder(Order order){
         if(order == null){
@@ -69,10 +73,11 @@ public class OrderController {
 
     // TODO: må fikse denne
     @GetMapping("/getOrdersByCustomer")
-    public List<Order> getOrdersByCustomer(){
-        return repository.getOrders();
+    public List<Order> getOrdersByCustomer(String customerID){
+        return repository.getCustomersOrders(customerID);
     }
 
+    // generating an order ID
     @GetMapping("/generateOrderID")
     public String generateOrderID(){
         String orderID = UUID.randomUUID().toString();

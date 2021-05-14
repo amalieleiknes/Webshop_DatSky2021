@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS City;
 DROP TABLE IF EXISTS Customer;
 DROP TABLE IF EXISTS `Order`;
 DROP TABLE IF EXISTS Ordercontent;
-DROP TABLE IF EXISTS Product;
+DROP TABLE IF EXISTS `Product`;
 SET FOREIGN_KEY_CHECKS = 1;
 
 
@@ -49,16 +49,15 @@ CREATE TABLE City (
 
 
 CREATE TABLE Customer (
-                                          customerID VARCHAR (20) NOT NULL,
+                                          customerID VARCHAR (100) NOT NULL,
                                           firstname VARCHAR (30),
                                           lastname VARCHAR (30),
                                           address VARCHAR (50),
                                           zipcode VARCHAR (4),
-                                          tlfnumber VARCHAR (8),
-                                          email VARCHAR (20) NOT NULL,
+                                          tlfnumber VARCHAR (20),
+                                          email VARCHAR (50) NOT NULL,
                                           password VARCHAR (20) NOT NULL,
-                                          PRIMARY KEY (customerID),
-                                          FOREIGN KEY (zipcode) REFERENCES City(zipcode)
+                                          PRIMARY KEY (customerID)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -67,7 +66,7 @@ CREATE TABLE `Order` (
                                        orderDate varchar (100) NOT NULL,
                                        totalprice DECIMAL (10) NOT NULL,
                                        amount INTEGER (5) NOT NULL,
-                                       customerID VARCHAR (20) NOT NULL,
+                                       customerID VARCHAR (100) NOT NULL,
                                        PRIMARY KEY (orderID)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -94,29 +93,36 @@ CREATE TABLE Ordercontent (
 
 
 
-
+# Inserting data for all zipcodes + cities in Norway
 INSERT INTO `City` (`zipcode`, `city`) VALUES
 ('0286', 'Løkka'),
 ('0273', 'Frogner');
 
 
+#Inserting some test data for customers
 INSERT INTO `Customer` (`customerID`, `firstname`, `lastname`,
                         `address`, `zipcode`, `tlfnumber`, `email`, `password`) VALUES
-(1, 'Hannah', 'Eriksen', 'Frognerveien 1', '0273', '97969594', 'hannah@mail.com', 'password'),
-(2, 'Caroline', 'Jetteberg', 'Løkkaveien 2', '0286', '01020304', 'caroline@mail.com', 'password'),
-(3, 'Amalie', 'Leiknes', 'Løkkaveien 3', '0286', '81828384', 'amalie@mail.com', 'password');
+(1, 'Per', 'Hansen', 'Frognerveien 1', '0273', '97969594', 'per@mail.com', 'password'),
+(2, 'Hans', 'Persen', 'Løkkaveien 2', '0286', '01020304', 'hans@mail.com', 'password'),
+(3, 'Lise', 'Luring', 'Løkkaveien 3', '0286', '81828384', 'lise@mail.com', 'password');
 
 
+# Inserting test data for orders
 INSERT INTO `Order` (`orderID`, `orderDate`, `totalprice`, `amount`, `customerID`) VALUES
 (1, '26.04.2021', 100.00, 2, 1),
 (2, '26.04.2021', 3000.00, 10, 2),
 (3, '28.04.2021', 1500.00, 6, 3);
 
 
+#Inserting test data for products
 INSERT INTO `Product` (`productID`, `productName`, `shortDescription`,
                        `longDescription`, `price`, `imageURL`) VALUES
 (1, 'godKaffi', 'Ein god kaffi', 'Ein gooooood kaffi', 1000.00, '/images/kaffe.jpg'),
 (2, 'bedreKaffi', 'Beittre kaffi', 'Ein beittre kaffi', 2000.00, '/images/kaffe.jpg'),
 (3, 'besteKaffi', 'Beste kaffi', 'Den beste kaffi', 3000.00, '/images/kaffe.jpg');
+
+
+
+# Inserting test data for order content
 
 UNLOCK TABLES;

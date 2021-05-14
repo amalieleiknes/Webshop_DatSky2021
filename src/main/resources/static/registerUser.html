@@ -11,7 +11,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="js/index.js"></script>
+    <script src="js/registerUser.js"></script>
+    <script src="js/shared.js"></script>
     <script src="js/utils/cookieUtils.js"></script>
 
     <title>Webshop - register user</title>
@@ -40,29 +41,29 @@
     </div>
 </div>
 
-    <div class="regUserContent">
-        <div class="userContent">
-            <div class="userDetails">
-                <h2>Type in your info here to register</h2>
-                </br>
-                <table class='table-registeruser'>
+    <div class="regUserContent" id="regUserContent">
+        <div class="userContent" id="userContent">
+            <h2>Type in your info here to register</h2>
+            </br>
+            <div class="userDetails" id="userDetails">
+                <table class='table-registeruser' id='table-registeruser'>
                     <tr>
-                        <td><input type='text' id="firstname" value="First name"/></td>
-                        <td><input type='text' id="lastname" value="Last name"/></td>
+                        <td><input type='text' id="firstname" placeholder='First name' name='First name'/></td>
+                        <td><input type='text' id="lastname" placeholder='Last name' name="Last name"/></td>
                     </tr>
                     <tr>
-                        <td><input type='text' id="address" value="Street address"/></td>
+                        <td><input type='text' id="address" placeholder='Street address' name="Street address"/></td>
                     </tr>
                     <tr>
-                        <td><input type='text' id="zipcode" value="Zip code"/></td>
+                        <td><input type='text' id="zipcode" placeholder='Zip code' name="Zip code"/></td>
                     </tr>
                     <tr>
-                        <td><input type='text' id="phone" value="Phone"/></td>
-                        <td><input type='text' id="email" value="Email address"/></td>
+                        <td><input type='text' id="phone" placeholder='Phone' name="Phone"/></td>
+                        <td><input type='text' id="email" placeholder='Email address' name="Email address"/></td>
                     </tr>
                     <tr>
-                        <td><input type='text' id="pwd" value="Password"/></td>
-                        <td><input type='text' id="pwdcheck" value="Retype your password"/></td>
+                        <td><input type='text' id="pwd" placeholder='Password' name="Password"/></td>
+                        <td><input type='text' id="pwdcheck" placeholder='Retype your password' name="Retype your password"/></td>
                     </tr>
                     <tr>
                         <td></br><button class='registerbtn' onclick="addCustomer()" id="registerUser">Register as user</button></br></td>
@@ -71,6 +72,7 @@
             </div>
         </div>
 
+        <div class="registerInfo" id="registerInfo"></div>
     </div>
 
 <div class="bottomnav">
