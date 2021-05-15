@@ -33,19 +33,18 @@ public class OrderRepository {
     }
 
     // getting the orders where customerID in order-table is the same as given customerID
-    public List<Order> getCustomersOrders(String customerID) {
+    public List<Order> getOrdersByCustomer(String customerID) {
         try{
-            String sql =    "SELECT * FROM `Order`" +
-                            "WHERE " + customerID + " = `Order`.customerID";
+            String sql =    "SELECT * FROM `Order` " +
+                            "WHERE `Order`.customerID = " + customerID;
 
+            //TODO: kommer ikke videre herfa og ned, noe feil i query?
             List<Order> orders = db.query(sql, new BeanPropertyRowMapper<>(Order.class));
             System.out.println("Getting customers orders");
             return orders;
         } catch(Exception e){
             return null;
         }
-
-
     }
 
     // getting one order based on orderID

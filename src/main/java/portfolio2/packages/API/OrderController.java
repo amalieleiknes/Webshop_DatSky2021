@@ -50,9 +50,10 @@ public class OrderController {
     }
 
 
-    @GetMapping("/getOrdersByCustomer")
+    @PostMapping("/getOrdersByCustomer")
     public List<Order> getOrdersByCustomer(String customerID){
-        return repository.getCustomersOrders(customerID);
+        System.out.println("ordercontroller - getordersbycust");
+        return repository.getOrdersByCustomer(customerID);
     }
 
 
