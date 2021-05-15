@@ -5,7 +5,6 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import portfolio2.packages.Objects.Order;
-import portfolio2.packages.Objects.OrderContent;
 import portfolio2.packages.Objects.OrderLine;
 import portfolio2.packages.Objects.Product;
 
