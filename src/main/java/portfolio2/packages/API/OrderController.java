@@ -72,7 +72,7 @@ public class OrderController {
 
 
     @GetMapping("/getOrdercontent")
-    public OrderContent getOrderContent(String orderID){
+    public List<OrderLine> getOrderContent(String orderID){
         return repository.getOrdercontent(orderID);
     }
 

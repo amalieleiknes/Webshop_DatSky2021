@@ -38,7 +38,7 @@ public class OrderRepository {
             String sql =    "SELECT * FROM `Order` " +
                             "WHERE `Order`.customerID = " + customerID;
 
-            //TODO: kommer ikke videre herfa og ned, noe feil i query?
+            //TODO: kommer ikke videre herfa og ned, noe feil i query? Står at antallet er 0
             List<Order> orders = db.query(sql, new BeanPropertyRowMapper<>(Order.class));
             System.out.println("Getting customers orders");
             return orders;
@@ -108,19 +108,12 @@ public class OrderRepository {
 
 
 
-    public OrderContent getOrdercontent (String orderID){
+    public List<OrderLine> getOrdercontent (String orderID){
         String sql;
-        int ordercont;
         try{
-            sql = "SELECT count(*) FROM Ordercontent WHERE orderID = ?";
-            ordercont = db.queryForObject(sql, Integer.class, orderID);
-            System.out.println("getOrdercontent: " + ordercont);
-            if(ordercont == 0){
-                System.out.println("getOrderByID: orderFound == 0, returnerer null");
-                return null;
-            }
-            sql = "SELECT * FROM Ordercontent WHERE orderID = ?";
-            return db.queryForObject(sql,new BeanPropertyRowMapper<>(OrderContent.class), orderID);
+            System.out.println("repository: getordercontent");
+            sql = "SELECT * FROM Ordercontent WHERE orderID = " + orderID;
+            return db.query(sql,new BeanPropertyRowMapper<>(OrderLine.class));
         }catch(Exception e){
             System.out.println("getOrdercontent: Catch: " + e.getMessage());
             return null;
