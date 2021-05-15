@@ -1,21 +1,25 @@
 $(function(){
     let customer = getCustomer();
     let tempUserID = getCookie("tempUserID");
+    let customerID = getCookie("customerID");
+    let emailID = getCookie("email");
 
-    //TODO: få opp bekreftelse på ordre med all ordreinformasjon
     $("#registerOrderBtn").click(function(){
-
-        // TODO: if userID is deleted from cookie or not generated -
         // make sure this is generated before adding order
-        if(tempUserID==="") {
-
-
-
+        if(tempUserID==="" && customerID==="" || emailID==="") {
+            deleteCookie("email");
+            deleteCookie("customerID");
+            let tempUserID = Math.random().toString(36).substring(7);
+            setCookie("tempUserID", tempUserID, 1);
+            let cookieTemp = getCookie("tempUserID");
+            console.log("No cookie is set, making a new one and relocating: ", cookieTemp);
+            location.reload();
         }
 
         else {
-
             let todaysDate = new Date();
+
+            // generating Order and Ordercontent
             $.get("/order/generateOrderID", function (orderID) {
                 console.log("OrderID: " + orderID);
                 setCookie("orderID", orderID, 1);
@@ -31,18 +35,21 @@ $(function(){
                             customerID: tempUserID
                         };
 
-                       $.post("/order/addOrder", newOrder, function (message) {
+                        $.post("/order/addOrder", newOrder, function (message) {
                             console.log(message);
-                        });
-
-
-                        $.post("/order/addOrdercontent", {orderID: orderID, customerID: tempUserID}, function (message) {
-                            console.log(message);
+                            if(message==="Order added!"){
+                                $.post("/order/addOrdercontent", {orderID: orderID, customerID: tempUserID}, function (message) {
+                                        console.log(message);
+                                    });
+                            }
                         });
                     });
+                    window.location.href="confirmation.html";
+                }
 
-                    //If user is logged in, get products from customers cart
-                } else {
+
+                //If user is logged in, get products from customers cart
+                else {
                     $.get("/getCartItems", {customerID: customer.customerID}, function (products) {
                         const newOrder = {
                             orderID: orderID,
@@ -52,31 +59,17 @@ $(function(){
                             customerID: customer.customerID
                         };
 
-                        console.log("Order: " + newOrder.orderID + ", " + newOrder.amount + ", " + newOrder.orderDate + ", " + newOrder.customerID);
-                        console.log(newOrder);
+                        $.post("/order/addOrder", newOrder, function (message) {
+                            console.log(message);
 
-                        $.post("/order/addOrder", newOrder, function (addOrderMessage) {
-                            if (addOrderMessage === "Order added!") {
-                                const newOrderContent = {
-                                    orderID: orderID,
-                                    orderProductList: products
-                                }
-                                console.log("Ordercontent: " + newOrderContent.orderID + ", products: ", newOrderContent.orderProductList);
-                                console.log(newOrderContent);
-
-                                $.post("/order/addOrderContent", newOrderContent, function (addOrderContentMessage) {
-                                    if (addOrderContentMessage === "Order content added!") {
-                                        console.log(addOrderContentMessage)
-                                    } else {
-                                        console.log("Add order content failed: ", addOrderContentMessage);
-                                    }
+                            if (message === "Order added!") {
+                                $.post("/order/addOrderContent", {orderID: orderID, customerID: customer.customerID}, function (addOrderContentMessage) {
+                                        console.log(addOrderContentMessage);
                                 });
-                            } else {
-                                console.log("Add order failed: ", addOrderMessage);
                             }
                         });
                     });
-                    //window.location.href="confirmation.html";
+                    window.location.href="confirmation.html";
                 }
             });
         }

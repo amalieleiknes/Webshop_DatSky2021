@@ -21,11 +21,11 @@ public class OrderRepository {
     // getting all orders made
     public List<Order> getAllOrders(){
         try{
-            System.out.println("Getting all orders - repository 1");
             String sql =    "SELECT * FROM `Order` " +
                             "ORDER BY customerID";
+
+            //TODO stopper her. Klarer ikke hent eut i nettleser?
             List<Order> orders = db.query(sql, new BeanPropertyRowMapper<>(Order.class));
-            System.out.println("Getting all orders - repository 2");
             return orders;
         }catch(Exception e){
             return null;
@@ -55,9 +55,7 @@ public class OrderRepository {
         try{
             sql = "SELECT count(*) FROM `Order` WHERE orderID = ?";
             orderFound = db.queryForObject(sql, Integer.class, orderID);
-            System.out.println("getOrderByID: orderFound = " + orderFound);
             if(orderFound == 0){
-                System.out.println("getOrderByID: orderFound == 0, returnerer null");
                 return null;
             }
             sql = "SELECT * FROM `Order` WHERE orderID = ?";

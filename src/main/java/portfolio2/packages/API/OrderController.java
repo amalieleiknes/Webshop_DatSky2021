@@ -50,10 +50,8 @@ public class OrderController {
     }
 
 
-    // TODO: må fikse denne
     @GetMapping("/getOrdersByCustomer")
     public List<Order> getOrdersByCustomer(String customerID){
-        System.out.println("Tester ordercontroller - getOrdersByCustomers");
         return repository.getCustomersOrders(customerID);
     }
 
@@ -72,10 +70,8 @@ public class OrderController {
     }
 
 
-    //TODO, fungerer ikke
     @GetMapping("/getOrdercontent")
     public OrderContent getOrderContent(String orderID){
-        System.out.println("Trying to get orders - controller");
         return repository.getOrdercontent(orderID);
     }
 
