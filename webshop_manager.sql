@@ -83,11 +83,11 @@ CREATE TABLE `Product` (
 
 CREATE TABLE Ordercontent (
                                           orderItemID INT (100) NOT NULL AUTO_INCREMENT,
-                                          orderID VARCHAR (30) NOT NULL,
-                                          productID INT(10) NOT NULL,
-                                          PRIMARY KEY (orderItemID),
-                                          FOREIGN KEY (productID) REFERENCES Product(productID),
-                                          FOREIGN KEY (orderID) REFERENCES `Order`(orderID)
+                                          orderID VARCHAR (100) NOT NULL,
+                                          productID INT(11) NOT NULL,
+                                          productName VARCHAR (20) NOT NULL,
+                                          price FLOAT NOT NULL,
+                                          PRIMARY KEY (orderItemID)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -101,6 +101,7 @@ INSERT INTO `Customer` (`customerID`, `firstname`, `lastname`,
 (3, 'Lise', 'Luring', 'Løkkaveien 3', '0286', '81828384', 'lise@mail.com', 'password');
 
 
+# TODO: amount er misvisende. heller et annet ord for antall?
 # Inserting test data for orders
 INSERT INTO `Order` (`orderID`, `orderDate`, `totalprice`, `amount`, `customerID`) VALUES
 (1, '26.04.2021', 100.00, 2, 1),
@@ -116,8 +117,9 @@ INSERT INTO `Product` (`productID`, `productName`, `shortDescription`,
 (3, 'besteKaffi', 'Beste kaffi', 'Den beste kaffi', 3000.00, '/images/kaffe.jpg');
 
 
-# Inserting test data for order content
-
+# Inserting test data for ordercontent
+INSERT INTO Ordercontent (`orderID`, `productID`, `productName`, `price`) VALUES
+(1, 1, "kaffi", 100.00), (1, 2, "kaffi", 200.00), (1, 2, "kaffi", 200.00), (2, 3, "kaffi", 100.00);
 
 
 # Inserting data for all zipcodes + cities in Norway

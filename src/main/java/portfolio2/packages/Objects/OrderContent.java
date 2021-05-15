@@ -1,9 +1,21 @@
 package portfolio2.packages.Objects;
 
-import java.util.List;
-
 public class OrderContent {
-    private String orderID;
+    private OrderLine orderline;
+
+    public OrderContent(OrderLine orderline) {
+        this.orderline = orderline;
+    }
+
+    public OrderLine getOrderline() {
+        return orderline;
+    }
+
+    public void setOrderline(OrderLine orderline) {
+        this.orderline = orderline;
+    }
+
+    /*
     private List<Product> orderProductList;
 
     public OrderContent(String orderID, List<Product> orderProductList){
@@ -26,4 +38,6 @@ public class OrderContent {
     public void setOrderProductList(List<Product> orderProductList) {
         this.orderProductList = orderProductList;
     }
+
+     */
 }
