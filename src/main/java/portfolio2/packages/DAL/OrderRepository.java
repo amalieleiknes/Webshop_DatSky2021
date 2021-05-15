@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import portfolio2.packages.Objects.Order;
 import portfolio2.packages.Objects.OrderContent;
+import portfolio2.packages.Objects.OrderLine;
 import portfolio2.packages.Objects.Product;
 
 import java.util.ArrayList;
@@ -22,8 +23,9 @@ public class OrderRepository {
         try{
             String sql =    "SELECT * FROM `Order` " +
                             "ORDER BY customerID";
+
+            //TODO stopper her. Klarer ikke hent eut i nettleser?
             List<Order> orders = db.query(sql, new BeanPropertyRowMapper<>(Order.class));
-            System.out.println("Getting all orders");
             return orders;
         }catch(Exception e){
             return null;
@@ -31,19 +33,18 @@ public class OrderRepository {
     }
 
     // getting the orders where customerID in order-table is the same as given customerID
-    public List<Order> getCustomersOrders(String customerID) {
+    public List<Order> getOrdersByCustomer(String customerID) {
         try{
-            String sql =    "SELECT * FROM `Order`" +
-                            "WHERE " + customerID + " = `Order`.customerID";
+            String sql =    "SELECT * FROM `Order` " +
+                            "WHERE `Order`.customerID = " + customerID;
 
+            //TODO: kommer ikke videre herfa og ned, noe feil i query?
             List<Order> orders = db.query(sql, new BeanPropertyRowMapper<>(Order.class));
             System.out.println("Getting customers orders");
             return orders;
         } catch(Exception e){
             return null;
         }
-
-
     }
 
     // getting one order based on orderID
@@ -53,9 +54,7 @@ public class OrderRepository {
         try{
             sql = "SELECT count(*) FROM `Order` WHERE orderID = ?";
             orderFound = db.queryForObject(sql, Integer.class, orderID);
-            System.out.println("getOrderByID: orderFound = " + orderFound);
             if(orderFound == 0){
-                System.out.println("getOrderByID: orderFound == 0, returnerer null");
                 return null;
             }
             sql = "SELECT * FROM `Order` WHERE orderID = ?";
@@ -81,25 +80,55 @@ public class OrderRepository {
         }
     }
 
-    public String addOrdercontent(OrderContent ordercontent){
-        String sql;
-        String orderID = ordercontent.getOrderID();
-        List<Product> orderProductList = ordercontent.getOrderProductList();
-        if(orderProductList.size() == 0){
+    public String addOrdercontent(String orderID, List<Product> listOfProducts) {
+        if (listOfProducts.size() == 0) {
             return "Could not add order content, order content is null";
-        }
+        } else {
+            String sql;
 
-        for(Product product : orderProductList){
-            try{
-                sql ="INSERT INTO Ordercontent (orderID, productID) VALUES (?,?)";
-                db.update(sql, orderID, product.getProductID());
-                return "Order content added!";
-            }catch(Exception e){
-                return "Could not add order content. Exception: " + e.getMessage();
+            // formatting the Ordercontent in a new list
+            List<OrderLine> orderContent = new ArrayList<>();
+            for(Product p : listOfProducts){
+                OrderLine aLine = new OrderLine(orderID, p.getProductID(),
+                        p.getProductName(), p.getPrice());
+
+                orderContent.add(aLine);
             }
+                try {
+                    for (OrderLine orderline : orderContent) {
+                        sql = "INSERT INTO Ordercontent (orderID, productID, productName, price) VALUES (?,?,?,?)";
+                        db.update(sql, orderID, orderline.getProductID(), orderline.getProductName(), orderline.getPrice());
+                    }
+                    return "Order content added!";
+                } catch (Exception e) {
+                    return "Could not add order content. Exception: " + e.getMessage();
+                }
         }
-        return "addOrderContent failed";
     }
+
+
+
+    public OrderContent getOrdercontent (String orderID){
+        String sql;
+        int ordercont;
+        try{
+            sql = "SELECT count(*) FROM Ordercontent WHERE orderID = ?";
+            ordercont = db.queryForObject(sql, Integer.class, orderID);
+            System.out.println("getOrdercontent: " + ordercont);
+            if(ordercont == 0){
+                System.out.println("getOrderByID: orderFound == 0, returnerer null");
+                return null;
+            }
+            sql = "SELECT * FROM Ordercontent WHERE orderID = ?";
+            return db.queryForObject(sql,new BeanPropertyRowMapper<>(OrderContent.class), orderID);
+        }catch(Exception e){
+            System.out.println("getOrdercontent: Catch: " + e.getMessage());
+            return null;
+        }
+    }
+
+
+
 
     //Method that checks if an integer is used as orderID in the database, and returns the integer if not
     //Denne fungerer foreløpig ikke, klarer ikke å hente ut fra databasen virker det som, så kommenterer den ut og

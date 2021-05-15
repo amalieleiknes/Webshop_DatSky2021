@@ -4,12 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.*;
 import portfolio2.packages.DAL.OrderRepository;
-import portfolio2.packages.Objects.Cart;
-import portfolio2.packages.Objects.Order;
-import portfolio2.packages.Objects.OrderContent;
-import portfolio2.packages.Objects.Product;
-
-import java.util.ArrayList;
+import portfolio2.packages.Objects.*;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,27 +16,10 @@ public class OrderController {
     @Autowired
     OrderRepository repository;
 
-/* TODO: Kan vi bare slette dette?
-
-    @GetMapping("/{orderID}")
-    public Order getOrderByID(@PathVariable String orderID){
-        return OrderRegister.getOrderByID(orderID);
-    }
-*/
-
-    // getting a order, based on order ID
-    @GetMapping("/getOrderByID")
-    public Order getOrderByID(String orderID){
-        if(orderID.isBlank() || orderID.isEmpty()){
-            return null;
-        }
-        return repository.getOrderByID(orderID);
-    }
-
-    // getting all the orders ever made
-    @GetMapping("/getAllOrders")
-    public List<Order> getAllOrders(){
-        return repository.getAllOrders();
+    // generating an order ID
+    @GetMapping("/generateOrderID")
+    public String generateOrderID(){
+        return UUID.randomUUID().toString();
     }
 
     // adding one order to the database
@@ -54,35 +32,48 @@ public class OrderController {
         return repository.addOrder(newOrder);
     }
 
-    @PostMapping("/addOrderContent")
-    public String addOrdercontent(OrderContent ordercontent) {
-        System.out.println("OrderController - addOrdercontent: Orderconent.getOrderID(): " + ordercontent.getOrderID());
-        List<Product> orderContentList = new ArrayList<>();
-        System.out.println(ordercontent.getOrderProductList());
-        for(Product p : ordercontent.getOrderProductList()){
-            System.out.println("Order content: Product name: " + p.getProductName());
-            orderContentList.add(p);
+    // getting a order, based on order ID
+    @GetMapping("/getOrderByID")
+    public Order getOrderByID(String orderID){
+        if(orderID.isBlank() || orderID.isEmpty()){
+            return null;
         }
-        if (orderContentList.size() == 0) {
-            return "Order content is null";
-        }
-        OrderContent newOrdercontent = new OrderContent(ordercontent.getOrderID(), orderContentList);
-        return repository.addOrdercontent(newOrdercontent);
+        return repository.getOrderByID(orderID);
+    }
+
+    // TODO: fungerer ikke
+    // getting all the orders ever made
+    @GetMapping("/getAllOrders")
+    public List<Order> getAllOrders(){
+        System.out.println("Tester ordercontroller - getallorders");
+        return repository.getAllOrders();
     }
 
 
-    // TODO: må fikse denne
-    @GetMapping("/getOrdersByCustomer")
+    @PostMapping("/getOrdersByCustomer")
     public List<Order> getOrdersByCustomer(String customerID){
-        return repository.getCustomersOrders(customerID);
+        System.out.println("ordercontroller - getordersbycust");
+        return repository.getOrdersByCustomer(customerID);
     }
 
-    // generating an order ID
-    @GetMapping("/generateOrderID")
-    public String generateOrderID(){
-        String orderID = UUID.randomUUID().toString();
-        return orderID;
+
+    @PostMapping("/addOrdercontent")
+    public String addOrdercontent(String orderID, String customerID){
+        CartController cart = new CartController();
+        List<Product> listOfProducts = cart.getAllCartItems(customerID);
+
+        if(listOfProducts == null){
+            return "Could not add ordercontent (ordercontent is null)";
+        }
+        else{
+            return repository.addOrdercontent(orderID, listOfProducts);
+        }
     }
 
+
+    @GetMapping("/getOrdercontent")
+    public OrderContent getOrderContent(String orderID){
+        return repository.getOrdercontent(orderID);
+    }
 
 }
