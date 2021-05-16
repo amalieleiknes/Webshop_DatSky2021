@@ -14,7 +14,8 @@ $(function(){
                 "<th>Order Date</th>" +
                 "<th>Totalprice</th>" +
                 "<th>Number of items</th>" +
-                "</tr>";
+                "<th>Press to see content</th>" +
+            "</tr>";
 
             console.log(orderList.length);
 
@@ -27,7 +28,7 @@ $(function(){
                     "<td>" + orderList[i].orderDate + "</td>" +
                     "<td>" + orderList[i].totalPrice + "</td>" +
                     "<td>" + orderList[i].amount + "</td>" +
-                    "<td><a class='btn btn-success' onclick='getOrderContent(" + orderList[i].orderID + ")'>Save</button></td>" +
+                    "<td><a class='btn btn-success' onclick='getOrderContent(" + orderList[i].orderID + ")'>See ordercontent</button></td>" +
                     "</tr>";
                 output += "</table>";
             }
@@ -40,7 +41,7 @@ $(function(){
 function getOrderContent(orderID){
     $.post("/order/getOrdercontent", {orderID: orderID} ,function(orderContentList){
         let output =
-            "<h1>Content of order marked</h1>" +
+            "<h1>Order #"+orderID+"</h1>" +
             "<table class='table table-striped table-bordered'>" +
             "<tr>" +
             "<th>ProductID</th>" +

@@ -70,7 +70,7 @@ public class OrderController {
         }
     }
 
-    @GetMapping("/getOrdercontent")
+    @PostMapping("/getOrdercontent")
     public List<OrderLine> getOrderContent(String orderID){
         return repository.getOrdercontent(orderID);
     }
