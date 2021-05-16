@@ -85,5 +85,12 @@ public class CartController {
         cart.addProductToCart(product);
         return "Customers list has " + cart.getProductsInCart().size() + " products in it.";
     }
+
+    @PostMapping("/emptyCart")
+    public String emptyCart(String customerID){
+        Cart cart = Carts.getCart(customerID);
+        cart.getProductsInCart().clear();
+        return "Cart belonging to customer " + customerID + " is now empty.";
+    }
 }
 
