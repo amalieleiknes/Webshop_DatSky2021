@@ -104,9 +104,9 @@ INSERT INTO `Customer` (`customerID`, `firstname`, `lastname`,
 # TODO: amount er misvisende. heller et annet ord for antall?
 # Inserting test data for orders
 INSERT INTO `Order` (`orderID`, `orderDate`, `totalprice`, `amount`, `customerID`) VALUES
-(1, '26.04.2021', 100.00, 2, 1),
-(2, '26.04.2021', 3000.00, 10, 2),
-(3, '28.04.2021', 1500.00, 6, 3);
+(1, '2021-05-15 16:54:22', 100.00, 2, 1),
+(2, '2021-05-15 16:54:22', 3000.00, 10, 2),
+(3, '2021-05-15 16:54:22', 1500.00, 6, 3);
 
 
 #Inserting test data for products
