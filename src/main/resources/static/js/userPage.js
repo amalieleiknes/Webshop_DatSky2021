@@ -27,7 +27,7 @@ $(function(){
                     "<td>" + orderList[i].orderDate + "</td>" +
                     "<td>" + orderList[i].totalPrice + "</td>" +
                     "<td>" + orderList[i].amount + "</td>" +
-                    "<td><a class='btn btn-success' onclick='getOrderContent(" + order.orderID + ")'>Save</button></td>" +
+                    "<td><a class='btn btn-success' onclick='getOrderContent(" + orderList[i].orderID + ")'>Save</button></td>" +
                     "</tr>";
                 output += "</table>";
             }
