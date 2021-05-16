@@ -6,6 +6,8 @@ public class OrderLine {
     private String productName;
     private Double price;
 
+    public OrderLine(){}
+
     public OrderLine(String orderID, int productID, String productName, Double price) {
         this.orderID = orderID;
         this.productID = productID;

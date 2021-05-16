@@ -37,16 +37,15 @@ $(function(){
 
                         $.post("/order/addOrder", newOrder, function (message) {
                             console.log(message);
-                            if(message==="Order added!"){
+                            if(message === "Order added!"){
                                 $.post("/order/addOrdercontent", {orderID: orderID, customerID: tempUserID}, function (message) {
                                         console.log(message);
-                                    });
+                                    window.location.href="confirmation.html";
+                                });
                             }
                         });
                     });
-                    window.location.href="confirmation.html";
                 }
-
 
                 //If user is logged in, get products from customers cart
                 else {
@@ -61,18 +60,16 @@ $(function(){
 
                         $.post("/order/addOrder", newOrder, function (message) {
                             console.log(message);
-
                             if (message === "Order added!") {
-                                $.post("/order/addOrderContent", {orderID: orderID, customerID: customer.customerID}, function (addOrderContentMessage) {
+                                $.post("/order/addOrdercontent", {orderID: orderID, customerID: customer.customerID}, function (addOrderContentMessage) {
                                         console.log(addOrderContentMessage);
+                                    window.location.href="confirmation.html";
                                 });
                             }
                         });
                     });
-                    window.location.href="confirmation.html";
                 }
             });
         }
     });
-
 });

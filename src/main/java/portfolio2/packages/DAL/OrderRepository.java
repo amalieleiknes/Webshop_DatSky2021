@@ -35,13 +35,13 @@ public class OrderRepository {
     public List<Order> getOrdersByCustomer(String customerID) {
         try{
             String sql =    "SELECT * FROM `Order` " +
-                            "WHERE `Order`.customerID = " + customerID;
+                            "WHERE customerID = ?";
 
-            //TODO: kommer ikke videre herfa og ned, noe feil i query? Står at antallet er 0
-            List<Order> orders = db.query(sql, new BeanPropertyRowMapper<>(Order.class));
+            List<Order> orders = db.query(sql, new BeanPropertyRowMapper<>(Order.class), customerID);
             System.out.println("Getting customers orders");
             return orders;
         } catch(Exception e){
+            System.out.println("getOrdersByCustomer - catch: " + e.getMessage());
             return null;
         }
     }
@@ -95,6 +95,7 @@ public class OrderRepository {
             }
                 try {
                     for (OrderLine orderline : orderContent) {
+                        System.out.println("addOrderContent - orderline: " + orderline);
                         sql = "INSERT INTO Ordercontent (orderID, productID, productName, price) VALUES (?,?,?,?)";
                         db.update(sql, orderID, orderline.getProductID(), orderline.getProductName(), orderline.getPrice());
                     }
@@ -108,19 +109,19 @@ public class OrderRepository {
 
 
     public List<OrderLine> getOrdercontent (String orderID){
+        System.out.println("getOrdercontent - orderID: " + orderID);
         String sql;
         try{
             System.out.println("repository: getordercontent");
-            sql = "SELECT * FROM Ordercontent WHERE orderID = " + orderID;
-            return db.query(sql,new BeanPropertyRowMapper<>(OrderLine.class));
+            sql = "SELECT * FROM Ordercontent WHERE orderID = ?";
+            List<OrderLine> orderLinesFromDB = db.query(sql,new BeanPropertyRowMapper<>(OrderLine.class), orderID);
+            System.out.println("orderLinesFromDB.size(): " + orderLinesFromDB.size());
+            return orderLinesFromDB;
         }catch(Exception e){
             System.out.println("getOrdercontent: Catch: " + e.getMessage());
             return null;
         }
     }
-
-
-
 
     //Method that checks if an integer is used as orderID in the database, and returns the integer if not
     //Denne fungerer foreløpig ikke, klarer ikke å hente ut fra databasen virker det som, så kommenterer den ut og
