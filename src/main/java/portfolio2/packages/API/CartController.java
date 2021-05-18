@@ -85,5 +85,23 @@ public class CartController {
         cart.addProductToCart(product);
         return "Customers list has " + cart.getProductsInCart().size() + " products in it.";
     }
+
+
+    @PostMapping("/deleteFromCart")
+    public String deleteFromCart(String productID, String customerID){
+        if (productID == null) {
+            return "Product is not in database";
+        }
+        else if(customerID==null){
+            return "Not valid customerID";
+        }
+        else {
+            int pID=Integer.parseInt(productID);
+            Cart cart = Carts.getCart(customerID);
+            assert cart != null;
+            cart.removeProductFromCart(pID);
+            return  "OK";
+        }
+    }
 }
 

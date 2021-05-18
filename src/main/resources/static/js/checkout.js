@@ -6,7 +6,8 @@ $(function(){
 
     $("#registerOrderBtn").click(function(){
         // make sure this is generated before adding order
-        if(tempUserID==="" && customerID==="" || emailID==="") {
+
+        if(customerID==="" && tempUserID==="") {
             deleteCookie("email");
             deleteCookie("customerID");
             let tempUserID = Math.random().toString(36).substring(7);

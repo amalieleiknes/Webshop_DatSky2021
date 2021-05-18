@@ -16,6 +16,7 @@ $(function(){
                     "<th>Product</th>" +
                     "<th>Description</th>" +
                     "<th>Price</th>" +
+                    "<th>Delete from cart</th>" +
                     "</tr>";
 
                 for (const product of products){
@@ -24,6 +25,7 @@ $(function(){
                         "<td>" + product.productName + "</td>" +
                         "<td>" + product.shortDescription + "</td>" +
                         "<td>" + product.price + " NOK" + "</td>" +
+                        "<td><a class='btn btn-danger' onclick='deleteFromCart(" + product.productID + ")'>Remove</button></td>" +
                         "</tr>";
                 }
                 output += "</table>";
@@ -40,14 +42,18 @@ $(function(){
                     "<th>Product</th>" +
                     "<th>Description</th>" +
                     "<th>Price</th>" +
+                    "<th>Delete from cart</th>" +
                     "</tr>";
 
-                for (const product of products){
+                let i;
+                for (i =0;i< products.length;i++){
+                    console.log(products[i].productID);
                     output +=
                         "<tr>" +
-                        "<td>" + product.productName + "</td>" +
-                        "<td>" + product.shortDescription + "</td>" +
-                        "<td>" + product.price + " NOK" + "</td>" +
+                        "<td>" + products[i].productName + "</td>" +
+                        "<td>" + products[i].shortDescription + "</td>" +
+                        "<td>" + products[i].price + " NOK" + "</td>" +
+                        "<td><a class='btn btn-danger' onclick='deleteFromCart(" + products[i].productID + ")'>Remove</button></td>" +
                         "</tr>";
                 }
                 output += "</table>";
@@ -74,4 +80,32 @@ $(function(){
             });
         }
     }
+
+
+
+
 });
+
+
+function deleteFromCart(productID) {
+    let customerID = getCookie("customerID")
+    let tempUserID = getCookie("tempUserID");
+
+    if(customerID===""){
+        if(tempUserID===""){
+            console.log("The userID (temporary or if logged in) has been deleted. " +
+                "Please go to http://localhost:10222/index.html to get a new cookie.");
+        }
+        else {
+            $.post("/deleteFromCart", {customerID: tempUserID, productID: productID}, function (string) {
+                console.log(string);
+            });
+        }
+    }
+    else {
+        $.post("/deleteFromCart", {customerID: customerID, productID: productID}, function (string) {
+            console.log(string);
+        });
+    }
+    location.reload();
+}
