@@ -6,6 +6,10 @@ $(function(){
         let customer = getCustomer();
 
         $.post("/order/getOrdersByCustomer", {customerID: customer.customerID}, function (orderList) {
+            console.log(orderList.length);
+            let i = 0;
+            console.log("Previous orders are printing... ");
+
             let output =
                 "<h1>Order history</h1>" +
                 "<table class='table table-striped table-bordered'>" +
@@ -15,30 +19,32 @@ $(function(){
                 "<th>Totalprice</th>" +
                 "<th>Number of items</th>" +
                 "<th>Press to see content</th>" +
-            "</tr>";
+                "</tr>";
 
-            console.log(orderList.length);
-
-            let i = 0;
             for(; i<orderList.length;i++) {
-                console.log("Previous orders are printing... ");
                 output +=
                     "<tr>" +
                     "<td>" + orderList[i].orderID + "</td>" +
                     "<td>" + orderList[i].orderDate + "</td>" +
                     "<td>" + orderList[i].totalPrice + "</td>" +
                     "<td>" + orderList[i].amount + "</td>" +
-                    "<td><a class='btn btn-success' onclick='getOrderContent(" + orderList[i].orderID + ")'>See ordercontent</button></td>" +
+                    "<td><a class='btn btn-success' onclick='getOrderContent("+orderList[i].orderID+")'>See ordercontent</button></td>" +
+                    //"<td><button class='btn btn-success' id='btnGetOrderContent"+i+"' onclick='getOrderContent("+orderList[i].orderID+")'" +
+                    //" value='" + orderList[i].orderID + "'>See ordercontent</button></td>" +
                     "</tr>";
-                output += "</table>";
+
+                console.log(orderList[i].orderID);
             }
-            $("#orderHistory").html(output);
+            output += "</table>";
+
+            $("#orderHistory").empty().html(output);
         });
     }
 });
 
 
 function getOrderContent(orderID){
+    console.log("Going into getOrderContent");
     $.post("/order/getOrdercontent", {orderID: orderID} ,function(orderContentList){
         let output =
             "<h1>Order #"+orderID+"</h1>" +
@@ -49,10 +55,10 @@ function getOrderContent(orderID){
             "<th>Price</th>" +
             "</tr>";
 
+        console.log("Previous orders' content is printing... ");
         let i;
         for (i=0; i<orderContentList.length; i++){
-            console.log("Previous orders are printing... ");
-            console.log(orderContentList[i].price);
+            console.log(orderContentList[i].orderID);
             output +=
                 "<tr>" +
                 "<td>" + orderContentList[i].productID + "</td>" +
