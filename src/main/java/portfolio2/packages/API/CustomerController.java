@@ -43,8 +43,6 @@ public class CustomerController {
             }
     }
 
-
-
     @GetMapping("/getCustomers")
     public List<Customer> getCustomers() {
         return repository.getCustomers();
@@ -59,12 +57,11 @@ public class CustomerController {
         return "OK";
     }
 
-
+    // TODO: hva er denne til?
     @PostMapping("/logOutCustomer")
     public void logOutCustomer(String email){
 
     }
-
 
     // **** Helper methods ****
     private void mergeTempUser(Customer customer, String tempUserID){
@@ -107,7 +104,4 @@ public class CustomerController {
             return "Fail";
         }
     }
-
-
-
 }

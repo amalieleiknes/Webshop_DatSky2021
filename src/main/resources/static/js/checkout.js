@@ -2,11 +2,24 @@ $(function(){
     let customer = getCustomer();
     let tempUserID = getCookie("tempUserID");
     let customerID = getCookie("customerID");
-    let emailID = getCookie("email");
+
+    // if user is logged in - fill out the address-field automatically
+    if(customerID!==""){
+        $.get("/customers/"+customerID, function (Customer){
+            console.log("Setting shipping info...");
+            document.getElementById("firstname").value = Customer.firstname;
+            document.getElementById("lastname").value = (Customer.lastname);
+            document.getElementById("address").value = (Customer.address);
+            document.getElementById("zipcode").value = (Customer.zipcode);
+            document.getElementById("city").value = (Customer.city);
+            document.getElementById("phone").value = (Customer.telephone);
+            document.getElementById("email").value = (Customer.email);
+        });
+    }
 
     $("#registerOrderBtn").click(function(){
-        // make sure this is generated before adding order
 
+        // make sure an ID is generated before adding the order
         if(customerID==="" && tempUserID==="") {
             deleteCookie("email");
             deleteCookie("customerID");
