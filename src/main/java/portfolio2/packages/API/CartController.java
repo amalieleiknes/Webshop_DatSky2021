@@ -28,7 +28,7 @@ public class CartController {
     }
 
     @GetMapping("/getTotalPrice")
-    public double getTotalPrice(String customerID){
+    public double getTotalPrice(String customerID) {
         Cart cart = Carts.getCart(customerID);
         if (cart == null) {
             return 0;
@@ -69,26 +69,28 @@ public class CartController {
     }
 
     @PostMapping("/emptyCart")
-    public String emptyCart(String customerID){
+    public String emptyCart(String customerID) {
         Cart cart = Carts.getCart(customerID);
+        assert cart != null;
         cart.getProductsInCart().clear();
         return "Cart belonging to customer " + customerID + " is now empty.";
+    }
+
 
     @PostMapping("/deleteFromCart")
-    public String deleteFromCart(String productID, String customerID){
+    public String deleteFromCart(String productID, String customerID) {
         if (productID == null) {
             return "Product is not in database";
-        }
-        else if(customerID==null){
+        } else if (customerID == null) {
             return "Not valid customerID";
-        }
-        else {
-            int pID=Integer.parseInt(productID);
+        } else {
+            int pID = Integer.parseInt(productID);
             Cart cart = Carts.getCart(customerID);
             assert cart != null;
             cart.removeProductFromCart(pID);
-            return  "OK";
+            return "OK";
         }
     }
-}
 
+
+}

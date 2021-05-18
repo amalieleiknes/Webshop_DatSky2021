@@ -41,7 +41,7 @@ $(function(){
                             if(message === "Order added!"){
                                 $.post("/order/addOrdercontent", {orderID: orderID, customerID: tempUserID}, function (addOrdercontentMessage) {
                                     console.log(addOrdercontentMessage);
-                                    $.post("/emptyCart", {customerID: customerID}, function(emptyCartMsg){
+                                    $.post("/emptyCart", {customerID: tempUserID}, function(emptyCartMsg){
                                         console.log(emptyCartMsg);
                                         window.location.href="confirmation.html";
                                     });
