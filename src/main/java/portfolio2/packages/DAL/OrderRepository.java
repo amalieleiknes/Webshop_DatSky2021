@@ -38,7 +38,6 @@ public class OrderRepository {
                             "WHERE customerID = ?";
 
             List<Order> orders = db.query(sql, new BeanPropertyRowMapper<>(Order.class), customerID);
-            System.out.println("Getting customers orders");
             return orders;
         } catch(Exception e){
             System.out.println("getOrdersByCustomer - catch: " + e.getMessage());
@@ -109,14 +108,10 @@ public class OrderRepository {
 
 
     public List<OrderLine> getOrdercontent (String orderID){
-        System.out.println("getOrdercontent - orderID: " + orderID);
         String sql;
         try{
-            System.out.println("repository: getordercontent");
             sql = "SELECT * FROM Ordercontent WHERE orderID = ?";
-            List<OrderLine> orderLinesFromDB = db.query(sql,new BeanPropertyRowMapper<>(OrderLine.class), orderID);
-            System.out.println("orderLinesFromDB.size(): " + orderLinesFromDB.size());
-            return orderLinesFromDB;
+            return db.query(sql,new BeanPropertyRowMapper<>(OrderLine.class), orderID);
         }catch(Exception e){
             System.out.println("getOrdercontent: Catch: " + e.getMessage());
             return null;

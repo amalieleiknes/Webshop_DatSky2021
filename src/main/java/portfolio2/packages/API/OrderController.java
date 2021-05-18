@@ -52,7 +52,6 @@ public class OrderController {
 
     @PostMapping("/getOrdersByCustomer")
     public List<Order> getOrdersByCustomer(String customerID){
-        System.out.println("ordercontroller - getordersbycust");
         return repository.getOrdersByCustomer(customerID);
     }
 

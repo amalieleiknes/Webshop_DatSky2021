@@ -6,8 +6,7 @@ $(function(){
         let customer = getCustomer();
 
         $.post("/order/getOrdersByCustomer", {customerID: customer.customerID}, function (orderList) {
-            console.log(orderList.length);
-            let i = 0;
+            let i;
             console.log("Previous orders are printing... ");
 
             let output =
@@ -21,30 +20,31 @@ $(function(){
                 "<th>Press to see content</th>" +
                 "</tr>";
 
-            for(; i<orderList.length;i++) {
-                output +=
-                    "<tr>" +
-                    "<td>" + orderList[i].orderID + "</td>" +
-                    "<td>" + orderList[i].orderDate + "</td>" +
-                    "<td>" + orderList[i].totalPrice + "</td>" +
-                    "<td>" + orderList[i].amount + "</td>" +
-                    "<td><a class='btn btn-success' onclick='getOrderContent("+orderList[i].orderID+")'>See ordercontent</button></td>" +
-                    //"<td><button class='btn btn-success' id='btnGetOrderContent"+i+"' onclick='getOrderContent("+orderList[i].orderID+")'" +
-                    //" value='" + orderList[i].orderID + "'>See ordercontent</button></td>" +
-                    "</tr>";
+            let line = 1;
+            $.each(orderList, function( key, order) {
+                    output +=
+                        "<tr>" +
+                        "<td><input type='text' disabled readonly id='orderID"+line+"' size='3' value='"+order.orderID+"'/></td>" +
+                        "<td>" + order.orderDate + "</td>" +
+                        "<td>" + order.totalPrice + "</td>" +
+                        "<td>" + order.amount + "</td>" +
 
-                console.log(orderList[i].orderID);
-            }
+                        //TODO: noe feil med denne knappen, finner ikke eksakt ut hvordan den kan fikses?
+                        "<td><a class='btn btn-success' onclick='getOrderContent("+line+")'>See ordercontent</button></td>" +
+                        "</tr>";
+                    line++;
+            });
+
             output += "</table>";
-
             $("#orderHistory").empty().html(output);
         });
     }
 });
 
 
-function getOrderContent(orderID){
-    console.log("Going into getOrderContent");
+function getOrderContent(line){
+    const orderID= $("#orderID" + line).val();
+
     $.post("/order/getOrdercontent", {orderID: orderID} ,function(orderContentList){
         let output =
             "<h1>Order #"+orderID+"</h1>" +
