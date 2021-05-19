@@ -20,14 +20,14 @@ $(window).on('load', function(){
                 "<div class='product' style='width:80%; padding: 5px; display: inline-block; margin: 1.5%;'>" +
                     "<h2 class='card-title'>" + product.productName + "</h2>" +
                     "</br>" +
-                    "<img class='card-img' src='" + product.imageURL + "' alt='img of a product' width='300px' height='300px'/>" +
-                    "</br>" +
-                    "<p>Description of the product:</p>" +
-                    "</br>" +
+                    "<img class='card-img' src='" + product.imageURL + "' alt='img of a product' width='300px' height='400px'/>" +
+                    "</br></br>" +
+                    "<h4>Description of the product:</h4>" +
                     "<p class='card-description'>" + product.longDescription + "</p>" +
                     "</br>" +
                     "<p class='card-price'>Price in NOK: " + product.price + ",-</p>" +
-                    "<a onclick='blabla()'></a>" +
+                "<button class='btn btn-primary' id='buttonaddcart' onclick='addToCart("+product.productID+")' " +
+                "value='" + product.productID + "'>Add to cart</button>" +
                 "</div>"
         }
         else{
@@ -36,14 +36,28 @@ $(window).on('load', function(){
 
         productcontent.innerHTML = content;
 
-
-
-        // TODO: lage et sammendrag av handlekurven på høyre side på produktsiden
-        //shoppingcartcontent.innerHTML = cartcontent;
-
     });
     
 });
+
+function addToCart(productID){
+    let user = getCustomer();
+    //If user is not logged in (just visiting website and want to add product to cart),
+    //get their temporary userID and add to cart attached to their ID.
+    if(user.customerID === null || user.customerID.length === 0){
+        let tempUserId = getCookie("tempUserID");
+        console.log("TempUserID", tempUserId);
+        $.post("/addToCart", {customerID : tempUserId, productID : productID}, function(result){
+            getNumberOfCartItems();
+            console.log(result);
+        });
+    }else{
+        $.post("/addToCart", {customerID : user.customerID, productID: productID}, function(result){
+            getNumberOfCartItems();
+            console.log(result);
+        });
+    }
+}
 
 function blabla() {
 

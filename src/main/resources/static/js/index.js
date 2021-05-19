@@ -5,12 +5,15 @@ $(function() {
     //When user is not logged in, generate a temporary userID
     //so user can add products to their cart.
     let user = getCustomer();
+    let tempUserID = getCookie("tempUserID");
+    console.log("TempUserID :", tempUserID);
     console.log("CustomerID :", user.customerID);
-    if(user.customerID === null || user.customerID.length === 0){
+
+    if(user.customerID === "" && tempUserID === ""){
         let tempUserID = Math.random().toString(36).substring(7);
         setCookie("tempUserID", tempUserID, 1);
-        let cookieTemp = getCookie("tempUserID");
-        console.log("CookieTemp: ", cookieTemp);
+        let cookie = getCookie("tempUserID");
+        console.log("CookieTemp: ", cookie);
     }
 });
 
