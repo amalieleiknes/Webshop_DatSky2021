@@ -36,9 +36,10 @@ function addCustomer(){
     else{
         $.post("customers/checkZipcode", newCustomer, function(status) {
             console.log(newCustomer.zipcode);
-            console.log(status);
+            console.log("zipcode status: " + status);
         if(status==="OK"){
-            $.post("customers/addCustomer", newCustomer, function (result) {
+            $.post("/customers/addCustomer", newCustomer, function (result) {
+                console.log("Status on adding a new customer: " + result);
                 if (result === "OK") {
                     customerAdded(newCustomer);
 
