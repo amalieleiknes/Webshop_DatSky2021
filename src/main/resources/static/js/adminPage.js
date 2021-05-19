@@ -39,7 +39,7 @@ $(function() {
                     "</div>" +
                 "</div>"   +
 
-                /*MODAL TEST*/
+                /*Modal for change product*/
                 "<div class='modal fade' id='"+ productID +"' tabindex='-1' role='dialog'>" +
                     "<div class='modal-dialog' role='document'>" +
                         "<div class='modal-content'>" +
@@ -52,12 +52,12 @@ $(function() {
                             "</div>"+
                             "<div class=\"modal-body\">" +
                                 "<ul class='edit-product'>" +
-                                    "<li class='edit-product__line'><label for='productID"+product.productID+"''>ID</label><input type='text' readonly id='productID"+product.productID+"' value='"+product.productID+"'/></li>" +
+                                    "<li class='edit-product__line'><label for='productID"+product.productID+"''>ID</label><input type='text' readonly id='productID"+product.productID+"' value='"+product.productID+"' disabled/></li>" +
                                     "<li class='edit-product__line'><label for='productName"+product.productID+"''>Name</label><input type='text' id='productName"+product.productID+"' value='"+product.productName+"'/></li>" +
                                     "<li class='edit-product__line'><label for='shortDescription"+product.productID+"'>Short description</label><input type='text' id='shortDescription"+product.productID+"' value='"+product.shortDescription+"'/></li>" +
                                     "<li class='edit-product__line'><label for='longDescription"+product.productID+"'>Long description</label><input type='text' id='longDescription"+product.productID+"' value='"+product.longDescription+"'/></li>" +
                                     "<li class='edit-product__line'><label for='price"+product.price+"'>Price</label><input type='text' id='price"+product.productID+"' value='"+product.price+"'/></li>" +
-                                    "<li class='edit-product__line'><label for='imageURL"+product.imageURL+"'>ImageURL</label><input type='text' id='imageURL"+product.productID+"' value='"+product.imageURL+"'/></li>" +
+                                    "<li class='edit-product__line'><label for='imageURL"+product.imageURL+"'>ImageURL</label><input type='text' id='imageURL"+product.productID+"' value='"+product.imageURL+"' disabled/></li>" +
                                 "</ul>" +
                             "</div>" +
                             "<div class=\"modal-footer\">" +
@@ -120,14 +120,48 @@ $(function() {
     };
 
 
+    function newProduct(){
+        let adminProductcardElement = document.getElementById("adminProductContainer");
+        let newProductModal =
+        "<div class='modal fade' id='newProduct' tabindex='-1' role='dialog'>" +
+            "<div class='modal-dialog' role='document'>" +
+                "<div class='modal-content'>" +
+                    "<div class=\"modal-header\">" +
+                        "<h1>Add new product</h1>" +
+                        "<h5 class=\"modal-title\" id=\"exampleModalLabel\"></h5>" +
+                        "<button type=\"button\" class=\"close\" data-dismiss=\"modal\">" +
+                        "<span>&times;</span>" +
+                        "</button>" +
+                    "</div>"+
+                    "<div class=\"modal-body\">" +
+                        "<ul class='edit-product'>" +
+                            "<li class='edit-product__line'><label for='productName'>Name</label><input type='text' id='productName' value=''/></li>" +
+                            "<li class='edit-product__line'><label for='shortDescription'>Short description</label><input type='text' id='shortDescription' value=''/></li>" +
+                            "<li class='edit-product__line'><label for='longDescription'>Long description</label><input type='text' id='longDescription' value=''/></li>" +
+                            "<li class='edit-product__line'><label for='price'>Price</label><input type='text' id='price' value=''/></li>" +
+                            "<li class='edit-product__line'><label for='imageURL'>ImageURL</label><input type='text' id='imageURL' value='' disabled/></li>" +
+                        "</ul>" +
+                    "</div>" +
+                    "<div class=\"modal-footer\">" +
+                        "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>" +
+                        "<button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" onclick='addProduct()'>Add new product</button>" +
+                    "</div>" +
+                "</div>"+
+            "</div>"+
+        "</div>" ;
+
+        adminProductcardElement.innerHTML = newProductModal;
+    }
+
+
     //Add new product
-    function addProduct(line){
+    function addProduct(){
         const newProduct = {
-            productName      : $("#productName" + line).val(),
-            shortDescription : $("#shortDescription" + line).val(),
-            longDescription  : $("#longDescription" + line).val(),
-            price            : $("#price" + line).val(),
-            imageURL         : $("#imageURL" + line).val()
+            productName      : $("#productName").val(),
+            shortDescription : $("#shortDescription").val(),
+            longDescription  : $("#longDescription").val(),
+            price            : $("#price").val(),
+            imageURL         : $("#imageURL").val()
         };
 
         console.log("ImageURL: ",newProduct.imageURL);
@@ -148,6 +182,8 @@ $(function() {
                     console.log("Could not add product (product is null)")
                 }else{
                     viewProducts();
+                    let closemodal = document.getElementById("closingbutton");
+                    closemodal.click();
                 }
                 })
         }

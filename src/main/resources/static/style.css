@@ -493,16 +493,15 @@ div#admproductContainer.admproductContainer {
     width: 150px;
 }
 
-.newProductline{
-    padding: 5px;
+.new-product{
+    padding: 10px;
     margin-top: 25px;
     border: none;
     cursor: pointer;
     background: #e77338;
     color: #000000;
     font-size: 20px;
-    border-radius: 10px;
-    width: 10%;
+    border-radius: 5px;
     text-align: center;
 }
 
