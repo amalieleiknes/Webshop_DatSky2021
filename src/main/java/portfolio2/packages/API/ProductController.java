@@ -75,15 +75,6 @@ public class ProductController {
         return repository.addProduct(newProduct);
     }
 
-    @PostMapping("/changeProduct")
-    public String changeProduct(Product product){
-        if(product == null){
-            return "Product is null.";
-        }
-        if(repository.getProductByID(product.getProductID()) == null){
-            return "Can't find product in database.";
-        }
-        return repository.changeProductByID(product);
-    }
+
 
 }

@@ -12,14 +12,14 @@ public class CustomerValidator {
     }
 
     public static boolean validatePassword(String password) {
-        if (password.matches("[a-zA-Z0-9._%+!-<>§@£$¤€#*&|]{3,}") && !password.isEmpty()){
+        if (password.matches("[a-zA-Z0-9._%+!-<>§@£=?$¤€#*&|]{3,}") && !password.isEmpty()){
             return true;
         }
         return false;
     }
 
     public static boolean validateTelephone(String telephone) {
-        if (telephone.matches("[0-9+]{3,}") && !telephone.isEmpty()){
+        if (telephone.matches("[0-9+ ]{3,}") && !telephone.isEmpty()){
             return true;
         }
         return false;

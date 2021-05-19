@@ -1,6 +1,6 @@
 /* CSS for top-navigation-bar */
 .topnav, .bottomnav{
-    background-color: #344778;
+    background-color: #405489;
     color: white;
     width: 100%;
     margin: 0;
@@ -62,7 +62,7 @@
     display: none;
     position: absolute;
     background-color: #345068BA;
-    min-width: 100px;
+    min-width: 110px;
     overflow: auto;
     box-shadow: 0 8px 16px 0 #00000051;
     z-index: 1;
@@ -79,10 +79,13 @@
     background-color: #ddd;
 }
 
-.show {
+#myDropdown {
     margin-left: 43%;
-    display: block;
     margin-top: 12%;
+}
+
+.show {
+    display: block;
 }
 
 #logOutAdmin {
