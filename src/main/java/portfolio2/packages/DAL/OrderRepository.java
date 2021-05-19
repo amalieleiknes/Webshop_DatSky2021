@@ -5,7 +5,6 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import portfolio2.packages.Objects.Order;
-import portfolio2.packages.Objects.OrderContent;
 import portfolio2.packages.Objects.OrderLine;
 import portfolio2.packages.Objects.Product;
 
@@ -36,13 +35,12 @@ public class OrderRepository {
     public List<Order> getOrdersByCustomer(String customerID) {
         try{
             String sql =    "SELECT * FROM `Order` " +
-                            "WHERE `Order`.customerID = " + customerID;
+                            "WHERE customerID = ?";
 
-            //TODO: kommer ikke videre herfa og ned, noe feil i query?
-            List<Order> orders = db.query(sql, new BeanPropertyRowMapper<>(Order.class));
-            System.out.println("Getting customers orders");
+            List<Order> orders = db.query(sql, new BeanPropertyRowMapper<>(Order.class), customerID);
             return orders;
         } catch(Exception e){
+            System.out.println("getOrdersByCustomer - catch: " + e.getMessage());
             return null;
         }
     }
@@ -96,6 +94,7 @@ public class OrderRepository {
             }
                 try {
                     for (OrderLine orderline : orderContent) {
+                        System.out.println("addOrderContent - orderline: " + orderline);
                         sql = "INSERT INTO Ordercontent (orderID, productID, productName, price) VALUES (?,?,?,?)";
                         db.update(sql, orderID, orderline.getProductID(), orderline.getProductName(), orderline.getPrice());
                     }
@@ -108,27 +107,16 @@ public class OrderRepository {
 
 
 
-    public OrderContent getOrdercontent (String orderID){
+    public List<OrderLine> getOrdercontent (String orderID){
         String sql;
-        int ordercont;
         try{
-            sql = "SELECT count(*) FROM Ordercontent WHERE orderID = ?";
-            ordercont = db.queryForObject(sql, Integer.class, orderID);
-            System.out.println("getOrdercontent: " + ordercont);
-            if(ordercont == 0){
-                System.out.println("getOrderByID: orderFound == 0, returnerer null");
-                return null;
-            }
             sql = "SELECT * FROM Ordercontent WHERE orderID = ?";
-            return db.queryForObject(sql,new BeanPropertyRowMapper<>(OrderContent.class), orderID);
+            return db.query(sql,new BeanPropertyRowMapper<>(OrderLine.class), orderID);
         }catch(Exception e){
             System.out.println("getOrdercontent: Catch: " + e.getMessage());
             return null;
         }
     }
-
-
-
 
     //Method that checks if an integer is used as orderID in the database, and returns the integer if not
     //Denne fungerer foreløpig ikke, klarer ikke å hente ut fra databasen virker det som, så kommenterer den ut og

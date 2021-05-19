@@ -348,29 +348,28 @@ a.goToCheckout{
 .regUserContent table{
     padding-left: 10%;
     padding-right: 10%;
-    margin-top: 4%;
+}
+
+#regUserContent.regUserContent{
+    margin-left: 10%;
+    margin-top: 2%;
 }
 
 /* content on left side */
-.userDetails{
+#userDetails{
     width: 40%;
     float: left;
 }
 
 /* content on right side */
-.registerInfo{
+#registerInfo{
     width: 40%;
     float: right;
 }
 
-
 .table-registeruser td {
     padding-right: 40px;
     margin: 20px;
-    padding-top: 10px;
-}
-
-.table-registeruser td {
     padding-top: 10px;
 }
 
@@ -419,4 +418,20 @@ div#admproductContainer.admproductContainer {
     border-radius: 10px;
     width: 10%;
     text-align: center;
+}
+
+
+
+/* userpage */
+.orderHistory, #orderHistory {
+    width: 40%;
+    margin-left: 10%;
+    margin-right: 5%;
+    float: left;
+}
+
+#orderContentHistory{
+    width: 30%;
+    margin-right: 10%;
+    float: right;
 }

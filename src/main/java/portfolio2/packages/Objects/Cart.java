@@ -27,6 +27,19 @@ public class Cart {
         return "Product added in customers cart.";
     }
 
+    public String removeProductFromCart(int productID){
+        for(Product p : productsInCart){
+            if(p.getProductID() == productID){
+                productsInCart.remove(p);
+                return "Product removed";
+            }
+        }
+        return "Product is not in cart";
+
+    }
+
+
+
     public double getTotalPrice(){
         double total = 0.0;
         for(Product p : productsInCart){

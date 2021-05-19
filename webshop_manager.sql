@@ -96,17 +96,17 @@ CREATE TABLE Ordercontent (
 #Inserting some test data for customers
 INSERT INTO `Customer` (`customerID`, `firstname`, `lastname`,
                         `address`, `zipcode`, `telephone`, `email`, `password`) VALUES
-(1, 'Per', 'Hansen', 'Frognerveien 1', '0273', '97969594', 'per@mail.com', 'password'),
-(2, 'Hans', 'Persen', 'Løkkaveien 2', '0286', '01020304', 'hans@mail.com', 'password'),
-(3, 'Lise', 'Luring', 'Løkkaveien 3', '0286', '81828384', 'lise@mail.com', 'password');
+('1', 'Per', 'Hansen', 'Frognerveien 1', '0273', '97969594', 'per@mail.com', 'password'),
+('2', 'Hans', 'Persen', 'Løkkaveien 2', '0286', '01020304', 'hans@mail.com', 'password'),
+('3', 'Lise', 'Luring', 'Løkkaveien 3', '0286', '81828384', 'lise@mail.com', 'password');
 
 
 # TODO: amount er misvisende. heller et annet ord for antall?
 # Inserting test data for orders
 INSERT INTO `Order` (`orderID`, `orderDate`, `totalprice`, `amount`, `customerID`) VALUES
-(1, '26.04.2021', 100.00, 2, 1),
-(2, '26.04.2021', 3000.00, 10, 2),
-(3, '28.04.2021', 1500.00, 6, 3);
+('00825529-0dd5-43e0-9ea7-dd36879dae0b', '2021-03-10 06:59:59', 0.00, 2, '1'),
+('08825529-0dd5-43e0-9ea7-dd36879dae0b', '2021-04-10 12:34:08', 0.00, 2, '2'),
+('09825529-0dd5-43e0-9ea7-dd36879dae0b', '2021-05-10 23:05:16', 0.00, 1, '3');
 
 
 #Inserting test data for products
@@ -119,7 +119,11 @@ INSERT INTO `Product` (`productID`, `productName`, `shortDescription`,
 
 # Inserting test data for ordercontent
 INSERT INTO Ordercontent (`orderID`, `productID`, `productName`, `price`) VALUES
-(1, 1, "kaffi", 100.00), (1, 2, "kaffi", 200.00), (1, 2, "kaffi", 200.00), (2, 3, "kaffi", 100.00);
+('00825529-0dd5-43e0-9ea7-dd36879dae0b', 1, "kaffi", 100.00),
+('00825529-0dd5-43e0-9ea7-dd36879dae0b', 1, "kaffi", 200.00),
+('08825529-0dd5-43e0-9ea7-dd36879dae0b', 2, "kaffi", 200.00),
+('08825529-0dd5-43e0-9ea7-dd36879dae0b', 2, "kaffi", 100.00),
+('09825529-0dd5-43e0-9ea7-dd36879dae0b', 3, "kaffi", 100.00);
 
 
 # Inserting data for all zipcodes + cities in Norway

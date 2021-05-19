@@ -29,14 +29,18 @@ public class CustomerRepository {
     }
 
     public Customer getCustomerByID(String customerID){
+        System.out.println(customerID);
         if(customerID == null){
             return null;
         }
         try{
-            String sql = "SELECT * FROM Customer WHERE customerID = ?";
-            List<Customer> customers = db.query(sql, new BeanPropertyRowMapper<>(Customer.class));
+            String sql = "SELECT customerID, firstname, lastname, address, Customer.zipcode, city, telephone, email FROM Customer " +
+                    "INNER JOIN City ON Customer.zipcode = City.zipcode " +
+                    "WHERE customerID = ?";
+            List<Customer> customers = db.query(sql, new BeanPropertyRowMapper<>(Customer.class), customerID);
             return customers.get(0);
         }catch(Exception e){
+            System.out.println(e);
             return null;
         }
     }
@@ -44,7 +48,7 @@ public class CustomerRepository {
     // getting the customers, but not showing the passwords as a privacy-concern
     public List<Customer> getCustomers() {
         try {
-            String sql = "SELECT customerID, firstname, lastname, address, Customer.zipcode, city, tlfnumber, email FROM Customer " +
+            String sql = "SELECT customerID, firstname, lastname, address, Customer.zipcode, city, telephone, email FROM Customer " +
                     "INNER JOIN City ON Customer.zipcode = City.zipcode " +
                     "ORDER BY customerID";
             return db.query(sql, new BeanPropertyRowMapper<>(Customer.class));

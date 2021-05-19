@@ -5,7 +5,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.*;
 import portfolio2.packages.DAL.ProductRepository;
 import portfolio2.packages.Objects.*;
-
 import java.util.List;
 
 @RestController
@@ -16,34 +15,13 @@ public class ProductController {
     @Autowired
     ProductRepository repository;
 
- /*   @GetMapping("/{productID}")
-    public Product getProductByID(@PathVariable int productID){
-        return ProductRegister.getProductByID(productID);
-    }
-*/
-/*    @GetMapping("/getShoppingcart")
-    public ArrayList<Product> getShoppingcart(){
-        return ShoppingCart.getProductList();
-    }*/
-
-    @PostMapping("/changeProduct")
-    public String changeProduct(Product product){
-        if(product == null){
-            return "Product is null.";
-        }
-        if(getProductByID(product.getProductID()) == null){
-            return "Can't find product in database.";
-        }
-        return repository.changeProductByID(product);
-    }
-
     @GetMapping("/getProducts")
     public List<Product> getProducts(){
         return repository.getProducts();
     }
 
-    @GetMapping("/getProductByID")
-    public Product getProductByID(Integer productID){
+    @GetMapping("/{productID}/getProduct")
+    public Product getProductByID(@PathVariable Integer productID){
         if(productID == null){
             return null;
         }
@@ -63,5 +41,15 @@ public class ProductController {
         return repository.addProduct(newProduct);
     }
 
+    @PostMapping("/changeProduct")
+    public String changeProduct(Product product){
+        if(product == null){
+            return "Product is null.";
+        }
+        if(getProductByID(product.getProductID()) == null){
+            return "Can't find product in database.";
+        }
+        return repository.changeProductByID(product);
+    }
 
 }
