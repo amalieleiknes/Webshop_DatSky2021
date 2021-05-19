@@ -29,6 +29,18 @@ public class CustomerRepository {
         return "OK";
     }
 
+    public boolean checkAvailability(String email){
+        System.out.println(email);
+        String sql;
+        try {
+            sql = "SELECT count(*) FROM Customer WHERE email = ?";
+            int customerFound = db.queryForObject(sql, Integer.class, email);
+            return customerFound <= 0;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public Customer getCustomerByID(String customerID) {
         if(customerID == null){
             return null;

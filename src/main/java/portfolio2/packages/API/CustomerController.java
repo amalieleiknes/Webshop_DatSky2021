@@ -39,11 +39,18 @@ public class CustomerController {
         }
         else{
             boolean validEmail = CustomerValidator.validateEmail(customer.getEmail());
+            boolean availableEmail = repository.checkAvailability(customer.getEmail());
             boolean validPassword = CustomerValidator.validatePassword(customer.getPassword());
             boolean validTelephone = CustomerValidator.validateTelephone(customer.getTelephone());
 
+            System.out.println(availableEmail);
+
+
             if(!validEmail){
                 return "Email is not valid";
+            }
+            else if(!availableEmail){
+                return "Email is not available to use";
             }
             else if(!validPassword){
                 return "Password is not valid";
