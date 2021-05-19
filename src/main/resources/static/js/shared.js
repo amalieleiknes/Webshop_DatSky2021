@@ -144,17 +144,23 @@ function logOnAdmin(){
     }
     else{
         $("#adminfailedLogIn").hide();
+        $.get("products/checkAdmin", {username: adminusername, password: adminpassword}, function(valid) {
+            console.log(valid);
+            if (valid === true) {
+                console.log("trying to set cookie...")
+                deleteCookie("customerID");
+                deleteCookie("email");
+                deleteCookie("tempUserID");
+                setCookie("adminusername", adminusername, 1);
+                setCookie("adminpassword", adminpassword, 1);
+                deleteCookie()
+                window.location.href = 'adminPage.html';
+            }
+            else{
+                console.log("Failed attempt to log into adminpage.");
+            }
+        });
 
-        if(adminusername === "admin" && adminpassword === "admin"){
-            console.log("trying to set cookie...")
-            deleteCookie("customerID");
-            deleteCookie("email");
-            deleteCookie("tempUserID");
-            setCookie("adminusername", adminusername, 1);
-            setCookie("adminpassword", adminpassword, 1);
-            deleteCookie()
-            window.location.href= 'adminPage.html';
-        }
     }
 }
 

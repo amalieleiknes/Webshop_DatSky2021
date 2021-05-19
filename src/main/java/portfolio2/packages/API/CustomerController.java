@@ -19,7 +19,7 @@ public class CustomerController {
 
     // getting one customer by ID
     @GetMapping("/{customerID}")
-    public Customer getCustomerByID(@PathVariable String customerID) throws InvalidCustomerException {
+    public Customer getCustomerByID(@PathVariable String customerID) {
         return repository.getCustomerByID(customerID);
     }
 
@@ -28,6 +28,7 @@ public class CustomerController {
     public List<Customer> getCustomers() {
         return repository.getCustomers();
     }
+
 
     @PostMapping("/addCustomer")
     public String addCustomer(Customer customer){

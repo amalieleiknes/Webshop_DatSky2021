@@ -29,8 +29,7 @@ public class CustomerRepository {
         return "OK";
     }
 
-    public Customer getCustomerByID(String customerID) throws InvalidCustomerException {
-        System.out.println(customerID);
+    public Customer getCustomerByID(String customerID) {
         if(customerID == null){
             return null;
         }
@@ -41,9 +40,10 @@ public class CustomerRepository {
             List<Customer> customers = db.query(sql, new BeanPropertyRowMapper<>(Customer.class), customerID);
 
             if(customers.size() == 0){
-                throw new InvalidCustomerException("There is no such customer in the database. The customerID-cookie has been tampered with: ");
+                throw new InvalidCustomerException("There is no such customerID {" + customerID + "} in the database. " +
+                        "The customerID-cookie has been tampered with.");
             }
-            
+
             return customers.get(0);
         }catch(InvalidCustomerException e){
             System.out.println(e);

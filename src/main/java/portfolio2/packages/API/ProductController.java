@@ -5,6 +5,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.*;
 import portfolio2.packages.DAL.ProductRepository;
 import portfolio2.packages.Objects.*;
+import portfolio2.packages.Validator.AdminValidator;
+
 import java.util.List;
 
 @RestController
@@ -23,6 +25,11 @@ public class ProductController {
     @GetMapping("/{productID}/getProduct")
     public Product getProductByID(@PathVariable int productID){
         return repository.getProductByID(productID);
+    }
+
+    @GetMapping("/checkAdmin")
+    public boolean checkAdminLogon(String username, String password){
+        return AdminValidator.validateAdmin(username, password);
     }
 
     @PostMapping("/addProduct")
