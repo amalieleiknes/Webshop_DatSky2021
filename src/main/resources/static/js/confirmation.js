@@ -1,6 +1,6 @@
 $(function(){
     let orderID = getCookie("orderID");
-    $.get("/order/getOrderByID", {orderID: orderID}, function(order){
+    $.get("/orders/{"+orderID+"}/getOrder", function(order){
         let orderDate = new Date(order.orderDate).toLocaleDateString('no-NO');
 
         $("#confOrderIDValue").empty().html(orderID);
@@ -10,7 +10,7 @@ $(function(){
         console.log("OrderID: " + orderID + ", orderDate: " + orderDate + ", amount: " + order.amount + ", totalprice: " + order.totalPrice);
     });
 
-    $.get("/order/getOrdercontent", {orderID: orderID}, function(ordercontent){
+    $.get("/orders/getOrdercontent", {orderID: orderID}, function(ordercontent){
         console.log("Ordercontent: ", ordercontent);
         console.log("Ordercontent.length: ", ordercontent.length);
         let output =

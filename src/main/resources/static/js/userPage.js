@@ -5,7 +5,7 @@ $(function(){
     function getOrderHistory() {
         let customer = getCustomer();
 
-        $.post("/order/getOrdersByCustomer", {customerID: customer.customerID}, function (orderList) {
+        $.post("/orders/getOrdersByCustomer", {customerID: customer.customerID}, function (orderList) {
             let i;
             console.log("Previous orders are printing... ");
 
@@ -28,8 +28,6 @@ $(function(){
                         "<td>" + order.orderDate + "</td>" +
                         "<td>" + order.totalPrice + "</td>" +
                         "<td>" + order.amount + "</td>" +
-
-                        //TODO: noe feil med denne knappen, finner ikke eksakt ut hvordan den kan fikses?
                         "<td><a class='btn btn-success' onclick='getOrderContent("+line+")'>See ordercontent</button></td>" +
                         "</tr>";
                     line++;
@@ -45,7 +43,7 @@ $(function(){
 function getOrderContent(line){
     const orderID= $("#orderID" + line).val();
 
-    $.post("/order/getOrdercontent", {orderID: orderID} ,function(orderContentList){
+    $.post("/orders/getOrdercontent", {orderID: orderID} ,function(orderContentList){
         let output =
             "<h1>Order #"+orderID+"</h1>" +
             "<table class='table table-striped table-bordered'>" +

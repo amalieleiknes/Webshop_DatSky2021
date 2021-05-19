@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @RestController
 @EnableScheduling
-@RequestMapping("/order")
+@RequestMapping("/orders")
 public class OrderController {
 
     @Autowired
@@ -20,6 +20,21 @@ public class OrderController {
     @GetMapping("/generateOrderID")
     public String generateOrderID(){
         return UUID.randomUUID().toString();
+    }
+
+    // getting a order, based on order ID
+    @GetMapping("/{orderID}/getOrder")
+    public Order getOrderByID(@PathVariable String orderID){
+        if(orderID.isBlank() || orderID.isEmpty()){
+            return null;
+        }
+        return repository.getOrderByID(orderID);
+    }
+
+    // getting all the orders
+    @GetMapping("/getOrders")
+    public List<Order> getAllOrders(){
+        return repository.getAllOrders();
     }
 
     // adding one order to the database
@@ -32,29 +47,10 @@ public class OrderController {
         return repository.addOrder(newOrder);
     }
 
-    // getting a order, based on order ID
-    @GetMapping("/getOrderByID")
-    public Order getOrderByID(String orderID){
-        if(orderID.isBlank() || orderID.isEmpty()){
-            return null;
-        }
-        return repository.getOrderByID(orderID);
-    }
-
-    // TODO: fungerer ikke
-    // getting all the orders ever made
-    @GetMapping("/getAllOrders")
-    public List<Order> getAllOrders(){
-        System.out.println("Tester ordercontroller - getallorders");
-        return repository.getAllOrders();
-    }
-
-
     @PostMapping("/getOrdersByCustomer")
     public List<Order> getOrdersByCustomer(String customerID){
         return repository.getOrdersByCustomer(customerID);
     }
-
 
     @PostMapping("/addOrdercontent")
     public String addOrdercontent(String orderID, String customerID){

@@ -34,7 +34,7 @@ $(function(){
             let todaysDate = new Date();
 
             // generating Order and Ordercontent
-            $.get("/order/generateOrderID", function (orderID) {
+            $.get("/orders/generateOrderID", function (orderID) {
                 console.log("OrderID: " + orderID);
                 setCookie("orderID", orderID, 1);
 
@@ -49,10 +49,10 @@ $(function(){
                             customerID: tempUserID
                         };
 
-                        $.post("/order/addOrder", newOrder, function (message) {
+                        $.post("/orders/addOrder", newOrder, function (message) {
                             console.log(message);
                             if(message === "Order added!"){
-                                $.post("/order/addOrdercontent", {orderID: orderID, customerID: tempUserID}, function (addOrdercontentMessage) {
+                                $.post("/orders/addOrdercontent", {orderID: orderID, customerID: tempUserID}, function (addOrdercontentMessage) {
                                     console.log(addOrdercontentMessage);
                                     $.post("/emptyCart", {customerID: tempUserID}, function(emptyCartMsg){
                                         console.log(emptyCartMsg);
@@ -75,10 +75,10 @@ $(function(){
                             customerID: customer.customerID
                         };
 
-                        $.post("/order/addOrder", newOrder, function (message) {
+                        $.post("/orders/addOrder", newOrder, function (message) {
                             console.log(message);
                             if (message === "Order added!") {
-                                $.post("/order/addOrdercontent", {orderID: orderID, customerID: customer.customerID}, function (addOrderContentMessage) {
+                                $.post("/orders/addOrdercontent", {orderID: orderID, customerID: customer.customerID}, function (addOrderContentMessage) {
                                     console.log(addOrderContentMessage);
                                     $.post("/emptyCart", {customerID: customerID}, function(emptyCartMsg){
                                         console.log(emptyCartMsg);
