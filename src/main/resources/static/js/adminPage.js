@@ -9,70 +9,78 @@ $(function() {
 
     function viewProducts(){
         $.get("products/getProducts", function (products) {
+            let adminProductcardElement = document.getElementById("adminProductContainer");
             console.log("All products: ", products);
-            const table = formatProductData(products);
-            $("#modifyProducts").html(table);
+            let table = formatProductData(products);
+            adminProductcardElement.innerHTML = table;
         });
     }
 
     // function to format the table
-    function formatProductData(products, appendNew){
-        let table=
-            "<table class='table table-condensed'>" +
-                "<thead>" +
-                    "<tr>" +
-                    "<th>ProductID</th>" +
-                    "<th>Name</th>" +
-                    "<th>Short Description</th>" +
-                    "<th>Long Description</th>" +
-                    "<th>Price</th>" +
-                    "<th>image</th>" +
-                    "<th>Save changes</th>" +
-                    "<th>Delete</th>" +
-                "</thead>" +
-            "<tbody>";
-        let line=1;
-        $.each(products, function( key, product) {
-            table+=
-                "<tr>" +
-                    "<td><input type='text' readonly id='productID"+line+"' size='3' value='"+product.productID+"'/></td>" +
-                    "<td><input type='text' id='productName"+line+"' value='"+product.productName+"'/></td>" +
-                    "<td><input type='text' id='shortDescription"+line+"' value='"+product.shortDescription+"'/></td>" +
-                    "<td><input type='text' id='longDescription"+line+"' value='"+product.longDescription+"'/></td>" +
-                    "<td><input type='text' id='price"+line+"' value='"+product.price+"'/></td>"+
-                    "<td><input type='text' readonly id='imageURL"+line+"' value='"+product.imageURL+"'/></td>" +
-                    "<td><a class='btn btn-success' onclick='changeProduct("+line+")'>Save</button></td>" +
-                    "<td><a class='btn btn-danger' onclick='deleteProduct("+line+")'>Delete</button></td>" +
-                "</tr>";
-            line++;
-        });
-        if(appendNew){
-            table+=
-                "<tr>" +
-                "<td><input type='text' disabled readonly id='productID"+line+"' size='3' value=''/></td>" +
-                "<td><input type='text' id='productName"+line+"' value=''/></td>" +
-                "<td><input type='text' id='shortDescription"+line+"' value=''/></td>" +
-                "<td><input type='text' id='longDescription"+line+"' value=''/></td>" +
-                "<td><input type='text' id='price"+line+"' value=''/></td>"+
-                "<td><input type='file' disabled id='imageURL"+line+"' size=12 /></td>" +
-                "<td><a class='btn btn-success' onclick='addProduct("+line+")'>Add product</button></td>" +
-                "</tr>";
-            line++;
-        }
-        table +="</tbody></table>";
-        return table;
+    function formatProductData(products){
+        let content = "";
+        $.each(products, function(counter, product){
+            const card = document.createElement("div");
+            card.classList.add('card-body');
+            let productID = "productId"+product.productID.toString();
+            let cardContent =
+                "<div class='card' id='" + product.productID + "'>" +
+                    "<div class='card-body' style='padding: 10px;'" +
+                        "<h5 class='card-title'>" + product.productName + "</h5>" +
+                        "</br>" +
+                        "<img class='card-img' src= '" + product.imageURL + "' alt='img of a product' width='250' height='auto'/>" +
+                        "</br>" +
+                        "<p class='card-description'>" + product.shortDescription + "</p>" +
+                        "<p class='card-price'>" + product.price + ",-</p>" +
+                        "<div class='button-wrapper'>" +
+                            "<button class='btn btn-primary' data-toggle='modal' data-target='#"+ productID +"'>Edit</button>" +
+                            "<button class='btn btn-primary' id='deleteproduct' onclick='deleteProduct("+product.productID+")' value='" + product.productID + "'>Delete product</button>" +
+                        "</div>" +
+                    "</div>" +
+                "</div>"   +
+
+                /*MODAL TEST*/
+                "<div class='modal fade' id='"+ productID +"' tabindex='-1' role='dialog'>" +
+                    "<div class='modal-dialog' role='document'>" +
+                        "<div class='modal-content'>" +
+                            "<div class=\"modal-header\">" +
+                                "<h1>Change '"+product.productName+"'</h1>" +
+                                "<h5 class=\"modal-title\" id=\"exampleModalLabel\"></h5>" +
+                                "<button type=\"button\" class=\"close\" data-dismiss=\"modal\">" +
+                                "<span>&times;</span>" +
+                                "</button>" +
+                            "</div>"+
+                            "<div class=\"modal-body\">" +
+                                "<input type='text' readonly id='productID"+product.productID+"' value='"+product.productID+"'/>" +
+                                "<input type='text' id='productName"+product.productID+"' value='"+product.productName+"'/>" +
+                                "<input type='text' id='shortDescription"+product.productID+"' value='"+product.shortDescription+"'/>" +
+                                "<input type='text' id='longDescription"+product.productID+"' value='"+product.longDescription+"'/>" +
+                                "<input type='text' id='price"+product.productID+"' value='"+product.price+"'/>" +
+                                "<input type='text' id='imageURL"+product.productID+"' value='"+product.imageURL+"'/>" +
+                            "</div>" +
+                            "<div class=\"modal-footer\">" +
+                                "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>" +
+                                "<button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" onclick='changeProduct("+product.productID+")'>Save changes</button>" +
+                            "</div>" +
+                        "</div>"+
+                    "</div>"+
+                "</div>" ;
+
+                content += cardContent;
+        })
+        return content;
     }
 
 
     // function to save changes to your product
-    function changeProduct(line){
+    function changeProduct(productID){
         const newInformation = {
-            productID        : $("#productID" + line).val(),
-            productName      : $("#productName" + line).val(),
-            shortDescription : $("#shortDescription" + line).val(),
-            longDescription  : $("#longDescription" + line).val(),
-            price            : $("#price" + line).val(),
-            imageURL         : $("#imageURL" + line).val()
+            productID        : $("#productID" + productID).val(),
+            productName      : $("#productName" + productID).val(),
+            shortDescription : $("#shortDescription" + productID).val(),
+            longDescription  : $("#longDescription" + productID).val(),
+            price            : $("#price" + productID).val(),
+            imageURL         : $("#imageURL" + productID).val()
         };
 
     $.post("/products/changeProduct", newInformation, function(result){
@@ -85,17 +93,24 @@ $(function() {
     }
 
     // delete the selected line
-    function deleteProduct(line){
+    function deleteProduct(productID){
+        $.post("/products/deleteProduct", productID, function(result){
+            if(result === "OK. Product deleted!"){
+                viewProducts();
+            }else{
+                console.log("Resultat av å slette produkt: " + result);
+            }
+        })
 
     }
-
+/*
     //Add new line to add productinformation
     function newProductline(){
         $.get("products/getProducts", function (products) {
             const table = formatProductData(products, true);
             $("#modifyProducts").html(table);
         });
-    }
+    }*/
 
     function logOutAdmin(){
         deleteCookie("adminpassword");

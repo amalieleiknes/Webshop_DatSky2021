@@ -17,6 +17,36 @@ public class ProductController {
     @Autowired
     ProductRepository repository;
 
+ /*   @GetMapping("/{productID}")
+    public Product getProductByID(@PathVariable int productID){
+        return ProductRegister.getProductByID(productID);
+    }
+*/
+/*    @GetMapping("/getShoppingcart")
+    public ArrayList<Product> getShoppingcart(){
+        return ShoppingCart.getProductList();
+    }*/
+
+    @PostMapping("/deleteProduct")
+    public String deleteProduct(Integer productID){
+        System.out.println("ProductID er: " + productID);
+        if(productID == null){
+            return "No productID was found.";
+        }
+       return repository.deleteProduct(productID);
+    }
+
+    @PostMapping("/changeProduct")
+    public String changeProduct(Product product){
+        if(product == null){
+            return "Product is null.";
+        }
+        if(getProductByID(product.getProductID()) == null){
+            return "Can't find product in database.";
+        }
+        return repository.changeProductByID(product);
+    }
+
     @GetMapping("/getProducts")
     public List<Product> getProducts(){
         return repository.getProducts();

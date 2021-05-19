@@ -14,6 +14,19 @@ public class ProductRepository {
     @Autowired
     JdbcTemplate db;
 
+    public String deleteProduct(Integer productID){
+        if(productID == null){
+            return "ProductID is null.";
+        }
+        try{
+            String sql = "DELETE FROM Product WHERE productID = ?";
+            db.update(sql, productID);
+        }catch(Exception e){
+            return "Could not delete selected product.";
+        }
+        return "OK. Product deleted.";
+    }
+
     public String changeProductByID(Product product){
         String sql;
         int productFound;

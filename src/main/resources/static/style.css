@@ -345,7 +345,11 @@ a.goToCheckout{
     border-top: none;
 }
 
-.deliveryDetails button{
+.tablewrapper{
+    max-width: none;
+}
+
+.deliveryDetails{
     padding: 5px;
     border: none;
     cursor: pointer;
@@ -456,10 +460,28 @@ a.goToCheckout{
 
 /* adminpage */
 
+#adminProductContainer {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+/*
 div#admproductContainer.admproductContainer {
     margin-left: 10%;
     width: 80%;
     float: left;
+}*/
+
+#admproductContainer {
+    max-width: 1056px;
+    margin: 0 auto;
+}
+
+.contentWrap {
+    max-width: 1056px;
+    float: right;
+    position: relative;
+    height: 100%;
 }
 
 .modifyProducts input {
@@ -471,11 +493,7 @@ div#admproductContainer.admproductContainer {
     width: 150px;
 }
 
-.modifyProducts table{
-
-}
-
-.admproductContainer button{
+.newProductline{
     padding: 5px;
     margin-top: 25px;
     border: none;
