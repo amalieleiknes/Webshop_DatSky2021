@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.*;
 import portfolio2.packages.DAL.CustomerRepository;
+import portfolio2.packages.Exceptions.InvalidCustomerException;
 import portfolio2.packages.Objects.*;
 import java.util.List;
 
@@ -18,11 +19,8 @@ public class CustomerController {
 
     // getting one customer by ID
     @GetMapping("/{customerID}")
-    public Customer getCustomerByID(@PathVariable String customerID){
-        String finalcustomerID = customerID.replace("{", "");
-        finalcustomerID = finalcustomerID.replace("}", "");
-
-        return repository.getCustomerByID(finalcustomerID);
+    public Customer getCustomerByID(@PathVariable String customerID) throws InvalidCustomerException {
+        return repository.getCustomerByID(customerID);
     }
 
     // getting all customers

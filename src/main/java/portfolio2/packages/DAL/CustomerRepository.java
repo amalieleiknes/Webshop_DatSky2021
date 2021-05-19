@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import portfolio2.packages.Exceptions.InvalidCustomerException;
 import portfolio2.packages.Objects.Customer;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class CustomerRepository {
         return "OK";
     }
 
-    public Customer getCustomerByID(String customerID){
+    public Customer getCustomerByID(String customerID) throws InvalidCustomerException {
         System.out.println(customerID);
         if(customerID == null){
             return null;
@@ -38,8 +39,13 @@ public class CustomerRepository {
                     "INNER JOIN City ON Customer.zipcode = City.zipcode " +
                     "WHERE customerID = ?";
             List<Customer> customers = db.query(sql, new BeanPropertyRowMapper<>(Customer.class), customerID);
+
+            if(customers.size() == 0){
+                throw new InvalidCustomerException("There is no such customer in the database. The customerID-cookie has been tampered with: ");
+            }
+            
             return customers.get(0);
-        }catch(Exception e){
+        }catch(InvalidCustomerException e){
             System.out.println(e);
             return null;
         }
@@ -53,6 +59,7 @@ public class CustomerRepository {
                     "ORDER BY customerID";
             return db.query(sql, new BeanPropertyRowMapper<>(Customer.class));
         } catch (Exception e) {
+            System.out.println(e);
             return null;
         }
     }

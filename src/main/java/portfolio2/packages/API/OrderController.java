@@ -25,13 +25,10 @@ public class OrderController {
     // getting a order, based on order ID
     @GetMapping("/{orderID}/getOrder")
     public Order getOrderByID(@PathVariable String orderID){
-        String finalOrderID = orderID.replace("{", "");
-        finalOrderID = finalOrderID.replace("}", "");
-
         if(orderID.isBlank() || orderID.isEmpty()){
             return null;
         }
-        return repository.getOrderByID(finalOrderID);
+        return repository.getOrderByID(orderID);
     }
 
     // getting all the orders

@@ -21,12 +21,8 @@ public class ProductController {
     }
 
     @GetMapping("/{productID}/getProduct")
-    public Product getProductByID(@PathVariable String productID){
-        String pID = productID.replace("{","");
-        pID = pID.replace("}","");
-        int finalProductID = Integer.parseInt(pID);
-
-        return repository.getProductByID(finalProductID);
+    public Product getProductByID(@PathVariable int productID){
+        return repository.getProductByID(productID);
     }
 
     @PostMapping("/addProduct")

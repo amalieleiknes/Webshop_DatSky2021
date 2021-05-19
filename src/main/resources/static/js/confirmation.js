@@ -1,6 +1,6 @@
 $(function(){
     let orderID = getCookie("orderID");
-    $.get("/orders/{"+orderID+"}/getOrder", function(order){
+    $.get("/orders/"+orderID+"/getOrder", function(order){
         let orderDate = new Date(order.orderDate).toLocaleDateString('no-NO');
 
         $("#confOrderDateValue").empty().html(orderDate);

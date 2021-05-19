@@ -4,7 +4,7 @@ $(window).on('load', function(){
     let urlObject = new URL(window.location.href);
     let productID = urlObject.searchParams.get('productID');
 
-    $.get("/products/{"+productID+"}/getProduct", function(product){
+    $.get("/products/"+productID+"/getProduct", function(product){
 
         // printing out the one product that is chosen
         let productcontent = document.getElementById("productcontent");
