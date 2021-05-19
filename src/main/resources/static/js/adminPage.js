@@ -104,14 +104,6 @@ $(function() {
         })
 
     }
-/*
-    //Add new line to add productinformation
-    function newProductline(){
-        $.get("products/getProducts", function (products) {
-            const table = formatProductData(products, true);
-            $("#modifyProducts").html(table);
-        });
-    }*/
 
     function logOutAdmin(){
         deleteCookie("adminpassword");
@@ -119,39 +111,6 @@ $(function() {
         window.location.href = "index.html";
     };
 
-
-    function newProduct(){
-        let adminProductcardElement = document.getElementById("adminProductContainer");
-        let newProductModal =
-        "<div class='modal fade' id='newProduct' tabindex='-1' role='dialog'>" +
-            "<div class='modal-dialog' role='document'>" +
-                "<div class='modal-content'>" +
-                    "<div class=\"modal-header\">" +
-                        "<h1>Add new product</h1>" +
-                        "<h5 class=\"modal-title\" id=\"exampleModalLabel\"></h5>" +
-                        "<button type=\"button\" class=\"close\" data-dismiss=\"modal\">" +
-                        "<span>&times;</span>" +
-                        "</button>" +
-                    "</div>"+
-                    "<div class=\"modal-body\">" +
-                        "<ul class='edit-product'>" +
-                            "<li class='edit-product__line'><label for='productName'>Name</label><input type='text' id='productName' value=''/></li>" +
-                            "<li class='edit-product__line'><label for='shortDescription'>Short description</label><input type='text' id='shortDescription' value=''/></li>" +
-                            "<li class='edit-product__line'><label for='longDescription'>Long description</label><input type='text' id='longDescription' value=''/></li>" +
-                            "<li class='edit-product__line'><label for='price'>Price</label><input type='text' id='price' value=''/></li>" +
-                            "<li class='edit-product__line'><label for='imageURL'>ImageURL</label><input type='text' id='imageURL' value='' disabled/></li>" +
-                        "</ul>" +
-                    "</div>" +
-                    "<div class=\"modal-footer\">" +
-                        "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>" +
-                        "<button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" onclick='addProduct()'>Add new product</button>" +
-                    "</div>" +
-                "</div>"+
-            "</div>"+
-        "</div>" ;
-
-        adminProductcardElement.innerHTML = newProductModal;
-    }
 
 
     //Add new product
