@@ -19,7 +19,10 @@ public class CustomerController {
     // getting one customer by ID
     @GetMapping("/{customerID}")
     public Customer getCustomerByID(@PathVariable String customerID){
-        return repository.getCustomerByID(customerID);
+        String finalcustomerID = customerID.replace("{", "");
+        finalcustomerID = finalcustomerID.replace("}", "");
+
+        return repository.getCustomerByID(finalcustomerID);
     }
 
     // getting all customers

@@ -10,7 +10,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="js/utils/cookieUtils.js"></script>
     <script src="js/confirmation.js"></script>
-    <script src="js/checkout.js"></script>
     <script src="js/shared.js"></script>
 
     <title>Webshop - order confirmation</title>
@@ -33,9 +32,12 @@
     </div>
 
     <div class ="right-side">
-        <div id="nav">
-        </div>
+
+        <a class="cartOverview" id="cartOverviewIcon" href="shoppingcart.html"><div id="cartOverview"></div></a>
+        <div id="userIconDropdownmenu"></div>
+
         <span id='failedLogIn'>Incorrect logininfo</span>
+
     </div>
 </div>
 
@@ -43,10 +45,6 @@
     <div class="printConf">
         <div class="confHeader">
             <h2>Thank you for your order!</h2>
-        </div>
-        <div class="confOrderID">
-            <div class="orderConfText">OrderID: </div>
-            <div class="orderConfValue" id="confOrderIDValue"></div>
         </div>
         </br>
         <div class="confOrderDate">
@@ -66,7 +64,6 @@
         </br>
         <div class="confOrdercontent">
             <div class="confOrdercontentHeader">
-                <h4>Order content: </h4>
             </div>
             </br>
             <div id="itemsInOrder"></div>

@@ -21,11 +21,12 @@ public class ProductController {
     }
 
     @GetMapping("/{productID}/getProduct")
-    public Product getProductByID(@PathVariable Integer productID){
-        if(productID == null){
-            return null;
-        }
-        return repository.getProductByID(productID);
+    public Product getProductByID(@PathVariable String productID){
+        String pID = productID.replace("{","");
+        pID = pID.replace("}","");
+        int finalProductID = Integer.parseInt(pID);
+
+        return repository.getProductByID(finalProductID);
     }
 
     @PostMapping("/addProduct")
@@ -46,7 +47,7 @@ public class ProductController {
         if(product == null){
             return "Product is null.";
         }
-        if(getProductByID(product.getProductID()) == null){
+        if(repository.getProductByID(product.getProductID()) == null){
             return "Can't find product in database.";
         }
         return repository.changeProductByID(product);

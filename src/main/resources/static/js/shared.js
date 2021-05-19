@@ -1,36 +1,43 @@
 "use strict";
 $(function() {
+    getNumberOfCartItems();
     $("#adminfailedLogIn").hide();
     $("#failedLogIn").hide();
     $("#failedProductAddtoCart").hide();
 
     let emailcookie = getCookie("email");
     let customerIDcookie = getCookie("customerID");
-    let navCardElement = document.getElementById("nav");
+    let userIconDropDown = document.getElementById("userIconDropdownmenu");
     let content;
 
 
     // checking if customer is logged in or not, and then gives the dynamic navigationcontent based on this info
     if (emailcookie === "" && customerIDcookie === "") {
         content =
-            "<div class='userLogInReg'>" +
-                "<a href='registerUser.html' tabIndex=''>" +
-                    "<div class='link'>Register as user</div>" +
-                "</a>" +
-                "<input type='text' class='input' id='customeremail' placeholder='email' name='email'/>" +
-                "<input type='text' class='input' id='customerpassword' placeholder='password' name='password'/>" +
-                "<button id='customerLogOnBtn'>Log in as user</button>" +
-                "<br/>" +
-            "</div>"
+            "<img src='images/Usericon.png' id='usericon' alt='shoppingcart' onclick='dropMenu()' width='70' height='70'>" +
+            "<div id='myDropdown' class='dropdown-content'>" +
+                "<div class='userLogInReg'>" +
+                    "<a href='registerUser.html' tabIndex=''>" +
+                        "<div class='link'>Register as user</div></a>" +
+                    "<input type='text' class='input' id='customeremail' placeholder='email' name='email'/>" +
+                    "<input type='text' class='input' id='customerpassword' placeholder='password' name='password'/>" +
+                    "<button id='customerLogOnBtn'>Log in as user</button>" +
+                    "<br/>" +
+                "</div>" +
+            "</div>";
     }
+
     else {
         content =
-            "<div class='userLogInReg'>" +
-            "<button id='logOutbtn'>Log out</button>" +
+            "<img src='images/Usericon.png' id='usericon' alt='shoppingcart' onclick='dropMenu()' width='70' height='70'>" +
+            "<div id='myDropdown' class='dropdown-content'>" +
+                "<button id='logOutbtn'>Log out</button>" +
+                "<a href='userPage.html' tabIndex=''>" +
+                "<div class='link'>See orderhistory</div></a>" +
             "</div>";
 
     }
-    navCardElement.innerHTML = content;
+    userIconDropDown.innerHTML = content;
 
 
     // check customers login-info
@@ -99,7 +106,7 @@ function getNumberOfCartItems() {
             let element = document.getElementById("cartOverview");
 
             element.innerHTML =
-                "<img src='images/cart.png' alt='shoppingcart' width='50' height='50'>" +
+                "<img src='images/Shoppingcart.png' alt='shoppingcart' width='70' height='70'>" +
                 "<span style='font-size: 30px'>" + numberOfProducts + "</span>";
         });
 
@@ -110,7 +117,7 @@ function getNumberOfCartItems() {
             let element = document.getElementById("cartOverview");
 
             element.innerHTML =
-                "<img src='images/cart.png' alt='shoppingcart' width='50' height='50'>" +
+                "<img src='images/Shoppingcart.png' alt='shoppingcart' width='50' height='50'>" +
                 "<span style='font-size: 30px'>" + numberOfProducts + "</span>";
         });
     }
@@ -120,7 +127,9 @@ function logOut(){
     $(location).attr('href', 'index.html');
     setCookie("email", null, 0);
     setCookie("customerID", null, 0);
+    setCookie("tempUserID", null, 0);
     deleteCookie("customerID");
+    deleteCookie("email");
     deleteCookie("tempUserID");
     location.reload();
 }
@@ -139,6 +148,7 @@ function logOnAdmin(){
         if(adminusername === "admin" && adminpassword === "admin"){
             console.log("trying to set cookie...")
             deleteCookie("customerID");
+            deleteCookie("email");
             deleteCookie("tempUserID");
             setCookie("adminusername", adminusername, 1);
             setCookie("adminpassword", adminpassword, 1);
@@ -146,5 +156,9 @@ function logOnAdmin(){
             window.location.href= 'adminPage.html';
         }
     }
+}
+
+function dropMenu() {
+    document.getElementById("myDropdown").classList.toggle("show");
 }
 
