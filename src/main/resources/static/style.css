@@ -79,7 +79,7 @@
     background-color: #ddd;
 }
 
-.show {
+.showMenu {
     margin-left: 43%;
     display: block;
     margin-top: 12%;
@@ -506,6 +506,16 @@ div#admproductContainer.admproductContainer {
     text-align: center;
 }
 
+
+.edit-product{
+    padding: 10px;
+}
+
+.edit-product__line{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
 
 
 /* userpage */

@@ -36,7 +36,7 @@ public class ProductController {
        return repository.deleteProduct(productID);
     }
 
-    @PostMapping("/changeProduct")
+/*    @PostMapping("/changeProduct")
     public String changeProduct(Product product){
         if(product == null){
             return "Product is null.";
@@ -45,7 +45,7 @@ public class ProductController {
             return "Can't find product in database.";
         }
         return repository.changeProductByID(product);
-    }
+    }*/
 
     @GetMapping("/getProducts")
     public List<Product> getProducts(){

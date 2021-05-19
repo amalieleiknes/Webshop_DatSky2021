@@ -165,6 +165,6 @@ function logOnAdmin(){
 }
 
 function dropMenu() {
-    document.getElementById("myDropdown").classList.toggle("show");
+    document.getElementById("myDropdown").classList.toggle("showMenu");
 }
 

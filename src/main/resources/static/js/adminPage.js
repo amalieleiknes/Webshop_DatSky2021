@@ -51,12 +51,14 @@ $(function() {
                                 "</button>" +
                             "</div>"+
                             "<div class=\"modal-body\">" +
-                                "<input type='text' readonly id='productID"+product.productID+"' value='"+product.productID+"'/>" +
-                                "<input type='text' id='productName"+product.productID+"' value='"+product.productName+"'/>" +
-                                "<input type='text' id='shortDescription"+product.productID+"' value='"+product.shortDescription+"'/>" +
-                                "<input type='text' id='longDescription"+product.productID+"' value='"+product.longDescription+"'/>" +
-                                "<input type='text' id='price"+product.productID+"' value='"+product.price+"'/>" +
-                                "<input type='text' id='imageURL"+product.productID+"' value='"+product.imageURL+"'/>" +
+                                "<ul class='edit-product'>" +
+                                    "<li class='edit-product__line'><label for='productID"+product.productID+"''>ID</label><input type='text' readonly id='productID"+product.productID+"' value='"+product.productID+"'/></li>" +
+                                    "<li class='edit-product__line'><label for='productName"+product.productID+"''>Name</label><input type='text' id='productName"+product.productID+"' value='"+product.productName+"'/></li>" +
+                                    "<li class='edit-product__line'><label for='shortDescription"+product.productID+"'>Short description</label><input type='text' id='shortDescription"+product.productID+"' value='"+product.shortDescription+"'/></li>" +
+                                    "<li class='edit-product__line'><label for='longDescription"+product.productID+"'>Long description</label><input type='text' id='longDescription"+product.productID+"' value='"+product.longDescription+"'/></li>" +
+                                    "<li class='edit-product__line'><label for='price"+product.price+"'>Price</label><input type='text' id='price"+product.productID+"' value='"+product.price+"'/></li>" +
+                                    "<li class='edit-product__line'><label for='imageURL"+product.imageURL+"'>ImageURL</label><input type='text' id='imageURL"+product.productID+"' value='"+product.imageURL+"'/></li>" +
+                                "</ul>" +
                             "</div>" +
                             "<div class=\"modal-footer\">" +
                                 "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>" +
@@ -65,7 +67,6 @@ $(function() {
                         "</div>"+
                     "</div>"+
                 "</div>" ;
-
                 content += cardContent;
         })
         return content;
