@@ -34,7 +34,7 @@ $(function() {
                         "<p class='card-price'>" + product.price + ",-</p>" +
                         "<div class='button-wrapper'>" +
                             "<button class='btn btn-primary' data-toggle='modal' data-target='#"+ productID +"'>Edit</button>" +
-                            "<button class='btn btn-primary' id='deleteproduct' onclick='deleteProduct("+product.productID+")' value='" + product.productID + "'>Delete product</button>" +
+                            "<button class='btn btn-primary' id='deleteproduct' onclick='deleteProduct("+product.productID.toString()+")' value='" + product.productID + "'>Delete product</button>" +
                         "</div>" +
                     "</div>" +
                 "</div>"   +
@@ -95,8 +95,8 @@ $(function() {
 
     // delete the selected line
     function deleteProduct(productID){
-        $.post("/products/deleteProduct", productID, function(result){
-            if(result === "OK. Product deleted!"){
+        $.post("/products/deleteProduct", {productID: productID}, function(result){
+            if(result === "OK. Product deleted."){
                 viewProducts();
             }else{
                 console.log("Resultat av å slette produkt: " + result);
