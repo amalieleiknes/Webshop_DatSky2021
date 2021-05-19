@@ -3,7 +3,7 @@ import portfolio2.packages.Validator.AdminValidator;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class testAdminLogin {
+public class UnittestAdminLogin {
 
 
     @Test

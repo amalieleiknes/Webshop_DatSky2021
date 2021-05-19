@@ -42,7 +42,6 @@ function addCustomer(){
                 if (result === "OK") {
                     customerAdded(newCustomer);
 
-
                     // setting fields to empty after registering
                     $("#firstname").val("");
                     $("#lastname").val("");
@@ -54,7 +53,9 @@ function addCustomer(){
                     $("#pwdcheck").val("");
 
                 } else {
-                    console.log("Could not add customer (customer is null)");
+                    let welcomeElement = document.getElementById("registerInfo");
+                    welcomeElement.innerHTML = result;
+                    console.log(result);
                 }
             });
         }

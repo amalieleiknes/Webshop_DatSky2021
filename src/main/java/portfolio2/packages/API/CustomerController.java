@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import portfolio2.packages.DAL.CustomerRepository;
 import portfolio2.packages.Exceptions.InvalidCustomerException;
 import portfolio2.packages.Objects.*;
+import portfolio2.packages.Validator.CustomerValidator;
+
 import java.util.List;
 
 
@@ -33,10 +35,26 @@ public class CustomerController {
     @PostMapping("/addCustomer")
     public String addCustomer(Customer customer){
         if(customer == null){
-            return "FAIL";
+            return "Customer is null";
         }
-        repository.addCustomer(customer);
-        return "OK";
+        else{
+            boolean validEmail = CustomerValidator.validateEmail(customer.getEmail());
+            boolean validPassword = CustomerValidator.validatePassword(customer.getPassword());
+            boolean validTelephone = CustomerValidator.validateTelephone(customer.getTelephone());
+
+            if(!validEmail){
+                return "Email is not valid";
+            }
+            else if(!validPassword){
+                return "Password is not valid";
+            }
+            else if(!validTelephone){
+                return "Telephone is not valid";
+            }
+            else{
+                return repository.addCustomer(customer);
+            }
+        }
     }
 
     @PostMapping("/checkIfValidCustomerLoginInfo")
