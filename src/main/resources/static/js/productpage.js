@@ -8,7 +8,6 @@ $(window).on('load', function(){
 
         // printing out the one product that is chosen
         let productcontent = document.getElementById("productcontent");
-        let shoppingcartcontent = document.getElementById("productpageShoppingcart");
 
         // getting the content of the product
         let content;
@@ -54,8 +53,4 @@ function addToCart(productID){
             console.log(result);
         });
     }
-}
-
-function blabla() {
-
 }

@@ -22,12 +22,13 @@ public class CustomerRepository {
                 throw new InvalidCustomerException("Customer is null and can therefore not be added to the database");
             }
             customer.setNewCustomerID();
-            sql = "INSERT INTO Customer (customerID, firstname, lastname, address, zipcode, telephone, email, password) VALUES (?,?,?,?,?,?,?,?)";
+            sql = "INSERT INTO Customer (customerID, firstname, lastname, address, zipcode, telephone, email, password)" +
+                    " VALUES (?,?,?,?,?,?,?,?)";
 
             db.update(sql, customer.getCustomerID(), customer.getFirstname(), customer.getLastname(), customer.getAddress(),
                     customer.getZipcode(), customer.getTelephone(), customer.getEmail(), customer.getPassword());
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
             return null;
         }
         return "OK";
@@ -38,6 +39,7 @@ public class CustomerRepository {
         String sql;
         try {
             sql = "SELECT count(*) FROM Customer WHERE email = ?";
+            //TODO: fikse en exception for denne
             int customerFound = db.queryForObject(sql, Integer.class, email);
             return customerFound <= 0;
         } catch (Exception e) {
@@ -68,7 +70,7 @@ public class CustomerRepository {
             return customers.get(0);
         }
         }catch(Exception e){
-            System.out.println(e);
+            System.out.println(e.getMessage());
             return null;
         }
     }
@@ -81,7 +83,7 @@ public class CustomerRepository {
                     "ORDER BY customerID";
             return db.query(sql, new BeanPropertyRowMapper<>(Customer.class));
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
             return null;
         }
     }

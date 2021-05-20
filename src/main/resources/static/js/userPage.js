@@ -6,7 +6,6 @@ $(function(){
         let customer = getCustomer();
 
         $.post("/orders/getOrdersByCustomer", {customerID: customer.customerID}, function (orderList) {
-            let i;
             console.log("Previous orders are printing... ");
 
             let output =

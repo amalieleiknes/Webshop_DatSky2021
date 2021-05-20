@@ -64,7 +64,7 @@ public class OrderController {
         List<Product> listOfProducts = cart.getAllCartItems(customerID);
 
         if(listOfProducts == null){
-            return "Could not add ordercontent (ordercontent is null)";
+            return "Could not add Ordercontent (Ordercontent is null)";
         }
         else{
             return repository.addOrdercontent(orderID, listOfProducts);

@@ -11,8 +11,7 @@ $(function() {
         $.get("products/getProducts", function (products) {
             let adminProductcardElement = document.getElementById("adminProductContainer");
             console.log("All products: ", products);
-            let table = formatProductData(products);
-            adminProductcardElement.innerHTML = table;
+            adminProductcardElement.innerHTML = formatProductData(products);
         });
     }
 

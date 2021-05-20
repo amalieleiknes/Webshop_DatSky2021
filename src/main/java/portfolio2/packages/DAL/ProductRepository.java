@@ -5,9 +5,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import portfolio2.packages.Exceptions.InvalidProductException;
-import portfolio2.packages.Objects.Customer;
 import portfolio2.packages.Objects.Product;
-
 import java.util.List;
 
 @Repository
@@ -34,6 +32,7 @@ public class ProductRepository {
         int productFound;
         try{
             sql = "SELECT count(*) FROM Product WHERE productID = ?";
+            //TODO
             productFound = db.queryForObject(sql, Integer.class, product.getProductID());
             if(productFound == 0){
                 return "No product matching in database";
@@ -49,8 +48,8 @@ public class ProductRepository {
     public List<Product> getProducts(){
         try{
             String sql = "SELECT * FROM Product";
-            List<Product> products = db.query(sql, new BeanPropertyRowMapper(Product.class));
-            return products;
+            //TODO
+            return db.query(sql, new BeanPropertyRowMapper(Product.class));
         }catch(Exception e){
             return null;
         }
@@ -68,7 +67,7 @@ public class ProductRepository {
             }
 
         } catch (InvalidProductException e){
-            System.out.println(e);
+            System.out.println(e.getMessage());
             return null;
         }
     }

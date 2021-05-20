@@ -5,11 +5,9 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import portfolio2.packages.Exceptions.InvalidOrderException;
-import portfolio2.packages.Exceptions.InvalidProductException;
 import portfolio2.packages.Objects.Order;
 import portfolio2.packages.Objects.OrderLine;
 import portfolio2.packages.Objects.Product;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,10 +35,9 @@ public class OrderRepository {
             String sql =    "SELECT * FROM `Order` " +
                             "WHERE customerID = ?";
 
-            List<Order> orders = db.query(sql, new BeanPropertyRowMapper<>(Order.class), customerID);
-            return orders;
+            return db.query(sql, new BeanPropertyRowMapper<>(Order.class), customerID);
         } catch(Exception e){
-            System.out.println("getOrdersByCustomer - catch: " + e.getMessage());
+            System.out.println(e.getMessage());
             return null;
         }
     }

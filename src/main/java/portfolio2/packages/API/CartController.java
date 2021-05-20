@@ -4,14 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.*;
 import portfolio2.packages.DAL.ProductRepository;
-import portfolio2.packages.Exceptions.InvalidProductException;
 import portfolio2.packages.Objects.Cart;
 import portfolio2.packages.Objects.Carts;
 import portfolio2.packages.Objects.Product;
-
 import java.util.List;
 
-// kan ikke ha requestbody når vi skal bruke et post-kall
 @RestController
 @EnableScheduling
 public class CartController {
@@ -48,7 +45,7 @@ public class CartController {
     }
 
     @PostMapping("/addToCart")
-    public String addToCart(String customerID, Integer productID) throws InvalidProductException {
+    public String addToCart(String customerID, Integer productID){
         if (customerID.isEmpty() || customerID.isBlank()) {
             return "Not valid customerID";
         }
@@ -61,12 +58,10 @@ public class CartController {
         if (cart == null) {
             //If customer doesn't have a cart, generate a cart and add product to this cart
             Cart newCart = Carts.addCart(customerID);
-            newCart.addProductToCart(product);
-            return "New cart was added to customer. Customers list has now " + newCart.getProductsInCart().size() + " products in it.";
+            return newCart.addProductToCart(product) + ". New cart was added to customer. Customers list has now " + newCart.getProductsInCart().size() + " products in it.";
         }
         //Else, add product to their already registered cart
-        cart.addProductToCart(product);
-        return "Customers list has " + cart.getProductsInCart().size() + " products in it.";
+        return cart.addProductToCart(product) + ". Customers list has " + cart.getProductsInCart().size() + " products in it.";
     }
 
     @PostMapping("/emptyCart")
@@ -88,8 +83,7 @@ public class CartController {
             int pID = Integer.parseInt(productID);
             Cart cart = Carts.getCart(customerID);
             assert cart != null;
-            cart.removeProductFromCart(pID);
-            return "OK";
+            return cart.removeProductFromCart(pID);
         }
     }
 

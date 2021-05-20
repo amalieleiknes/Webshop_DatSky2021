@@ -9,7 +9,6 @@ package portfolio2.packages.Objects;
 import java.util.List;
 
 public class ShoppingCart {
-
 /*    private static ArrayList<Product> shoppingcartList = new ArrayList<>();
 
     public static ArrayList<Product> getProductList() {

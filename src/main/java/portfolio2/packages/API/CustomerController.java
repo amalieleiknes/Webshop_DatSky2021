@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.*;
 import portfolio2.packages.DAL.CustomerRepository;
-import portfolio2.packages.Exceptions.InvalidCustomerException;
 import portfolio2.packages.Objects.*;
 import portfolio2.packages.Validator.CustomerValidator;
-
 import java.util.List;
 
 

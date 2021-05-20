@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
-    private String owner;
-    private List<Product> productsInCart = new ArrayList<>();
+    private final String owner;
+    private final List<Product> productsInCart = new ArrayList<>();
 
     public Cart(String owner){
         this.owner = owner;
