@@ -31,83 +31,81 @@ $(function(){
         }
 
         else {
+            let todaysDate = new Date();
 
-            // check if userID is valid (a registered customer) if customer is logged in
-            if(customerID!==""){
-                $.get("/customers/"+customerID, function(cust){
-                    console.log(cust);
-                    if(cust===""){
-                        console.log("This cookie has been changed or deleted, Please log out and try again.")
-                    }
-                    else {
-                        let todaysDate = new Date();
+            // generating Order and Ordercontent
+            $.get("/orders/generateOrderID", function (orderID) {
+                console.log("OrderID: " + orderID);
+                setCookie("orderID", orderID, 1);
 
-                        // generating Order and Ordercontent
-                        $.get("/orders/generateOrderID", function (orderID) {
-                            console.log("OrderID: " + orderID);
-                            setCookie("orderID", orderID, 1);
+                //If user on website is not logged in, check for products in temporary cart
+                if (customer.customerID === null || customer.customerID.length === 0) {
+                    $.get("/getCartItems", {customerID: tempUserID}, function (products) {
+                        const newOrder = {
+                            orderID: orderID,
+                            orderDate: todaysDate,
+                            totalPrice: 0,
+                            amount: products.length,
+                            customerID: tempUserID
+                        };
 
-                            //If user on website is not logged in, check for products in temporary cart
-                            if (customer.customerID === null || customer.customerID.length === 0) {
-                                $.get("/getCartItems", {customerID: tempUserID}, function (products) {
-                                    const newOrder = {
-                                        orderID: orderID,
-                                        orderDate: todaysDate,
-                                        totalPrice: 0,
-                                        amount: products.length,
-                                        customerID: tempUserID
-                                    };
+                        $.post("/orders/addOrder", newOrder, function (message) {
+                            console.log(message);
+                            if (message === "Order added!") {
+                                $.post("/orders/addOrdercontent", {
+                                    orderID: orderID,
+                                    customerID: tempUserID
+                                }, function (addOrdercontentMessage) {
+                                    console.log(addOrdercontentMessage);
+                                    window.location.href = "confirmation.html";
+                                    $.post("/emptyCart", {customerID: tempUserID}, function (emptyCartMsg) {
+                                        console.log(emptyCartMsg);
 
-                                    $.post("/orders/addOrder", newOrder, function (message) {
-                                        console.log(message);
-                                        if (message === "Order added!") {
-                                            $.post("/orders/addOrdercontent", {
-                                                orderID: orderID,
-                                                customerID: tempUserID
-                                            }, function (addOrdercontentMessage) {
-                                                console.log(addOrdercontentMessage);
-                                                $.post("/emptyCart", {customerID: tempUserID}, function (emptyCartMsg) {
-                                                    console.log(emptyCartMsg);
-                                                    window.location.href = "confirmation.html";
-                                                });
-                                            });
-                                        }
-                                    });
-                                });
-                            }
-
-                            //If user is logged in, get products from customers cart
-                            else {
-                                $.get("/getCartItems", {customerID: customer.customerID}, function (products) {
-                                    const newOrder = {
-                                        orderID: orderID,
-                                        orderDate: todaysDate,
-                                        totalPrice: 0,
-                                        amount: products.length,
-                                        customerID: customer.customerID
-                                    };
-
-                                    $.post("/orders/addOrder", newOrder, function (message) {
-                                        console.log(message);
-                                        if (message === "Order added!") {
-                                            $.post("/orders/addOrdercontent", {
-                                                orderID: orderID,
-                                                customerID: customer.customerID
-                                            }, function (addOrderContentMessage) {
-                                                console.log(addOrderContentMessage);
-                                                $.post("/emptyCart", {customerID: customerID}, function (emptyCartMsg) {
-                                                    console.log(emptyCartMsg);
-                                                    window.location.href = "confirmation.html";
-                                                });
-                                            });
-                                        }
                                     });
                                 });
                             }
                         });
-                    }
-                });
-            }
+                    });
+                }
+
+                //If user is logged in, get products from customers cart
+                else {
+                    // check if userID is valid (a registered customer) if customer is logged in
+                    $.get("/customers/"+customerID, function(cust){
+                        console.log(cust);
+                        if(cust===""){
+                            console.log("This cookie has been changed or deleted, Please log out and try again.")
+                        }
+                        else{
+                            $.get("/getCartItems", {customerID: customer.customerID}, function (products) {
+                                const newOrder = {
+                                    orderID: orderID,
+                                    orderDate: todaysDate,
+                                    totalPrice: 0,
+                                    amount: products.length,
+                                    customerID: customer.customerID
+                                };
+
+                                $.post("/orders/addOrder", newOrder, function (message) {
+                                    console.log(message);
+                                    if (message === "Order added!") {
+                                        $.post("/orders/addOrdercontent", {
+                                            orderID: orderID,
+                                            customerID: customer.customerID
+                                        }, function (addOrderContentMessage) {
+                                            console.log(addOrderContentMessage);
+                                            $.post("/emptyCart", {customerID: customerID}, function (emptyCartMsg) {
+                                                console.log(emptyCartMsg);
+                                                window.location.href = "confirmation.html";
+                                            });
+                                        });
+                                    }
+                                });
+                            });
+                        }
+                    });
+                }
+            });
         }
     });
 });
