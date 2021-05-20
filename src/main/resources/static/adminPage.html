@@ -23,7 +23,7 @@
 <div class="topnav">
     <div class ="contentWrap" >
         <div id="logOutAdmin" onclick="logOutAdmin()">
-            <button>Log out and go to frontpage</button>
+            <button>Sign out as admin</button>
         </div>
     </div>
 </div>
@@ -50,9 +50,10 @@
                     <li class='edit-product__line'><label for='price'>Price</label><input type='text' id='price' value=''/></li>
                     <li class='edit-product__line'><label for='imageURL'>ImageURL</label><input type='text' id='imageURL' value='' disabled/></li>
                 </ul>
+                <div id="inputalert"></div>
             </div>
             <div class="modal-footer">
-                <button type=button id="closingbutton" class='btn btn-secondary' data-dismiss="modal">Close</button>
+                <button type=button id="closingbutton" class='btn btn-secondary' data-dismiss="modal" onclick="clearInputfields()">Close</button>
                 <button type=button class='btn btn-primary' onclick='addProduct()'>Add new product</button>
                 </div>
             </div>

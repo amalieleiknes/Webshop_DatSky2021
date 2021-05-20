@@ -59,10 +59,11 @@ $(function() {
                                     "<li class='edit-product__line'><label for='price"+product.price+"'>Price</label><input type='text' id='price"+product.productID+"' value='"+product.price+"'/></li>" +
                                     "<li class='edit-product__line'><label for='imageURL"+product.imageURL+"'>ImageURL</label><input type='text' id='imageURL"+product.productID+"' value='"+product.imageURL+"' disabled/></li>" +
                                 "</ul>" +
+                                "<div id='inputalert"+product.productID+"'></div>" +
                             "</div>" +
                             "<div class=\"modal-footer\">" +
-                                "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>" +
-                                "<button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" onclick='changeProduct("+product.productID+")'>Save changes</button>" +
+                                "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\" id='closingbutton"+product.productID+"'>Close</button>" +
+                                "<button type=\"button\" class=\"btn btn-primary\" onclick='changeProduct("+product.productID+")'>Save changes</button>" +
                             "</div>" +
                         "</div>"+
                     "</div>"+
@@ -75,22 +76,38 @@ $(function() {
 
     // function to save changes to your product
     function changeProduct(productID){
-        const newInformation = {
-            productID        : $("#productID" + productID).val(),
-            productName      : $("#productName" + productID).val(),
-            shortDescription : $("#shortDescription" + productID).val(),
-            longDescription  : $("#longDescription" + productID).val(),
-            price            : $("#price" + productID).val(),
-            imageURL         : $("#imageURL" + productID).val()
-        };
 
-    $.post("/products/changeProduct", newInformation, function(result){
-        if(result === "Product updated!"){
-            viewProducts();
-        }else{
-            console.log("Resultat fra å endre produkt: ", result);
-        }
+        let productNameElement      = document.getElementById("productName"+productID);
+        let shortDescriptionElement = document.getElementById("shortDescription"+productID);
+        let longDescriptionElement  = document.getElementById("longDescription"+productID);
+        let priceElement            = document.getElementById("price"+productID);
+
+        if( isValid(productNameElement, "Name","inputalert"+productID) &&
+            isValid(shortDescriptionElement, "Short description", "inputalert"+productID) &&
+            isValid(longDescriptionElement, "Long description", "inputalert"+productID) &&
+            isValidNumber(priceElement, "Price", "inputalert"+productID)) {
+
+            const newInformation = {
+                productID        : $("#productID" + productID).val(),
+                productName      : $("#productName" + productID).val(),
+                shortDescription : $("#shortDescription" + productID).val(),
+                longDescription  : $("#longDescription" + productID).val(),
+                price            : $("#price" + productID).val(),
+                imageURL         : $("#imageURL" + productID).val()
+            };
+
+        $.post("/products/changeProduct", newInformation, function(result){
+            if(result === "Product updated!"){
+                console.log("Resultat fra å endre produkt: " + result);
+                viewProducts();
+                let closemodal = document.getElementById("closingbutton"+productID);
+                closemodal.click();
+            }else{
+                console.log("Resultat fra å endre produkt: ", result);
+            }
         })
+    }else{
+        }
     }
 
     // delete the selected line
@@ -109,33 +126,28 @@ $(function() {
         deleteCookie("adminpassword");
         deleteCookie("adminusername");
         window.location.href = "index.html";
-    };
-
-
+    }
 
     //Add new product
     function addProduct(){
-        const newProduct = {
-            productName      : $("#productName").val(),
-            shortDescription : $("#shortDescription").val(),
-            longDescription  : $("#longDescription").val(),
-            price            : $("#price").val(),
-            imageURL         : $("#imageURL").val()
-        };
+        let productNameElement      = $("#productName");
+        let shortDescriptionElement = $("#shortDescription");
+        let longDescriptionElement  = $("#longDescription");
+        let priceElement            = $("#price");
+        let imageURLElement         = $("#imageURL");
 
-        console.log("ImageURL: ",newProduct.imageURL);
+        if( isValid(productNameElement, "Name","inputalert") &&
+            isValid(shortDescriptionElement, "Short description","inputalert") &&
+            isValid(longDescriptionElement, "Long description","inputalert") &&
+            isValidNumber(priceElement, "Price","inputalert")) {
 
-        if(isNaN(newProduct.price)){
-            console.log("Not accepted price-value");
-            return;
-        }
-
-        if (newProduct.productName.length === 0 ||
-            newProduct.longDescription.length === 0||
-            newProduct.shortDescription.length === 0 ||
-            newProduct.price.length === 0){
-            console.log("Some fields are need to be filled in.");
-        }else{
+            const newProduct = {
+                productName      : productNameElement.val(),
+                shortDescription : shortDescriptionElement.val(),
+                longDescription  : longDescriptionElement.val(),
+                price            : priceElement.val(),
+                imageURL         : imageURLElement.val(),
+            };
             $.post("products/addProduct", newProduct, function(result){
                 if(result !== "Product added!"){
                     console.log("Could not add product (product is null)")
@@ -143,9 +155,55 @@ $(function() {
                     viewProducts();
                     let closemodal = document.getElementById("closingbutton");
                     closemodal.click();
+                    clearInputfields();
                 }
-                })
+            })
+            }else{
+            //wrong, do not post anything
         }
+    }
+
+    function isValidNumber(inputElement, elementName, errorMessageId){
+        if(/\S/.test(inputElement.value) && !isNaN(inputElement.value)){
+            // string is not empty, is a number and not just whitespace
+            $("#"+errorMessageId).fadeOut();
+            inputElement.classList.remove("input-alert");
+            //valid
+            return true;
+        }else{
+            $("#"+errorMessageId).fadeIn();
+            inputElement.classList.add("input-alert");
+            $("#"+errorMessageId).html('Field "' + elementName + '" does not have a number in it. Please write a price with numbers.');
+            return false;
+        }
+    }
+
+    function isValid(inputElement,elementName, errorMessageId){
+        console.log("InputElement: ", inputElement);
+        if(inputElement === null){
+            return  false;
+        }
+
+
+        if(inputElement.value.length > 0 && /\S/.test(inputElement.value)){
+            $("#"+errorMessageId).fadeOut();
+            inputElement.classList.remove("input-alert");
+            //valid
+            return true;
+        }else{
+            $("#"+errorMessageId).fadeIn();
+            inputElement.classList.add("input-alert");
+            $("#"+errorMessageId).html('Field "' + elementName + '" is not filled in.');
+            return false;
+        }
+    }
+
+    function clearInputfields(){
+        $("#productName").val('')
+        $("#shortDescription").val('')
+        $("#longDescription").val('')
+        $("#price").val('')
+        $("#imageURL").val('')
     }
 
 

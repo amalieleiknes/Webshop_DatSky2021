@@ -17,6 +17,7 @@
 .bottomnav {
     bottom: 0;
     overflow: hidden;
+    position: static;
 }
 
 .topnav a{
@@ -532,4 +533,8 @@ div#admproductContainer.admproductContainer {
     width: 30%;
     margin-right: 10%;
     float: right;
+}
+
+.input-alert{
+    border-color: red;
 }
