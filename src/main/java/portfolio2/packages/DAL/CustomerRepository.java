@@ -14,17 +14,21 @@ public class CustomerRepository {
     @Autowired
     public JdbcTemplate db;
 
+    // adding a customer to the database
     public String addCustomer(Customer customer) {
         String sql;
         try {
+            if(customer == null){
+                throw new InvalidCustomerException("Customer is null and can therefore not be added to the database");
+            }
             customer.setNewCustomerID();
             sql = "INSERT INTO Customer (customerID, firstname, lastname, address, zipcode, telephone, email, password) VALUES (?,?,?,?,?,?,?,?)";
 
             db.update(sql, customer.getCustomerID(), customer.getFirstname(), customer.getLastname(), customer.getAddress(),
                     customer.getZipcode(), customer.getTelephone(), customer.getEmail(), customer.getPassword());
         } catch (Exception e) {
-            System.out.println("Customer repository has an exception: " + e);
-            return "Something went wrong trying to add customer.";
+            System.out.println(e);
+            return null;
         }
         return "OK";
     }

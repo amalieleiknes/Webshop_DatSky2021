@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.*;
 import portfolio2.packages.DAL.ProductRepository;
+import portfolio2.packages.Exceptions.InvalidProductException;
 import portfolio2.packages.Objects.*;
 import portfolio2.packages.Validator.AdminValidator;
 
@@ -37,7 +38,7 @@ public class ProductController {
     }
 
     @PostMapping("/changeProduct")
-    public String changeProduct(Product product){
+    public String changeProduct(Product product) throws InvalidProductException {
         if(product == null){
             return "Product is null.";
         }
@@ -53,7 +54,7 @@ public class ProductController {
     }
 
     @GetMapping("/{productID}/getProduct")
-    public Product getProductByID(@PathVariable int productID){
+    public Product getProductByID(@PathVariable int productID) throws InvalidProductException {
         return repository.getProductByID(productID);
     }
 

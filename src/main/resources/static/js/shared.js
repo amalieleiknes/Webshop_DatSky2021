@@ -87,7 +87,7 @@ $(function() {
         logOut();
     });
 
-    // check admins login-info TODO: ikke bra sikkerhet. Bør sjekkes i java kanskje?
+    // if button is clicked, call on function to log in admin
     $("#adminlogOnbtn").click(function() {
         logOnAdmin();
     });
@@ -123,6 +123,7 @@ function getNumberOfCartItems() {
     }
 }
 
+// function to log out a customer
 function logOut(){
     $(location).attr('href', 'index.html');
     setCookie("email", null, 0);
@@ -134,6 +135,7 @@ function logOut(){
     location.reload();
 }
 
+//function to log on admin - first checking if the data is valid
 function logOnAdmin(){
     const adminusername = $("#adminusername").val();
     const adminpassword = $("#adminpassword").val();
@@ -164,6 +166,7 @@ function logOnAdmin(){
     }
 }
 
+// fucntion to show the dropdownmenu when clicked on
 function dropMenu() {
     document.getElementById("myDropdown").classList.toggle("showMenu");
 }

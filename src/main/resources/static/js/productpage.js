@@ -10,12 +10,9 @@ $(window).on('load', function(){
         let productcontent = document.getElementById("productcontent");
         let shoppingcartcontent = document.getElementById("productpageShoppingcart");
 
-        //TODO: finne ut om productID faktisk finnes slik at if-en nedenfor kan brukes (feks gjennom et GETkall)
-
         // getting the content of the product
         let content;
         if(product.name!=="") {
-            console.log("Inne i formater-produktinfo", product);
             content =
                 "<div class='product' style='width:80%; padding: 5px; display: inline-block; margin: 1.5%;'>" +
                     "<h2 class='card-title'>" + product.productName + "</h2>" +

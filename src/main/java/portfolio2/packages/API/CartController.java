@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.*;
 import portfolio2.packages.DAL.ProductRepository;
+import portfolio2.packages.Exceptions.InvalidProductException;
 import portfolio2.packages.Objects.Cart;
 import portfolio2.packages.Objects.Carts;
 import portfolio2.packages.Objects.Product;
@@ -47,7 +48,7 @@ public class CartController {
     }
 
     @PostMapping("/addToCart")
-    public String addToCart(String customerID, Integer productID) {
+    public String addToCart(String customerID, Integer productID) throws InvalidProductException {
         if (customerID.isEmpty() || customerID.isBlank()) {
             return "Not valid customerID";
         }

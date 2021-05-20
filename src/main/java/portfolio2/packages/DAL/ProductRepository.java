@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import portfolio2.packages.Exceptions.InvalidProductException;
+import portfolio2.packages.Objects.Customer;
 import portfolio2.packages.Objects.Product;
 
 import java.util.List;
@@ -55,17 +57,18 @@ public class ProductRepository {
     }
 
     public Product getProductByID(Integer productID){
-        String sql;
+        String sql = "SELECT * FROM Product WHERE productID = ?";
         try{
-            sql = "SELECT count(*) FROM Product WHERE productID = ?";
-            int productsFound = db.queryForObject(sql, Integer.class, productID);
-            if(productsFound == 0){
-                return null;
+            List<Product> products = db.query(sql, new BeanPropertyRowMapper<>(Product.class), productID);
+            if(products.size() == 0){
+                throw new InvalidProductException("ProductID does not exist.");
+            }
+            else{
+                return products.get(0);
             }
 
-            sql = "SELECT * FROM Product WHERE productID = ?";
-            return db.queryForObject(sql, new BeanPropertyRowMapper<>(Product.class), productID);
-        }catch(Exception e){
+        } catch (InvalidProductException e){
+            System.out.println(e);
             return null;
         }
     }
@@ -79,6 +82,4 @@ public class ProductRepository {
         }
         return "Product added!";
     }
-
-
 }
