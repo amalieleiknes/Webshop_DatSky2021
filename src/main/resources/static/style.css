@@ -85,7 +85,11 @@
     margin-top: 12%;
 }
 
-.show {
+.showMenu {
+    display: block;
+}
+
+.show{
     display: block;
 }
 
