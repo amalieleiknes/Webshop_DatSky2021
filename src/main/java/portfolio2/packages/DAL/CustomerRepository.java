@@ -41,23 +41,29 @@ public class CustomerRepository {
         }
     }
 
+    // getting a customer from the database based on their ID
     public Customer getCustomerByID(String customerID) {
-        if(customerID == null){
+        try{
+        if (customerID == null){
             return null;
         }
-        try{
+        else if (customerID.equals("0")){
+            throw new InvalidCustomerException("The customer {0} does not exist. Allowing this call will result in a selection of all Orders in the database");
+        }
+        else {
             String sql = "SELECT customerID, firstname, lastname, address, Customer.zipcode, city, telephone, email FROM Customer " +
                     "INNER JOIN City ON Customer.zipcode = City.zipcode " +
                     "WHERE customerID = ?";
             List<Customer> customers = db.query(sql, new BeanPropertyRowMapper<>(Customer.class), customerID);
 
-            if(customers.size() == 0){
+            if (customers.size() == 0) {
                 throw new InvalidCustomerException("There is no such customerID {" + customerID + "} in the database. " +
                         "The customerID-cookie has been tampered with.");
             }
 
             return customers.get(0);
-        }catch(InvalidCustomerException e){
+        }
+        }catch(Exception e){
             System.out.println(e);
             return null;
         }

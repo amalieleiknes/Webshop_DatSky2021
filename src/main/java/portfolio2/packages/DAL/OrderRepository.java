@@ -23,9 +23,7 @@ public class OrderRepository {
             String sql =    "SELECT * FROM `Order` " +
                             "ORDER BY customerID";
 
-            //TODO stopper her. Klarer ikke hent eut i nettleser?
-            List<Order> orders = db.query(sql, new BeanPropertyRowMapper<>(Order.class));
-            return orders;
+            return db.query(sql, new BeanPropertyRowMapper<>(Order.class));
         }catch(Exception e){
             return null;
         }

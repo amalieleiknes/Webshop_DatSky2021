@@ -38,13 +38,12 @@ public class CustomerController {
             return "Customer is null";
         }
         else{
+
+            // checking if the input is valid and that the email is not already in use
             boolean validEmail = CustomerValidator.validateEmail(customer.getEmail());
             boolean availableEmail = repository.checkAvailability(customer.getEmail());
             boolean validPassword = CustomerValidator.validatePassword(customer.getPassword());
             boolean validTelephone = CustomerValidator.validateTelephone(customer.getTelephone());
-
-            System.out.println(availableEmail);
-
 
             if(!validEmail){
                 return "Email is not valid";
@@ -73,12 +72,6 @@ public class CustomerController {
             mergeTempUser(customer, tempUserID);
             return customer.getCustomerID();
         }
-    }
-
-    // TODO: hva er denne til?
-    @PostMapping("/logOutCustomer")
-    public void logOutCustomer(String email){
-
     }
 
     @PostMapping("/checkZipcode")

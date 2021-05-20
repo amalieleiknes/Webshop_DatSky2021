@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.*;
 import portfolio2.packages.DAL.OrderRepository;
+import portfolio2.packages.Exceptions.InvalidCustomerException;
 import portfolio2.packages.Objects.*;
 import java.util.List;
 import java.util.UUID;
@@ -48,8 +49,13 @@ public class OrderController {
     }
 
     @PostMapping("/getOrdersByCustomer")
-    public List<Order> getOrdersByCustomer(String customerID){
-        return repository.getOrdersByCustomer(customerID);
+    public List<Order> getOrdersByCustomer(String customerID) throws InvalidCustomerException {
+        if(customerID.equals("0")){
+            throw new InvalidCustomerException("The customer {0} does not exist. Allowing this call will result in a selection of all Orders in the database");
+        }
+        else {
+            return repository.getOrdersByCustomer(customerID);
+        }
     }
 
     @PostMapping("/addOrdercontent")
