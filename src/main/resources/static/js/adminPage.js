@@ -130,11 +130,11 @@ $(function() {
 
     //Add new product
     function addProduct(){
-        let productNameElement      = $("#productName");
-        let shortDescriptionElement = $("#shortDescription");
-        let longDescriptionElement  = $("#longDescription");
-        let priceElement            = $("#price");
-        let imageURLElement         = $("#imageURL");
+        let productNameElement      = document.getElementById("productName")
+        let shortDescriptionElement = document.getElementById("shortDescription")
+        let longDescriptionElement  = document.getElementById("longDescription")
+        let priceElement            = document.getElementById("price")
+        let imageURLElement         = document.getElementById("imageURL")
 
         if( isValid(productNameElement, "Name","inputalert") &&
             isValid(shortDescriptionElement, "Short description","inputalert") &&
@@ -142,11 +142,11 @@ $(function() {
             isValidNumber(priceElement, "Price","inputalert")) {
 
             const newProduct = {
-                productName      : productNameElement.val(),
-                shortDescription : shortDescriptionElement.val(),
-                longDescription  : longDescriptionElement.val(),
-                price            : priceElement.val(),
-                imageURL         : imageURLElement.val(),
+                productName      : productNameElement.value,
+                shortDescription : shortDescriptionElement.value,
+                longDescription  : longDescriptionElement.value,
+                price            : priceElement.value,
+                imageURL         : imageURLElement.value,
             };
             $.post("products/addProduct", newProduct, function(result){
                 if(result !== "Product added!"){
@@ -183,7 +183,6 @@ $(function() {
         if(inputElement === null){
             return  false;
         }
-
 
         if(inputElement.value.length > 0 && /\S/.test(inputElement.value)){
             $("#"+errorMessageId).fadeOut();
