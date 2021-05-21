@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS Customer;
 DROP TABLE IF EXISTS `Order`;
 DROP TABLE IF EXISTS Ordercontent;
 DROP TABLE IF EXISTS `Product`;
+DROP TABLE IF EXISTS Image;
 SET FOREIGN_KEY_CHECKS = 1;
 
 
@@ -36,16 +37,20 @@ CREATE TABLE SPRING_SESSION_ATTRIBUTES (
 );
 
 CREATE INDEX SPRING_SESSION_ATTRIBUTES_IX1 ON SPRING_SESSION_ATTRIBUTES (SESSION_PRIMARY_ID);
-
 # Code from documentation ends here.
+
+
+CREATE TABLE Image (
+                                            imageID int,
+                                            IMAGE BLOB,
+                                            PRIMARY KEY (imageID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE City (
                                             zipcode VARCHAR (4) NOT NULL,
                                             city VARCHAR (30) NOT NULL,
                                             PRIMARY KEY (zipcode)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
 
 
 CREATE TABLE Customer (
@@ -81,6 +86,7 @@ CREATE TABLE `Product` (
                                         PRIMARY KEY (productID)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 CREATE TABLE Ordercontent (
                                           orderItemID INT (100) NOT NULL AUTO_INCREMENT,
                                           orderID VARCHAR (100) NOT NULL,
@@ -91,9 +97,12 @@ CREATE TABLE Ordercontent (
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+#INSERT INTO Image(`imageID`, IMAGE) VALUES
+#(1, LOAD_FILE(`src/main/resources/static/images/kaffe.jpg`)),
+#(2, LOAD_FILE(`src/main/resources/static/images/Shoppingcart.jpg`)),
+#(3, LOAD_FILE(`src/main/resources/static/images/Usericon.jpg`));
 
-
-#Inserting some test data for customers
+#Inserting test data for customers
 INSERT INTO `Customer` (`customerID`, `firstname`, `lastname`,
                         `address`, `zipcode`, `telephone`, `email`, `password`) VALUES
 ('1', 'Per', 'Hansen', 'Frognerveien 1', '0273', '97969594', 'per@mail.com', 'password'),

@@ -1,5 +1,6 @@
 "use strict";
 $(function() {
+    deleteCookie("orderID");
     // getting all products
     viewProducts();
 
