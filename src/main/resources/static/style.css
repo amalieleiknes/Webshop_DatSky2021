@@ -372,7 +372,7 @@ a.goToCheckout{
 .priceSummary{
     padding: 35px;
     margin-right: 5%;
-    width: 25%;
+    width: 30%;
     float: right;
     background: #c9dcef;
 }
@@ -409,6 +409,12 @@ a.goToCheckout{
     font-size: 20px;
     border-radius: 10px;
     width: 100%;
+    text-align: center;
+}
+
+.registrationError{
+    font-size: large;
+    color: red;
     text-align: center;
 }
 

@@ -11,7 +11,7 @@ $(function(){
 
     $.post("/orders/getOrdercontent", {orderID: orderID} ,function(orderContentList){
         let output =
-            "<h1>Order #"+orderID+"</h1>" +
+            "<h4>Order #"+orderID+"</h4>" +
             "<table class='table table-striped table-bordered'>" +
             "<tr>" +
             "<th>ProductID</th>" +

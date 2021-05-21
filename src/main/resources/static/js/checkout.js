@@ -29,97 +29,131 @@ $(function(){
             console.log("No cookie is set, making a new one and relocating: ", cookieTemp);
             location.reload();
         }
-
         else {
-            let todaysDate = new Date();
+            if(document.getElementById("firstname").value === "" ||
+            document.getElementById("lastname").value === "" ||
+            document.getElementById("address").value === "" ||
+            document.getElementById("zipcode").value === "" ||
+            document.getElementById("city").value === "" ||
+            document.getElementById("phone").value === "" ||
+            document.getElementById("email").value === ""){
+                document.getElementById("registrationError").innerHTML =
+                    "Error: Please enter your shipping information, all fields are required.";
+            }
+            else{
+                document.getElementById("registrationError").innerHTML = "";
+                let todaysDate = new Date();
 
-            // generating Order and Ordercontent
-            $.get("/orders/generateOrderID", function (orderID) {
-                console.log("OrderID: " + orderID);
-                setCookie("orderID", orderID, 1);
+                // generating Order and Ordercontent
+                $.get("/orders/generateOrderID", function (orderID) {
+                    console.log("OrderID: " + orderID);
+                    setCookie("orderID", orderID, 1);
 
-                //If user on website is not logged in, check for products in temporary cart
-                if (customer.customerID === null || customer.customerID.length === 0) {
-                    $.get("/getCartItems", {customerID: tempUserID}, function (products) {
+                    //If user on website is not logged in, check for products in temporary cart
+                    if (customer.customerID === null || customer.customerID.length === 0) {
+                        $.get("/getCartItems", {customerID: tempUserID}, function (products) {
 
-                        // if cart is empty, order can not be generated
-                        if(products.length === 0){
-                            console.log("Cart is empty, cannot make an order");
-                        }
-                        else {
-                            const newOrder = {
-                                orderID: orderID,
-                                orderDate: todaysDate,
-                                totalPrice: 0,
-                                amount: products.length,
-                                customerID: tempUserID
-                            };
+                            // if cart is empty, order can not be generated
+                            if(products.length === 0){
+                                document.getElementById("registrationError").innerHTML =
+                                    "Error: Cart is empty, order registration failed.";
+                                console.log("Cart is empty, cannot make an order");
+                            }
+                            else {
+                                const newOrder = {
+                                    orderID: orderID,
+                                    orderDate: todaysDate,
+                                    totalPrice: 0,
+                                    amount: products.length,
+                                    customerID: tempUserID
+                                };
 
-                            $.post("/orders/addOrder", newOrder, function (message) {
-                                console.log(message);
-                                if (message === "Order added!") {
-                                    $.post("/orders/addOrdercontent", {
-                                        orderID: orderID,
-                                        customerID: tempUserID
-                                    }, function (addOrdercontentMessage) {
-                                        console.log(addOrdercontentMessage);
-                                        window.location.href = "confirmation.html";
-                                        $.post("/emptyCart", {customerID: tempUserID}, function (emptyCartMsg) {
-                                            console.log(emptyCartMsg);
-
-                                        });
-                                    });
-                                }
-                            });
-                        }
-                    });
-                }
-
-                //If user is logged in, get products from customers cart
-                else {
-                    // check if userID is valid (a registered customer) if customer is logged in
-                    $.get("/customers/"+customerID, function(cust){
-                        console.log(cust);
-                        if(cust===""){
-                            console.log("This cookie has been changed or deleted, Please log out and try again.")
-                        }
-                        else{
-                            $.get("/getCartItems", {customerID: customer.customerID}, function (products) {
-
-                                // if cart is empty, order can not be generated
-                                if(products.length === 0){
-                                    console.log("Cart is empty, cannot make an order");
-                                }
-                                else {
-                                    const newOrder = {
-                                        orderID: orderID,
-                                        orderDate: todaysDate,
-                                        totalPrice: 0,
-                                        amount: products.length,
-                                        customerID: customer.customerID
-                                    };
-
-                                    $.post("/orders/addOrder", newOrder, function (message) {
-                                        console.log(message);
-                                        if (message === "Order added!") {
-                                            $.post("/orders/addOrdercontent", {
-                                                orderID: orderID,
-                                                customerID: customer.customerID
-                                            }, function (addOrderContentMessage) {
-                                                console.log(addOrderContentMessage);
-                                                $.post("/emptyCart", {customerID: customerID}, function (emptyCartMsg) {
+                                $.post("/orders/addOrder", newOrder, function (message) {
+                                    console.log(message);
+                                    if (message === "Order added!") {
+                                        $.post("/orders/addOrdercontent", {
+                                            orderID: orderID,
+                                            customerID: tempUserID
+                                        }, function (addOrdercontentMessage) {
+                                            if(addOrdercontentMessage === "Order content added!"){
+                                                console.log(addOrdercontentMessage);
+                                                window.location.href = "confirmation.html";
+                                                $.post("/emptyCart", {customerID: tempUserID}, function (emptyCartMsg) {
                                                     console.log(emptyCartMsg);
-                                                    window.location.href = "confirmation.html";
                                                 });
-                                            });
-                                        }
-                                    });
-                                }
-                            });
-                        }
-                    });
-                }
-            });
+                                            }
+                                            else{
+                                                document.getElementById("registrationError").innerHTML =
+                                                    "Error: Order registration failed. Please contact customer service.";
+                                            }
+                                        });
+                                    }
+                                    else{
+                                        document.getElementById("registrationError").innerHTML =
+                                            "Error: Order registration failed. Please contact customer service.";
+                                    }
+                                });
+                            }
+                        });
+                    }
+
+                    //If user is logged in, get products from customers cart
+                    else {
+                        // check if userID is valid (a registered customer) if customer is logged in
+                        $.get("/customers/"+customerID, function(cust){
+                            console.log(cust);
+                            if(cust===""){
+                                console.log("This cookie has been changed or deleted, Please log out and try again.")
+                            }
+                            else{
+                                $.get("/getCartItems", {customerID: customer.customerID}, function (products) {
+                                    // if cart is empty, order can not be generated
+                                    if(products.length === 0){
+                                        document.getElementById("registrationError").innerHTML =
+                                            "Error: Cart is empty, order registration failed.";
+                                        console.log("Cart is empty, cannot make an order");
+                                    }
+                                    else {
+                                        const newOrder = {
+                                            orderID: orderID,
+                                            orderDate: todaysDate,
+                                            totalPrice: 0,
+                                            amount: products.length,
+                                            customerID: customer.customerID
+                                        };
+
+                                        $.post("/orders/addOrder", newOrder, function (message) {
+                                            console.log(message);
+                                            if (message === "Order added!") {
+                                                $.post("/orders/addOrdercontent", {
+                                                    orderID: orderID,
+                                                    customerID: customer.customerID
+                                                }, function (addOrderContentMessage) {
+                                                    if(addOrderContentMessage === "Order content added!"){
+                                                        console.log(addOrderContentMessage);
+                                                        $.post("/emptyCart", {customerID: customerID}, function (emptyCartMsg) {
+                                                            console.log(emptyCartMsg);
+                                                            window.location.href = "confirmation.html";
+                                                        });
+                                                    }
+                                                    else{
+                                                        document.getElementById("registrationError").innerHTML =
+                                                            "Error: Order registration failed. Please contact customer service.";
+                                                    }
+                                                });
+                                            }
+                                            else{
+                                                document.getElementById("registrationError").innerHTML =
+                                                    "Error: Order registration failed. Please contact customer service.";
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
         }
     });
 
