@@ -80,7 +80,7 @@ CREATE TABLE `Product` (
                                         productID INT (11) NOT NULL AUTO_INCREMENT,
                                         productName VARCHAR (20) NOT NULL,
                                         shortDescription VARCHAR (100) NOT NULL,
-                                        longDescription VARCHAR (100) NOT NULL,
+                                        longDescription VARCHAR (200) NOT NULL,
                                         price FLOAT NOT NULL,
                                         imageURL VARCHAR (100),
                                         PRIMARY KEY (productID)

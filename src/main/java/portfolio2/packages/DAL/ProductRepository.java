@@ -48,7 +48,6 @@ public class ProductRepository {
     public List<Product> getProducts(){
         try{
             String sql = "SELECT * FROM Product";
-            //TODO
             return db.query(sql, new BeanPropertyRowMapper(Product.class));
         }catch(Exception e){
             return null;
@@ -68,6 +67,9 @@ public class ProductRepository {
 
         } catch (InvalidProductException e){
             System.out.println(e.getMessage());
+            return null;
+        } catch (Exception e){
+            System.out.println("Unknown exception: " + e.getMessage());
             return null;
         }
     }

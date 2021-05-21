@@ -16,17 +16,6 @@ public class ProductController {
     @Autowired
     ProductRepository repository;
 
-    //TODO: Slettes?
- /*   @GetMapping("/{productID}")
-    public Product getProductByID(@PathVariable int productID){
-        return ProductRegister.getProductByID(productID);
-    }
-*/
-/*    @GetMapping("/getShoppingcart")
-    public ArrayList<Product> getShoppingcart(){
-        return ShoppingCart.getProductList();
-    }*/
-
     @PostMapping("/deleteProduct")
     public String deleteProduct(Integer productID){
         System.out.println("ProductID er: " + productID);
@@ -49,17 +38,32 @@ public class ProductController {
 
     @GetMapping("/getProducts")
     public List<Product> getProducts(){
-        return repository.getProducts();
+        try {
+            return repository.getProducts();
+        } catch(Exception e){
+            System.out.println("Could not get products: " + e.getMessage());
+            return null;
+        }
     }
 
     @GetMapping("/{productID}/getProduct")
     public Product getProductByID(@PathVariable int productID){
-        return repository.getProductByID(productID);
+        try {
+            return repository.getProductByID(productID);
+        } catch(Exception e) {
+            System.out.println("Could not get product by ID: " + e.getMessage());
+            return null;
+        }
     }
 
     @GetMapping("/checkAdmin")
     public boolean checkAdminLogon(String username, String password){
-        return AdminValidator.validateAdmin(username, password);
+        try {
+            return AdminValidator.validateAdmin(username, password);
+        } catch(Exception e){
+            System.out.println("Could not validate admin");
+            return false;
+        }
     }
 
     @PostMapping("/addProduct")
@@ -74,7 +78,4 @@ public class ProductController {
                 product.getImageURL());
         return repository.addProduct(newProduct);
     }
-
-
-
 }

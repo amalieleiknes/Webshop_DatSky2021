@@ -144,12 +144,6 @@ img{
     vertical-align: middle;
 }
 
-/* Top-navigation-bar links on mouse-over */
-.topnav a:hover {
-    background-color: #1d3040;
-    text-decoration: none;
-}
-
 
 .left-side{
     width: 50%;

@@ -18,70 +18,90 @@ public class CustomerController {
     CustomerRepository repository;
 
     // getting one customer by ID
-    @GetMapping("/{customerID}")
+    @GetMapping("/{customerID}/getCustomer")
     public Customer getCustomerByID(@PathVariable String customerID) {
-        return repository.getCustomerByID(customerID);
+        try{
+            return repository.getCustomerByID(customerID);
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+
     }
 
     // getting all customers
     @GetMapping("/getCustomers")
     public List<Customer> getCustomers() {
-        return repository.getCustomers();
+        try{
+            return repository.getCustomers();
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
 
     @PostMapping("/addCustomer")
     public String addCustomer(Customer customer){
-        if(customer == null){
-            return "Customer is null";
-        }
-        else{
+        try {
+            if (customer == null) {
+                return "Customer is null";
+            } else {
 
-            // checking if the input is valid and that the email is not already in use
-            boolean validEmail = CustomerValidator.validateEmail(customer.getEmail());
-            boolean availableEmail = repository.checkAvailability(customer.getEmail());
-            boolean validPassword = CustomerValidator.validatePassword(customer.getPassword());
-            boolean validTelephone = CustomerValidator.validateTelephone(customer.getTelephone());
+                // checking if the input is valid and that the email is not already in use
+                boolean validEmail = CustomerValidator.validateEmail(customer.getEmail());
+                boolean availableEmail = repository.checkAvailability(customer.getEmail());
+                boolean validPassword = CustomerValidator.validatePassword(customer.getPassword());
+                boolean validTelephone = CustomerValidator.validateTelephone(customer.getTelephone());
 
-            if(!validEmail){
-                return "Email is not valid";
+                if (!validEmail) {
+                    return "Email is not valid";
+                } else if (!availableEmail) {
+                    return "Email is not available to use";
+                } else if (!validPassword) {
+                    return "Password is not valid";
+                } else if (!validTelephone) {
+                    return "Telephone is not valid";
+                } else {
+                    return repository.addCustomer(customer);
+                }
             }
-            else if(!availableEmail){
-                return "Email is not available to use";
-            }
-            else if(!validPassword){
-                return "Password is not valid";
-            }
-            else if(!validTelephone){
-                return "Telephone is not valid";
-            }
-            else{
-                return repository.addCustomer(customer);
-            }
+        } catch(Exception e){
+            System.out.println("Could not add customer: " + e);
+            return null;
         }
     }
 
     @PostMapping("/checkIfValidCustomerLoginInfo")
     public String checkIfValidCustomerLoginInfo(String email, String password, String tempUserID){
-        Customer customer = repository.checkIfValidCustomerLogin(email, password);
-        if (customer == null) {
-            return "FAIL";
-        } else {
-            mergeTempUser(customer, tempUserID);
-            return customer.getCustomerID();
+        try {
+            Customer customer = repository.checkIfValidCustomerLogin(email, password);
+            if (customer == null) {
+                return "FAIL";
+            } else {
+                mergeTempUser(customer, tempUserID);
+                return customer.getCustomerID();
+            }
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
         }
     }
 
     @PostMapping("/checkZipcode")
     public String checkZipcode(Customer customer){
-        String zipcode = customer.getZipcode();
-        List<String> list = repository.checkZipcode(zipcode);
+        try {
+            String zipcode = customer.getZipcode();
+            List<String> list = repository.checkZipcode(zipcode);
 
-        if(list.size()>0){
-            return "OK";
-        }
-        else{
-            return "Fail";
+            if (list.size() > 0) {
+                return "OK";
+            } else {
+                return "Fail";
+            }
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+            return "Could not check zipcode";
         }
     }
 

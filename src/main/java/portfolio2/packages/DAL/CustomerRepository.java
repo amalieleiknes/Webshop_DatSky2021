@@ -39,10 +39,10 @@ public class CustomerRepository {
         String sql;
         try {
             sql = "SELECT count(*) FROM Customer WHERE email = ?";
-            //TODO: fikse en exception for denne
             int customerFound = db.queryForObject(sql, Integer.class, email);
             return customerFound <= 0;
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }
@@ -63,14 +63,16 @@ public class CustomerRepository {
             List<Customer> customers = db.query(sql, new BeanPropertyRowMapper<>(Customer.class), customerID);
 
             if (customers.size() == 0) {
-                throw new InvalidCustomerException("There is no such customerID {" + customerID + "} in the database. " +
-                        "The customerID-cookie has been tampered with.");
+                throw new InvalidCustomerException("There is no such customerID {" + customerID + "} in the database. ");
             }
 
             return customers.get(0);
         }
-        }catch(Exception e){
+        }catch(InvalidCustomerException e){
             System.out.println(e.getMessage());
+            return null;
+        } catch(Exception a){
+            System.out.println("Unknown exception: " + a.getMessage());
             return null;
         }
     }
