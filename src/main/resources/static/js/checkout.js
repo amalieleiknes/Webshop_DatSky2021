@@ -2,6 +2,7 @@ $(function(){
     let customer = getCustomer();
     let tempUserID = getCookie("tempUserID");
     let customerID = getCookie("customerID");
+    $("#addressUpdated").hide();
 
     // if user is logged in - fill out the address-field automatically
     if(customerID!==""){
@@ -107,5 +108,9 @@ $(function(){
                 }
             });
         }
+    });
+
+    $("#updateAddress").click(function(){
+        $("#addressUpdated").show();
     });
 });

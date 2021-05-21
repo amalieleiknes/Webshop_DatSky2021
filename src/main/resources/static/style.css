@@ -408,7 +408,7 @@ a.goToCheckout{
     max-width: none;
 }
 
-.deliveryDetails{
+.deliveryDetails button{
     padding: 5px;
     border: none;
     cursor: pointer;
