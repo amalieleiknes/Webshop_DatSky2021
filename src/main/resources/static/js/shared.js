@@ -29,7 +29,7 @@ $(function() {
 
     else {
         content =
-            "<img src='images/Usericon.png' id='usericon' alt='shoppingcart' onclick='dropMenu()' width='70' height='70'>" +
+            "<img src='images/Usericon.png' id='usericon' alt='shoppingcart' onclick='dropMenu()' width='80' height='80'>" +
             "<div id='myDropdown' class='dropdown-content'>" +
                 "<button id='logOutbtn'>Log out</button>" +
                 "<a href='userPage.html' tabIndex=''>" +
@@ -107,7 +107,7 @@ function getNumberOfCartItems() {
 
             element.innerHTML =
                 "<img src='images/Shoppingcart.png' alt='shoppingcart' width='70' height='70'>" +
-                "<span style='font-size: 30px'>" + numberOfProducts + "</span>";
+                "<span style='font-size: 40px'>" + numberOfProducts + "</span>";
         });
 
     //User is logged in

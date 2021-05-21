@@ -50,7 +50,7 @@ $(function() {
                 let cardContent  =
                     "<div class='card' id='" + product.productID + "'>" +
                         "<div class='card-body' style='padding: 10px;'" +
-                            "<h5 class='card-title'>" + product.productName + "</h5>" +
+                            "<h5 class='card-title' id='productNameIndex'>" + product.productName + "</h5>" +
                             "</br>" +
                             "<img class='card-img' src= '" + product.imageURL + "' alt='img of a product' width='250' height='auto'/>" +
                             "</br>" +
