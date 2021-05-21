@@ -6,7 +6,7 @@ $(function(){
 
     // if user is logged in - fill out the address-field automatically
     if(customerID!==""){
-        $.get("/customers/"+customerID, function (Customer){
+        $.get("/customers/"+customerID+"/getCustomer", function (Customer){
             console.log("Setting shipping info...");
             document.getElementById("firstname").value = Customer.firstname;
             document.getElementById("lastname").value = (Customer.lastname);
