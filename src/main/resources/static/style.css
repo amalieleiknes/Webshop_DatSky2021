@@ -20,6 +20,10 @@
     position: static;
 }
 
+#orderHistory .h1{
+    font-size: 3.5rem;
+}
+
 .topnav a{
     color: white;
 }
@@ -33,6 +37,7 @@
     float: right;
     margin-right: 10%;
 }
+
 #usericon:hover {
     background-color: #6c98b4;
 }
