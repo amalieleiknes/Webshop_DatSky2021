@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="Stylesheet" type="text/css" href="style.css">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="js/utils/cookieUtils.js"></script>
+  <script src="js/checkoutOptions.js"></script>
+  <script src="js/shared.js"></script>
+  <script src="js/registerUser.js"></script>
+
+  <title>Webshop - checkout options</title>
+</head>
+
+<body>
+<div class="topnav">
+  <div class="left-side">
+    <div class="links">
+      <a href="index.html" tabindex="">
+        <div class="link">Browse products</div>
+      </a>
+      <a href="shoppingcart.html" class="active" tabindex="">
+        <div class="link">Shoppingcart</div>
+      </a>
+      <a href="checkout.html" tabindex="">
+        <div class="link">Checkout</div>
+      </a>
+    </div>
+  </div>
+
+  <div class ="right-side">
+
+    <a class="cartOverview" id="cartOverviewIcon" href="shoppingcart.html"><div id="cartOverview"></div></a>
+    <div id="userIconDropdownmenu"></div>
+
+    <span id='failedLogIn'>Incorrect logininfo</span>
+
+  </div>
+</div>
+
+<div class="content">
+  <div class="checkoutOptionsContent" id="checkoutOptionsContent">
+    <div class="optionsHeader" id="optionsHeader"><h4>Please choose one of the following options:</h4></div>
+    <div class="optionsLogInRegForms" id="optionsLogInRegForms"></div>
+    </br>
+    <div class="optionsBox">
+      <div class="optionDiv">
+        <div class="optionBtn">
+          <button id="optionLogInBtn">Log in as user</button>
+        </div>
+      </div>
+      </br>
+      <div class="optionDiv">
+        <div class="optionBtn">
+          <button id="optionRegisterBtn">Register as user</button>
+        </div>
+      </div>
+      </br>
+      <div class="optionDiv">
+        <div class="optionBtn">
+          <a class="optionGuestBtn" href="checkout.html">
+            <div id="optionGuestBtn" >Continue as guest</div>
+          </a>
+        </div>
+      </div>
+      </br>
+    </div>
+  </div>
+</div>
+
+<div class="bottomnav">
+  <div class ="left-side">
+    <p>Contact info: webshop@webshop.com</p>
+  </div>
+
+  <div class ="right-side">
+    <div class="nav">
+      <div class="adminLogInReg">
+        <input type="text" class="input" id="adminusername" placeholder="username" name="adminusername"/>
+        <input type="text" class="input" id="adminpassword" placeholder="password" name="adminpassword"/>
+        <button id="adminlogOnbtn">Log in as admin</button>
+        <br/>
+        <span id='adminfailedLogIn'>Incorrect logininfo</span>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

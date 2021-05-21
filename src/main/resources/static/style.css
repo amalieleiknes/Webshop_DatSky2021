@@ -282,9 +282,60 @@ a.goToCheckout{
     text-decoration: none;
 }
 
+/* checkoutOptions.html: */
+.checkoutOptionsContent {
+    padding: 5% 25%;
+}
+
+.optionsHeader{
+    text-align: center;
+}
+
+.optionsBox{
+    width: 100%;
+}
+
+.optionDiv{
+    width: 100%;
+}
+
+.optionBtn button, #optionGuestBtn{
+    padding: 5px;
+    margin-top: 25px;
+    border: none;
+    cursor: pointer;
+    background: #e77338;
+    color: #000000;
+    font-size: 20px;
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.optionBtn a{
+    text-decoration: none;
+    font-size: 20px;
+}
+
+#customerLogOnBtn{
+    padding: 9px;
+    border: none;
+    cursor: pointer;
+    background: #e77338;
+    color: #000000;
+    font-size: 17px;
+    border-radius: 10px;
+    width: 200px;
+    text-align: center;
+}
+
 /* checkout.html: */
 .checkoutcontent{
     padding: 20px;
+}
+
+.checkoutHeader{
+    width: 100%;
 }
 
 .checkoutCart{

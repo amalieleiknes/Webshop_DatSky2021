@@ -76,5 +76,13 @@ function customerAdded(cust){
         "t want to link your orders to your account. </h2>";
     let welcomeElement = document.getElementById("registerInfo");
     welcomeElement.innerHTML = content;
+
+    let contentLogIn =
+        "<div class='userLogIn'>" +
+        "<input type='text' class='input' id='customeremailOptions' placeholder='email' name='email'/>" +
+        "<input type='text' class='input' id='customerpasswordOptions' placeholder='password' name='password'/>" +
+        "<button class='customerLogIn' onclick='customerLogInFromOptions()' id='customerLogOnBtn'>Log in as user</button>" +
+        "</div>";
+    document.getElementById("optionsLogInRegForms").innerHTML = contentLogIn;
 }
 

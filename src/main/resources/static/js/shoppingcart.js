@@ -1,6 +1,8 @@
 $(function(){
     getShoppingcart();
     getTotalPrice();
+    let emailcookie = getCookie("email");
+    let customerIDcookie = getCookie("customerID");
 
     function getShoppingcart(){
         let customer = getCustomer();
@@ -80,6 +82,15 @@ $(function(){
             });
         }
     }
+
+    $("#goToCheckout").click(function(){
+        if (emailcookie === "" && customerIDcookie === ""){
+            window.location.href = "checkoutOptions.html";
+        }
+        else{
+            window.location.href = "checkout.html";
+        }
+    });
 
 
 
