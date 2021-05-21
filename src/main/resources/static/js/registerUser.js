@@ -42,7 +42,6 @@ function addCustomer(){
                 if (result === "OK") {
                     customerAdded(newCustomer);
 
-
                     // setting fields to empty after registering
                     $("#firstname").val("");
                     $("#lastname").val("");
@@ -54,7 +53,9 @@ function addCustomer(){
                     $("#pwdcheck").val("");
 
                 } else {
-                    console.log("Could not add customer (customer is null)");
+                    let welcomeElement = document.getElementById("registerInfo");
+                    welcomeElement.innerHTML = result;
+                    console.log(result);
                 }
             });
         }
@@ -75,5 +76,13 @@ function customerAdded(cust){
         "t want to link your orders to your account. </h2>";
     let welcomeElement = document.getElementById("registerInfo");
     welcomeElement.innerHTML = content;
+
+    let contentLogIn =
+        "<div class='userLogIn'>" +
+        "<input type='text' class='input' id='customeremailOptions' placeholder='email' name='email'/>" +
+        "<input type='text' class='input' id='customerpasswordOptions' placeholder='password' name='password'/>" +
+        "<button class='customerLogIn' onclick='customerLogInFromOptions()' id='customerLogOnBtn'>Log in as user</button>" +
+        "</div>";
+    document.getElementById("optionsLogInRegForms").innerHTML = contentLogIn;
 }
 

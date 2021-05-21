@@ -1,6 +1,6 @@
 /* CSS for top-navigation-bar */
 .topnav, .bottomnav{
-    background-color: #1d3064;
+    background-color: #293b6c;
     color: white;
     width: 100%;
     margin: 0;
@@ -16,10 +16,115 @@
 .bottomnav {
     bottom: 0;
     overflow: hidden;
+    position: static;
+}
+
+#productNameIndex {
+    font-size: 2rem;
+    font-family: "Arial Black", serif;
+}
+
+#productNameIndex p , #productNameIndex a, #productNameIndex button {
+    font-size: 1.3rem;
+    font-family: "Times New Roman", serif;
+}
+
+#orderHistory h1{
+    font-size: 3.5rem;
 }
 
 .topnav a{
     color: white;
+}
+
+.topnav .right-side{
+    width: 40%;
+    align-content: center;
+}
+
+#usericon {
+    float: right;
+    margin-right: 10%;
+    height: 100%;
+}
+
+img#usericon{
+    width: 75px;
+    height: 80px;
+}
+
+#usericon:hover {
+    background-color: #6c98b4;
+}
+
+#userIconDropdownmenu{
+    vertical-align: middle;
+}
+
+#cartOverviewIcon {
+    float: right;
+}
+
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+#logOutbtn{
+    margin-left: 15%;
+    margin-top: 10%;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #2c4d63;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #345068BA;
+    min-width: 110px;
+    overflow: auto;
+    box-shadow: 0 8px 16px 0 #00000051;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: #ececec;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {
+    background-color: #ddd;
+}
+
+.showMenu {
+    margin-left: 40%;
+    margin-top: 13.7%;
+}
+
+.showMenu {
+    display: block;
+}
+
+.show{
+    display: block;
+}
+
+#logOutAdmin {
+    float: right;
+    margin-right: 10%;
 }
 
 .cartOverview{
@@ -30,29 +135,18 @@
 }
 
 a.cartOverview{
-    color: black;
+    color: white;
     text-decoration: none;
-    font-size: 40px;
+    font-size: 50px;
 }
 
 img{
     vertical-align: middle;
 }
 
-/* Top-navigation-bar links on mouse-over */
-.topnav a:hover {
-    background-color: #1d3040;
-    text-decoration: none;
-}
-
-/* Active link */
-.topnav a.active {
-    background-color: #2a6cde;
-    text-decoration: none;
-}
 
 .left-side{
-    width: 40%;
+    width: 50%;
     float: left;
     position: relative;
     height: 100%;
@@ -60,10 +154,11 @@ img{
 }
 
 .right-side{
-    width: 60%;
+    width: 50%;
     float: right;
     position: relative;
     height: 100%;
+    text-decoration: none;
 }
 
 .topnav button, .bottomnav button{
@@ -111,7 +206,7 @@ img{
 .productSpecificationContainer {
     width: 50%;
     margin-left: 15%;
-    margin-top: 10%;
+    margin-top: 2%;
     margin-bottom: 10%;
 }
 
@@ -206,9 +301,60 @@ a.goToCheckout{
     text-decoration: none;
 }
 
+/* checkoutOptions.html: */
+.checkoutOptionsContent {
+    padding: 5% 25%;
+}
+
+.optionsHeader{
+    text-align: center;
+}
+
+.optionsBox{
+    width: 100%;
+}
+
+.optionDiv{
+    width: 100%;
+}
+
+.optionBtn button, #optionGuestBtn{
+    padding: 5px;
+    margin-top: 25px;
+    border: none;
+    cursor: pointer;
+    background: #e77338;
+    color: #000000;
+    font-size: 20px;
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.optionBtn a{
+    text-decoration: none;
+    font-size: 20px;
+}
+
+#customerLogOnBtn{
+    padding: 9px;
+    border: none;
+    cursor: pointer;
+    background: #e77338;
+    color: #000000;
+    font-size: 17px;
+    border-radius: 10px;
+    width: 200px;
+    text-align: center;
+}
+
 /* checkout.html: */
 .checkoutcontent{
     padding: 20px;
+}
+
+.checkoutHeader{
+    width: 100%;
 }
 
 .checkoutCart{
@@ -220,7 +366,7 @@ a.goToCheckout{
 .priceSummary{
     padding: 35px;
     margin-right: 5%;
-    width: 25%;
+    width: 30%;
     float: right;
     background: #c9dcef;
 }
@@ -260,6 +406,12 @@ a.goToCheckout{
     text-align: center;
 }
 
+.registrationError{
+    font-size: large;
+    color: red;
+    text-align: center;
+}
+
 .bottomCheckoutContent{
     width: 60%;
     float: left;
@@ -275,6 +427,10 @@ a.goToCheckout{
 
 .table td{
     border-top: none;
+}
+
+.tablewrapper{
+    max-width: none;
 }
 
 .deliveryDetails button{
@@ -388,10 +544,28 @@ a.goToCheckout{
 
 /* adminpage */
 
+#adminProductContainer {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+/*
 div#admproductContainer.admproductContainer {
     margin-left: 10%;
     width: 80%;
     float: left;
+}*/
+
+#admproductContainer {
+    max-width: 1056px;
+    margin: 0 auto;
+}
+
+.contentWrap {
+    max-width: 1056px;
+    float: right;
+    position: relative;
+    height: 100%;
 }
 
 .modifyProducts input {
@@ -403,23 +577,28 @@ div#admproductContainer.admproductContainer {
     width: 150px;
 }
 
-.modifyProducts table{
-
-}
-
-.admproductContainer button{
-    padding: 5px;
+.new-product{
+    padding: 10px;
     margin-top: 25px;
     border: none;
     cursor: pointer;
     background: #e77338;
     color: #000000;
     font-size: 20px;
-    border-radius: 10px;
-    width: 10%;
+    border-radius: 5px;
     text-align: center;
 }
 
+
+.edit-product{
+    padding: 10px;
+}
+
+.edit-product__line{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
 
 
 /* userpage */
@@ -434,4 +613,8 @@ div#admproductContainer.admproductContainer {
     width: 30%;
     margin-right: 10%;
     float: right;
+}
+
+.input-alert{
+    border-color: red;
 }

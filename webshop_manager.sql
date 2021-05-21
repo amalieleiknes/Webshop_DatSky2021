@@ -8,10 +8,11 @@ DROP TABLE IF EXISTS Customer;
 DROP TABLE IF EXISTS `Order`;
 DROP TABLE IF EXISTS Ordercontent;
 DROP TABLE IF EXISTS `Product`;
+DROP TABLE IF EXISTS Image;
 SET FOREIGN_KEY_CHECKS = 1;
 
 
-# Code below is borrowed from https://docs.spring.io/spring-session/docs/current/api/org/springframework/session/jdbc/JdbcIndexedSessionRepository.html. Downloaded 10.05.2021
+# //Code below is downloaded from https://docs.spring.io/spring-session/docs/current/api/org/springframework/session/jdbc/JdbcIndexedSessionRepository.html. Downloaded 10.05.2021
 CREATE TABLE SPRING_SESSION (
                                 PRIMARY_ID CHAR(36) NOT NULL,
                                 SESSION_ID CHAR(36) NOT NULL,
@@ -36,16 +37,20 @@ CREATE TABLE SPRING_SESSION_ATTRIBUTES (
 );
 
 CREATE INDEX SPRING_SESSION_ATTRIBUTES_IX1 ON SPRING_SESSION_ATTRIBUTES (SESSION_PRIMARY_ID);
+# //Code from documentation ends here.
 
-# Code from documentation ends here.
+
+CREATE TABLE Image (
+                                            imageID int,
+                                            IMAGE BLOB,
+                                            PRIMARY KEY (imageID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE City (
                                             zipcode VARCHAR (4) NOT NULL,
                                             city VARCHAR (30) NOT NULL,
                                             PRIMARY KEY (zipcode)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
 
 
 CREATE TABLE Customer (
@@ -75,11 +80,12 @@ CREATE TABLE `Product` (
                                         productID INT (11) NOT NULL AUTO_INCREMENT,
                                         productName VARCHAR (20) NOT NULL,
                                         shortDescription VARCHAR (100) NOT NULL,
-                                        longDescription VARCHAR (100) NOT NULL,
+                                        longDescription VARCHAR (200) NOT NULL,
                                         price FLOAT NOT NULL,
                                         imageURL VARCHAR (100),
                                         PRIMARY KEY (productID)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE Ordercontent (
                                           orderItemID INT (100) NOT NULL AUTO_INCREMENT,
@@ -91,9 +97,7 @@ CREATE TABLE Ordercontent (
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-
-
-#Inserting some test data for customers
+#//Inserting test data for customers
 INSERT INTO `Customer` (`customerID`, `firstname`, `lastname`,
                         `address`, `zipcode`, `telephone`, `email`, `password`) VALUES
 ('1', 'Per', 'Hansen', 'Frognerveien 1', '0273', '97969594', 'per@mail.com', 'password'),
@@ -101,32 +105,31 @@ INSERT INTO `Customer` (`customerID`, `firstname`, `lastname`,
 ('3', 'Lise', 'Luring', 'Løkkaveien 3', '0286', '81828384', 'lise@mail.com', 'password');
 
 
-# TODO: amount er misvisende. heller et annet ord for antall?
-# Inserting test data for orders
+# //Inserting test data for orders
 INSERT INTO `Order` (`orderID`, `orderDate`, `totalprice`, `amount`, `customerID`) VALUES
 ('00825529-0dd5-43e0-9ea7-dd36879dae0b', '2021-03-10 06:59:59', 0.00, 2, '1'),
 ('08825529-0dd5-43e0-9ea7-dd36879dae0b', '2021-04-10 12:34:08', 0.00, 2, '2'),
 ('09825529-0dd5-43e0-9ea7-dd36879dae0b', '2021-05-10 23:05:16', 0.00, 1, '3');
 
 
-#Inserting test data for products
+#//Inserting test data for products
 INSERT INTO `Product` (`productID`, `productName`, `shortDescription`,
                        `longDescription`, `price`, `imageURL`) VALUES
-(1, 'godKaffi', 'Ein god kaffi', 'Ein gooooood kaffi', 1000.00, '/images/kaffe.jpg'),
-(2, 'bedreKaffi', 'Beittre kaffi', 'Ein beittre kaffi', 2000.00, '/images/kaffe.jpg'),
-(3, 'besteKaffi', 'Beste kaffi', 'Den beste kaffi', 3000.00, '/images/kaffe.jpg');
+(1, 'Focaccia', 'A very good focaccia', 'This is the best focaccia you will ever taste. Made with love. And flour.', 1000.00, '/images/productpictures/product1.1.jpg'),
+(2, 'Cheeseplatter', 'The best cheeses', 'World famous goat cheese. Locally made mozzarella. Brown cheese from the high mountains of Norway. All topped with a special jam with figs to top the scale. You are welcome', 2000.00, '/images/productpictures/product2.1.jpg'),
+(3, 'Lime and mint', 'Essential for the mockito.', 'Recipe: 1. oz water, 1 lime, 1 mint leaf and 1 cup of ice. Sprinkle some sugar on top for an amazing experience', 3000.00, '/images/productpictures/product3.1.jpg');
 
 
-# Inserting test data for ordercontent
+# //Inserting test data for ordercontent
 INSERT INTO Ordercontent (`orderID`, `productID`, `productName`, `price`) VALUES
-('00825529-0dd5-43e0-9ea7-dd36879dae0b', 1, "kaffi", 100.00),
-('00825529-0dd5-43e0-9ea7-dd36879dae0b', 1, "kaffi", 200.00),
-('08825529-0dd5-43e0-9ea7-dd36879dae0b', 2, "kaffi", 200.00),
-('08825529-0dd5-43e0-9ea7-dd36879dae0b', 2, "kaffi", 100.00),
-('09825529-0dd5-43e0-9ea7-dd36879dae0b', 3, "kaffi", 100.00);
+('00825529-0dd5-43e0-9ea7-dd36879dae0b', 1, "Focaccia", 100.00),
+('00825529-0dd5-43e0-9ea7-dd36879dae0b', 1, "Focaccia", 200.00),
+('08825529-0dd5-43e0-9ea7-dd36879dae0b', 2, "Cheeseplatter", 200.00),
+('08825529-0dd5-43e0-9ea7-dd36879dae0b', 2, "Cheeseplatter", 100.00),
+('09825529-0dd5-43e0-9ea7-dd36879dae0b', 3, "Lime and mint", 100.00);
 
 
-# Inserting data for all zipcodes + cities in Norway
+# //Inserting data for all zipcodes + cities in Norway. Information is found from "Postnummertabell" in excel format, downloaded from URL: https://www.bring.no/tjenester/adressetjenester/postnummer (date: 14.05.2021)
 INSERT INTO `City` (`zipcode`, `city`) VALUES
 ('0001', 'OSLO'),
 ('0010', 'OSLO'),
@@ -5260,11 +5263,6 @@ INSERT INTO `City` (`zipcode`, `city`) VALUES
 ('9982', 'KONGSFJORD'),
 ('9990', 'BÅTSFJORD'),
 ('9991', 'BÅTSFJORD');
-
-
-
-
-
 
 
 UNLOCK TABLES;

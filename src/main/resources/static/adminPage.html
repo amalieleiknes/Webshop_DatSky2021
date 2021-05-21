@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <link rel="Stylesheet" type="text/css" href="style.css">
 
 <head>
@@ -9,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <script src="js/shared.js"></script>
+    <!--<script src="js/shared.js"></script>-->
     <script src="js/adminPage.js"></script>
     <script src="js/utils/cookieUtils.js"></script>
 
@@ -18,37 +19,51 @@
 </head>
 <body>
 
-<div class="topnav">
-    <div class="left-side">
-        <div class="links">
-            <a href="index.html" tabindex="">
-                <div class="link">Browse products</div>
-            </a>
-            <a href="shoppingcart.html" tabindex="">
-                <div class="link">Shoppingcart</div>
-            </a>
-            <a href="checkout.html" tabindex="">
-                <div class="link">Checkout</div>
-            </a>
-        </div>
-    </div>
 
-    <div class ="right-side">
-        <div id="nav">
+<div class="topnav">
+    <div class ="contentWrap" >
+        <div id="logOutAdmin" onclick="logOutAdmin()">
+            <button>Sign out as admin</button>
         </div>
-        <span id='failedLogIn'>Incorrect logininfo</span>
     </div>
 </div>
 
-<div class="admproductContainer" id="admproductContainer">
+
+<div id="admproductContainer">
+    <button id="newproductbutton" class="new-product" data-toggle='modal' data-target="#newProduct">Add new product</button>
+
+    <div class='modal fade' id='newProduct' tabindex='-1' role='dialog'>
+    <div class='modal-dialog' role='document'>
+        <div class='modal-content'>
+            <div class="modal-header">
+                <h1>Add new product</h1>
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type=button class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                    </button>
+                </div>
+            <div class="modal-body">
+                <ul class='edit-product'>
+                    <li class='edit-product__line'><label for='productName'>Name</label><input type='text' id='productName' value=''/></li>
+                    <li class='edit-product__line'><label for='shortDescription'>Short description</label><input type='text' id='shortDescription' value=''/></li>
+                    <li class='edit-product__line'><label for='longDescription'>Long description</label><input type='text' id='longDescription' value=''/></li>
+                    <li class='edit-product__line'><label for='price'>Price</label><input type='text' id='price' value=''/></li>
+                    <li class='edit-product__line'><label for='imageURL'>ImageURL</label><input type='text' id='imageURL' value='' disabled/></li>
+                </ul>
+                <div id="inputalert"></div>
+            </div>
+            <div class="modal-footer">
+                <button type=button id="closingbutton" class='btn btn-secondary' data-dismiss="modal" onclick="clearInputfields()">Close</button>
+                <button type=button class='btn btn-primary' onclick='addProduct()'>Add new product</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <br/><br/>
     <h2>Modify products</h2>
-    <button id="newProductline" onclick="newProductline()">Add product</button>
     <br/><br/>
-    <div id="modifyProducts">hei</div>
-
+    <div id="adminProductContainer"></div>
 </div>
-
 
 <div class="bottomnav">
 
@@ -58,16 +73,6 @@
 
     <div class ="right-side">
         <div class="nav">
-            <div class="adminLogInReg">
-
-                <input type="text" class="input" id="adminusername" placeholder="username" name="adminusername"/>
-                <input type="text" class="input" id="adminpassword" placeholder="password" name="adminpassword"/>
-                <button id="adminlogOnbtn">Log in as admin</button>
-                <br/>
-                <span id='adminfailedLogIn'>Incorrect logininfo</span>
-            </div>
-
-
         </div>
     </div>
 

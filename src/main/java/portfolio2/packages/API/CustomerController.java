@@ -5,6 +5,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.*;
 import portfolio2.packages.DAL.CustomerRepository;
 import portfolio2.packages.Objects.*;
+import portfolio2.packages.Validator.CustomerValidator;
 import java.util.List;
 
 
@@ -17,53 +18,90 @@ public class CustomerController {
     CustomerRepository repository;
 
     // getting one customer by ID
-    @GetMapping("/{customerID}")
-    public Customer getCustomerByID(@PathVariable String customerID){
-        return repository.getCustomerByID(customerID);
+    @GetMapping("/{customerID}/getCustomer")
+    public Customer getCustomerByID(@PathVariable String customerID) {
+        try{
+            return repository.getCustomerByID(customerID);
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+
     }
 
     // getting all customers
     @GetMapping("/getCustomers")
     public List<Customer> getCustomers() {
-        return repository.getCustomers();
+        try{
+            return repository.getCustomers();
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
+
 
     @PostMapping("/addCustomer")
     public String addCustomer(Customer customer){
-        if(customer == null){
-            return "FAIL";
+        try {
+            if (customer == null) {
+                return "Customer is null";
+            } else {
+
+                // checking if the input is valid and that the email is not already in use
+                boolean validEmail = CustomerValidator.validateEmail(customer.getEmail());
+                boolean availableEmail = repository.checkAvailability(customer.getEmail());
+                boolean validPassword = CustomerValidator.validatePassword(customer.getPassword());
+                boolean validTelephone = CustomerValidator.validateTelephone(customer.getTelephone());
+
+                if (!validEmail) {
+                    return "Email is not valid";
+                } else if (!availableEmail) {
+                    return "Email is not available to use";
+                } else if (!validPassword) {
+                    return "Password is not valid";
+                } else if (!validTelephone) {
+                    return "Telephone is not valid";
+                } else {
+                    return repository.addCustomer(customer);
+                }
+            }
+        } catch(Exception e){
+            System.out.println("Could not add customer: " + e);
+            return null;
         }
-        repository.addCustomer(customer);
-        return "OK";
     }
 
     @PostMapping("/checkIfValidCustomerLoginInfo")
     public String checkIfValidCustomerLoginInfo(String email, String password, String tempUserID){
-        Customer customer = repository.checkIfValidCustomerLogin(email, password);
-        if (customer == null) {
-            return "FAIL";
-        } else {
-            mergeTempUser(customer, tempUserID);
-            return customer.getCustomerID();
+        try {
+            Customer customer = repository.checkIfValidCustomerLogin(email, password);
+            if (customer == null) {
+                return "FAIL";
+            } else {
+                mergeTempUser(customer, tempUserID);
+                return customer.getCustomerID();
+            }
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
         }
-    }
-
-    // TODO: hva er denne til?
-    @PostMapping("/logOutCustomer")
-    public void logOutCustomer(String email){
-
     }
 
     @PostMapping("/checkZipcode")
     public String checkZipcode(Customer customer){
-        String zipcode = customer.getZipcode();
-        List<String> list = repository.checkZipcode(zipcode);
+        try {
+            String zipcode = customer.getZipcode();
+            List<String> list = repository.checkZipcode(zipcode);
 
-        if(list.size()>0){
-            return "OK";
-        }
-        else{
-            return "Fail";
+            if (list.size() > 0) {
+                return "OK";
+            } else {
+                return "Fail";
+            }
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+            return "Could not check zipcode";
         }
     }
 

@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import portfolio2.packages.Exceptions.InvalidOrderException;
 import portfolio2.packages.Objects.Order;
 import portfolio2.packages.Objects.OrderLine;
 import portfolio2.packages.Objects.Product;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +23,7 @@ public class OrderRepository {
             String sql =    "SELECT * FROM `Order` " +
                             "ORDER BY customerID";
 
-            //TODO stopper her. Klarer ikke hent eut i nettleser?
-            List<Order> orders = db.query(sql, new BeanPropertyRowMapper<>(Order.class));
-            return orders;
+            return db.query(sql, new BeanPropertyRowMapper<>(Order.class));
         }catch(Exception e){
             return null;
         }
@@ -37,28 +35,26 @@ public class OrderRepository {
             String sql =    "SELECT * FROM `Order` " +
                             "WHERE customerID = ?";
 
-            List<Order> orders = db.query(sql, new BeanPropertyRowMapper<>(Order.class), customerID);
-            return orders;
+            return db.query(sql, new BeanPropertyRowMapper<>(Order.class), customerID);
         } catch(Exception e){
-            System.out.println("getOrdersByCustomer - catch: " + e.getMessage());
+            System.out.println(e.getMessage());
             return null;
         }
     }
 
     // getting one order based on orderID
     public Order getOrderByID(String orderID){
-        String sql;
-        int orderFound;
+        String sql = "SELECT * FROM `Order` WHERE orderID = ?";
         try{
-            sql = "SELECT count(*) FROM `Order` WHERE orderID = ?";
-            orderFound = db.queryForObject(sql, Integer.class, orderID);
-            if(orderFound == 0){
-                return null;
+            List<Order> orders = db.query(sql, new BeanPropertyRowMapper<>(Order.class), orderID);
+
+            if(orders.size() == 0){
+                throw new InvalidOrderException("OrderID does not exist.");
             }
-            sql = "SELECT * FROM `Order` WHERE orderID = ?";
-            return db.queryForObject(sql,new BeanPropertyRowMapper<>(Order.class), orderID);
-        }catch(Exception e){
-            System.out.println("getOrderByID: Catch: " + e.getMessage());
+
+            return orders.get(0);
+        } catch(InvalidOrderException e){
+            System.out.println(e.getMessage());
             return null;
         }
     }
@@ -118,6 +114,8 @@ public class OrderRepository {
         }
     }
 
+
+    // TODO: kan dette slettes?
     //Method that checks if an integer is used as orderID in the database, and returns the integer if not
     //Denne fungerer foreløpig ikke, klarer ikke å hente ut fra databasen virker det som, så kommenterer den ut og
     // bruker randomUUID i Controlleren i stedet

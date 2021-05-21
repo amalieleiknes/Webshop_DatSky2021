@@ -8,6 +8,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="js/utils/cookieUtils.js"></script>
     <script src="js/shoppingcart.js"></script>
     <script src="js/shared.js"></script>
@@ -16,27 +19,22 @@
 </head>
 
 <body>
-    <div class="topnav">
-        <div class="left-side">
-            <div class="links">
-                <a href="index.html" tabindex="">
-                    <div class="link">Browse products</div>
-                </a>
-                <a href="shoppingcart.html" class="active" tabindex="">
-                    <div class="link">Shoppingcart</div>
-                </a>
-                <a href="checkout.html" tabindex="">
-                    <div class="link">Checkout</div>
-                </a>
-            </div>
-        </div>
-
-        <div class ="right-side">
-            <div id="nav">
-            </div>
-            <span id='failedLogIn'>Incorrect logininfo</span>
-        </div>
+<div class="topnav">
+    <div class="left-side">
+        <a href="index.html" tabindex="1">
+            <img class='logoImg' src='images/LOGO.PNG' alt='webshopcatering-logo' width='150' height='auto'/>
+        </a>
     </div>
+
+    <div class ="right-side">
+
+        <a class="cartOverview" id="cartOverviewIcon" href="shoppingcart.html"><div id="cartOverview"></div></a>
+        <div id="userIconDropdownmenu"></div>
+
+        <span id='failedLogIn'>Incorrect logininfo</span>
+
+    </div>
+</div>
 
     <div class="content">
         <div class="cart">
@@ -48,7 +46,7 @@
                     <h3><div id="totalCost"></div></h3>
                 </div>
                 <div class="right-side">
-                        <a class="goToCheckout" href="checkout.html">
+                        <a class="goToCheckout">
                             <div id="goToCheckout" >Go to checkout</div>
                         </a>
                 </div>

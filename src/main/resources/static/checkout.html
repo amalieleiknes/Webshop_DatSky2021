@@ -19,28 +19,23 @@
 
 <div class="topnav">
     <div class="left-side">
-        <div class="links">
-            <a href="index.html" tabindex="">
-                <div class="link">Browse products</div>
-            </a>
-            <a href="shoppingcart.html" tabindex="">
-                <div class="link">Shoppingcart</div>
-            </a>
-            <a href="checkout.html" class="active" tabindex="">
-                <div class="link">Checkout</div>
-            </a>
-        </div>
+        <a href="index.html" tabindex="1">
+            <img class='logoImg' src='images/LOGO.PNG' alt='webshopcatering-logo' width='150' height='auto'/>
+        </a>
     </div>
 
     <div class ="right-side">
-        <div id="nav">
-        </div>
+
+        <a class="cartOverview" id="cartOverviewIcon" href="shoppingcart.html"><div id="cartOverview"></div></a>
+        <div id="userIconDropdownmenu"></div>
+
         <span id='failedLogIn'>Incorrect logininfo</span>
+
     </div>
 </div>
 
 <div class="checkoutcontent">
-    <h1>Checkout</h1>
+    <div class="checkoutHeader"><h1>Checkout</h1></div>
     <div class="checkoutCart">
         <h2>Items in cart</h2>
         <div id="itemsInCart"></div>
@@ -67,28 +62,31 @@
         <div class="registerOrder">
             <button id="registerOrderBtn">Register and pay</button>
         </div>
+        </br>
+        <div class="registrationError" id="registrationError"></div>
     </div>
     <div class="bottomCheckoutContent">
         <div class="deliveryDetails">
             <h2>Shipping address</h2>
             <table class='table'>
                 <tr>
-                    <td><input type='text' id="firstname" value="First name"/></td>
-                    <td><input type='text' id="lastname" value="Last name"/></td>
+                    <td><input type='text' id="firstname" placeholder="First name"/></td>
+                    <td><input type='text' id="lastname" placeholder="Last name"/></td>
                 </tr>
                 <tr>
-                    <td><input type='text' id="address" value="Street address"/></td>
+                    <td><input type='text' id="address" placeholder="Street address"/></td>
                 </tr>
                 <tr>
-                    <td><input type='text' id="zipcode" value="Zip code"/></td>
-                    <td><input type='text' id="city" value="City"/></td>
+                    <td><input type='text' id="zipcode" placeholder="Zip code"/></td>
+                    <td><input type='text' id="city" placeholder="City"/></td>
                 </tr>
                 <tr>
-                    <td><input type='text' id="phone" value="Phone"/></td>
-                    <td><input type='text' id="email" value="Email address"/></td>
+                    <td><input type='text' id="phone" placeholder="Phone"/></td>
+                    <td><input type='text' id="email" placeholder="Email address"/></td>
                 </tr>
                 <tr>
                     <td><button id="updateAddress">Update shipping address</button></td>
+                    <td><span id="addressUpdated">Address updated successfully!</span></td>
                 </tr>
             </table>
         </div>

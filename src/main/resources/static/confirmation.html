@@ -10,7 +10,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="js/utils/cookieUtils.js"></script>
     <script src="js/confirmation.js"></script>
-    <script src="js/checkout.js"></script>
     <script src="js/shared.js"></script>
 
     <title>Webshop - order confirmation</title>
@@ -19,23 +18,18 @@
 
 <div class="topnav">
     <div class="left-side">
-        <div class="links">
-            <a href="index.html" tabindex="">
-                <div class="link">Browse products</div>
-            </a>
-            <a href="shoppingcart.html" tabindex="">
-                <div class="link">Shoppingcart</div>
-            </a>
-            <a href="checkout.html" class="active" tabindex="">
-                <div class="link">Checkout</div>
-            </a>
-        </div>
+        <a href="index.html" tabindex="1">
+            <img class='logoImg' src='images/LOGO.PNG' alt='webshopcatering-logo' width='150' height='auto'/>
+        </a>
     </div>
 
     <div class ="right-side">
-        <div id="nav">
-        </div>
+
+        <a class="cartOverview" id="cartOverviewIcon" href="shoppingcart.html"><div id="cartOverview"></div></a>
+        <div id="userIconDropdownmenu"></div>
+
         <span id='failedLogIn'>Incorrect logininfo</span>
+
     </div>
 </div>
 
@@ -44,10 +38,6 @@
         <div class="confHeader">
             <h2>Thank you for your order!</h2>
         </div>
-        <div class="confOrderID">
-            <div class="orderConfText">OrderID: </div>
-            <div class="orderConfValue" id="confOrderIDValue"></div>
-        </div>
         </br>
         <div class="confOrderDate">
             <div class="orderConfText">Order date: </div>
@@ -55,7 +45,7 @@
         </div>
         </br>
         <div class="confAmount">
-            <div class="orderConfText">Amount of products: </div>
+            <div class="orderConfText">Number of products: </div>
             <div class="orderConfValue" id="confOrderAmountValue"></div>
         </div>
         </br>
@@ -66,7 +56,6 @@
         </br>
         <div class="confOrdercontent">
             <div class="confOrdercontentHeader">
-                <h4>Order content: </h4>
             </div>
             </br>
             <div id="itemsInOrder"></div>

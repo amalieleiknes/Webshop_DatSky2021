@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import portfolio2.packages.Exceptions.InvalidProductException;
 import portfolio2.packages.Objects.Product;
-
 import java.util.List;
 
 @Repository
@@ -14,11 +14,25 @@ public class ProductRepository {
     @Autowired
     JdbcTemplate db;
 
+    public String deleteProduct(Integer productID){
+        if(productID == null){
+            return "ProductID is null.";
+        }
+        try{
+            String sql = "DELETE FROM Product WHERE productID = ?";
+            db.update(sql, productID);
+        }catch(Exception e){
+            return "Could not delete selected product.";
+        }
+        return "OK. Product deleted.";
+    }
+
     public String changeProductByID(Product product){
         String sql;
         int productFound;
         try{
             sql = "SELECT count(*) FROM Product WHERE productID = ?";
+            //TODO
             productFound = db.queryForObject(sql, Integer.class, product.getProductID());
             if(productFound == 0){
                 return "No product matching in database";
@@ -34,25 +48,28 @@ public class ProductRepository {
     public List<Product> getProducts(){
         try{
             String sql = "SELECT * FROM Product";
-            List<Product> products = db.query(sql, new BeanPropertyRowMapper(Product.class));
-            return products;
+            return db.query(sql, new BeanPropertyRowMapper(Product.class));
         }catch(Exception e){
             return null;
         }
     }
 
     public Product getProductByID(Integer productID){
-        String sql;
+        String sql = "SELECT * FROM Product WHERE productID = ?";
         try{
-            sql = "SELECT count(*) FROM Product WHERE productID = ?";
-            int productsFound = db.queryForObject(sql, Integer.class, productID);
-            if(productsFound == 0){
-                return null;
+            List<Product> products = db.query(sql, new BeanPropertyRowMapper<>(Product.class), productID);
+            if(products.size() == 0){
+                throw new InvalidProductException("ProductID does not exist.");
+            }
+            else{
+                return products.get(0);
             }
 
-            sql = "SELECT * FROM Product WHERE productID = ?";
-            return db.queryForObject(sql, new BeanPropertyRowMapper<>(Product.class), productID);
-        }catch(Exception e){
+        } catch (InvalidProductException e){
+            System.out.println(e.getMessage());
+            return null;
+        } catch (Exception e){
+            System.out.println("Unknown exception: " + e.getMessage());
             return null;
         }
     }
@@ -66,6 +83,4 @@ public class ProductRepository {
         }
         return "Product added!";
     }
-
-
 }

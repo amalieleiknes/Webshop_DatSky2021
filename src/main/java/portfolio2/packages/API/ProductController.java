@@ -5,6 +5,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.*;
 import portfolio2.packages.DAL.ProductRepository;
 import portfolio2.packages.Objects.*;
+import portfolio2.packages.Validator.AdminValidator;
 import java.util.List;
 
 @RestController
@@ -15,17 +16,54 @@ public class ProductController {
     @Autowired
     ProductRepository repository;
 
+    @PostMapping("/deleteProduct")
+    public String deleteProduct(Integer productID){
+        System.out.println("ProductID er: " + productID);
+        if(productID == null){
+            return "No productID was found.";
+        }
+       return repository.deleteProduct(productID);
+    }
+
+    @PostMapping("/changeProduct")
+    public String changeProduct(Product product){
+        if(product == null){
+            return "Product is null.";
+        }
+        if(getProductByID(product.getProductID()) == null){
+            return "Can't find product in database.";
+        }
+        return repository.changeProductByID(product);
+    }
+
     @GetMapping("/getProducts")
     public List<Product> getProducts(){
-        return repository.getProducts();
+        try {
+            return repository.getProducts();
+        } catch(Exception e){
+            System.out.println("Could not get products: " + e.getMessage());
+            return null;
+        }
     }
 
     @GetMapping("/{productID}/getProduct")
-    public Product getProductByID(@PathVariable Integer productID){
-        if(productID == null){
+    public Product getProductByID(@PathVariable int productID){
+        try {
+            return repository.getProductByID(productID);
+        } catch(Exception e) {
+            System.out.println("Could not get product by ID: " + e.getMessage());
             return null;
         }
-        return repository.getProductByID(productID);
+    }
+
+    @GetMapping("/checkAdmin")
+    public boolean checkAdminLogon(String username, String password){
+        try {
+            return AdminValidator.validateAdmin(username, password);
+        } catch(Exception e){
+            System.out.println("Could not validate admin");
+            return false;
+        }
     }
 
     @PostMapping("/addProduct")
@@ -40,16 +78,4 @@ public class ProductController {
                 product.getImageURL());
         return repository.addProduct(newProduct);
     }
-
-    @PostMapping("/changeProduct")
-    public String changeProduct(Product product){
-        if(product == null){
-            return "Product is null.";
-        }
-        if(getProductByID(product.getProductID()) == null){
-            return "Can't find product in database.";
-        }
-        return repository.changeProductByID(product);
-    }
-
 }
