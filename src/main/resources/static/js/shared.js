@@ -117,7 +117,7 @@ function getNumberOfCartItems() {
             let element = document.getElementById("cartOverview");
 
             element.innerHTML =
-                "<img src='images/Shoppingcart.png' alt='shoppingcart' width='50' height='50'>" +
+                "<img src='images/Shoppingcart.png' alt='shoppingcart' width='80' height='80'>" +
                 "<span style='font-size: 30px'>" + numberOfProducts + "</span>";
         });
     }
