@@ -19,7 +19,6 @@ $(function(){
     }
 
     $("#registerOrderBtn").click(function(){
-
         // if no ID is set/ cookie with ID is deleted --> generate a new one
         if(customerID==="" && tempUserID==="") {
             deleteCookie("email");
@@ -42,30 +41,37 @@ $(function(){
                 //If user on website is not logged in, check for products in temporary cart
                 if (customer.customerID === null || customer.customerID.length === 0) {
                     $.get("/getCartItems", {customerID: tempUserID}, function (products) {
-                        const newOrder = {
-                            orderID: orderID,
-                            orderDate: todaysDate,
-                            totalPrice: 0,
-                            amount: products.length,
-                            customerID: tempUserID
-                        };
 
-                        $.post("/orders/addOrder", newOrder, function (message) {
-                            console.log(message);
-                            if (message === "Order added!") {
-                                $.post("/orders/addOrdercontent", {
-                                    orderID: orderID,
-                                    customerID: tempUserID
-                                }, function (addOrdercontentMessage) {
-                                    console.log(addOrdercontentMessage);
-                                    window.location.href = "confirmation.html";
-                                    $.post("/emptyCart", {customerID: tempUserID}, function (emptyCartMsg) {
-                                        console.log(emptyCartMsg);
+                        // if cart is empty, order can not be generated
+                        if(products.length === 0){
+                            console.log("Cart is empty, cannot make an order");
+                        }
+                        else {
+                            const newOrder = {
+                                orderID: orderID,
+                                orderDate: todaysDate,
+                                totalPrice: 0,
+                                amount: products.length,
+                                customerID: tempUserID
+                            };
 
+                            $.post("/orders/addOrder", newOrder, function (message) {
+                                console.log(message);
+                                if (message === "Order added!") {
+                                    $.post("/orders/addOrdercontent", {
+                                        orderID: orderID,
+                                        customerID: tempUserID
+                                    }, function (addOrdercontentMessage) {
+                                        console.log(addOrdercontentMessage);
+                                        window.location.href = "confirmation.html";
+                                        $.post("/emptyCart", {customerID: tempUserID}, function (emptyCartMsg) {
+                                            console.log(emptyCartMsg);
+
+                                        });
                                     });
-                                });
-                            }
-                        });
+                                }
+                            });
+                        }
                     });
                 }
 
@@ -79,29 +85,36 @@ $(function(){
                         }
                         else{
                             $.get("/getCartItems", {customerID: customer.customerID}, function (products) {
-                                const newOrder = {
-                                    orderID: orderID,
-                                    orderDate: todaysDate,
-                                    totalPrice: 0,
-                                    amount: products.length,
-                                    customerID: customer.customerID
-                                };
 
-                                $.post("/orders/addOrder", newOrder, function (message) {
-                                    console.log(message);
-                                    if (message === "Order added!") {
-                                        $.post("/orders/addOrdercontent", {
-                                            orderID: orderID,
-                                            customerID: customer.customerID
-                                        }, function (addOrderContentMessage) {
-                                            console.log(addOrderContentMessage);
-                                            $.post("/emptyCart", {customerID: customerID}, function (emptyCartMsg) {
-                                                console.log(emptyCartMsg);
-                                                window.location.href = "confirmation.html";
+                                // if cart is empty, order can not be generated
+                                if(products.length === 0){
+                                    console.log("Cart is empty, cannot make an order");
+                                }
+                                else {
+                                    const newOrder = {
+                                        orderID: orderID,
+                                        orderDate: todaysDate,
+                                        totalPrice: 0,
+                                        amount: products.length,
+                                        customerID: customer.customerID
+                                    };
+
+                                    $.post("/orders/addOrder", newOrder, function (message) {
+                                        console.log(message);
+                                        if (message === "Order added!") {
+                                            $.post("/orders/addOrdercontent", {
+                                                orderID: orderID,
+                                                customerID: customer.customerID
+                                            }, function (addOrderContentMessage) {
+                                                console.log(addOrderContentMessage);
+                                                $.post("/emptyCart", {customerID: customerID}, function (emptyCartMsg) {
+                                                    console.log(emptyCartMsg);
+                                                    window.location.href = "confirmation.html";
+                                                });
                                             });
-                                        });
-                                    }
-                                });
+                                        }
+                                    });
+                                }
                             });
                         }
                     });
