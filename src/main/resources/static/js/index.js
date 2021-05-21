@@ -55,7 +55,7 @@ $(function() {
                             "<img class='card-img' src= '" + product.imageURL + "' alt='img of a product' width='250' height='auto'/>" +
                             "</br>" +
                             "<p class='card-description'>" + product.shortDescription + "</p>" +
-                            "<p class='card-price'>" + product.price + ",-</p>" +
+                            "<p class='card-price'>" + product.price + " NOK</p>" +
                             "<div class='button-wrapper'>" +
                                 "<a id='goToProduct' href='productpage.html?productID=" + product.productID + "' class='btn btn-primary'>Go to product</a>" +
                                 "<button class='btn btn-primary' id='buttonaddcart' onclick='addToCart("+product.productID+")' value='" + product.productID + "'>Add to cart</button>" +

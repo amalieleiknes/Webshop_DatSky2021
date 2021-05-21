@@ -33,7 +33,7 @@ $(function() {
             "<div id='myDropdown' class='dropdown-content'>" +
                 "<button id='logOutbtn'>Log out</button>" +
                 "<a href='userPage.html' tabIndex=''>" +
-                "<div class='link'>See orderhistory</div></a>" +
+                "<div class='link'>See order history</div></a>" +
             "</div>";
 
     }

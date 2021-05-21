@@ -15,7 +15,7 @@ $(function(){
             "<table class='table table-striped table-bordered'>" +
             "<tr>" +
             "<th>ProductID</th>" +
-            "<th>Product Name</th>" +
+            "<th>Product name</th>" +
             "<th>Price</th>" +
             "</tr>";
 
@@ -27,7 +27,7 @@ $(function(){
                 "<tr>" +
                 "<td>" + orderContentList[i].productID + "</td>" +
                 "<td>" + orderContentList[i].productName + "</td>" +
-                "<td>" + orderContentList[i].price + "</td>" +
+                "<td>" + orderContentList[i].price + " NOK" + "</td>" +
                 "</tr>";
         }
         output += "</table>";
