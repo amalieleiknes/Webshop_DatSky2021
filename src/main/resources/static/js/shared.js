@@ -34,6 +34,7 @@ $(function() {
                 "<button id='logOutbtn'>Log out</button>" +
                 "<a href='userPage.html' tabIndex=''>" +
                 "<div class='link'>See order history</div></a>" +
+                "<div>Logged in as "+emailcookie+"</div>" +
             "</div>";
 
     }
