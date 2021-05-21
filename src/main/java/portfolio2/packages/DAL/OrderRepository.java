@@ -90,7 +90,6 @@ public class OrderRepository {
             }
                 try {
                     for (OrderLine orderline : orderContent) {
-                        System.out.println("addOrderContent - orderline: " + orderline);
                         sql = "INSERT INTO Ordercontent (orderID, productID, productName, price) VALUES (?,?,?,?)";
                         db.update(sql, orderID, orderline.getProductID(), orderline.getProductName(), orderline.getPrice());
                     }
