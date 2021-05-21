@@ -18,7 +18,7 @@ public class Product {
         this.longDescription = longDescription;
         this.price = price;
         if(imageURL.isBlank() || imageURL.isEmpty()){
-            this.imageURL = "/images/kaffe.jpg";
+            this.imageURL = "/images/missingImage.png";
         }else {
             this.imageURL = imageURL;
         }

@@ -100,7 +100,7 @@ $(function(){
                     //If user is logged in, get products from customers cart
                     else {
                         // check if userID is valid (a registered customer) if customer is logged in
-                        $.get("/customers/"+customerID, function(cust){
+                        $.get("/customers/"+customerID+"/getCustomer", function(cust){
                             console.log(cust);
                             if(cust===""){
                                 console.log("This cookie has been changed or deleted, Please log out and try again.")
