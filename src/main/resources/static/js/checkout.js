@@ -30,6 +30,7 @@ $(function(){
             location.reload();
         }
         else {
+            updateAddress();
             if(document.getElementById("firstname").value === "" ||
             document.getElementById("lastname").value === "" ||
             document.getElementById("address").value === "" ||
@@ -156,8 +157,27 @@ $(function(){
             }
         }
     });
-
-    $("#updateAddress").click(function(){
-        $("#addressUpdated").show();
-    });
 });
+
+function updateAddress(){
+    /*$("#updateAddress").click(function(){*/
+    let firstNameElement = document.getElementById("firstname");
+    let lastNameElement = document.getElementById("lastname");
+    let addressElement = document.getElementById("address");
+    let zipcodeElement = document.getElementById("zipcode");
+    let cityElement = document.getElementById("city");
+    let phoneElement = document.getElementById("phone");
+    let emailElement = document.getElementById("email");
+
+    if(isValid(firstNameElement, "First name", "addressUpdated") &&
+        isValid(lastNameElement, "Last name", "addressUpdated") &&
+        isValid(addressElement, "Address", "addressUpdated") &&
+        isValidNumber(zipcodeElement, "Zip code", "addressUpdated") &&
+        isValid(cityElement, "City", "addressUpdated") &&
+        isValid(phoneElement, "Phone", "addressUpdated") &&
+        isValid(emailElement, "Email", "addressUpdated")){
+
+        document.getElementById("addressUpdated").innerHTML = "Address updated successfully!";
+        $("#addressUpdated").fadeIn();
+    }
+}
