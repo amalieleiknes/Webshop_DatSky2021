@@ -1,6 +1,6 @@
 /* CSS for top-navigation-bar */
 .topnav, .bottomnav{
-    background-color: #405489;
+    background-color: #293b6c;
     color: white;
     width: 100%;
     margin: 0;
@@ -11,13 +11,22 @@
 .topnav{
     top: 0;
     position: static;
-    color: black;
 }
 
 .bottomnav {
     bottom: 0;
     overflow: hidden;
     position: static;
+}
+
+#productNameIndex {
+    font-size: 2rem;
+    font-family: "Arial Black", serif;
+}
+
+#productNameIndex p , #productNameIndex a, #productNameIndex button {
+    font-size: 1.3rem;
+    font-family: "Times New Roman", serif;
 }
 
 #orderHistory .h1{
@@ -36,10 +45,20 @@
 #usericon {
     float: right;
     margin-right: 10%;
+    height: 100%;
+}
+
+img#usericon{
+    width: 75px;
+    height: 80px;
 }
 
 #usericon:hover {
     background-color: #6c98b4;
+}
+
+#userIconDropdownmenu{
+    vertical-align: middle;
 }
 
 #cartOverviewIcon {
@@ -91,8 +110,8 @@
 }
 
 .showMenu {
-    margin-left: 43%;
-    margin-top: 12%;
+    margin-left: 40%;
+    margin-top: 13.7%;
 }
 
 .showMenu {
@@ -116,9 +135,9 @@
 }
 
 a.cartOverview{
-    color: black;
+    color: white;
     text-decoration: none;
-    font-size: 40px;
+    font-size: 50px;
 }
 
 img{
@@ -131,14 +150,9 @@ img{
     text-decoration: none;
 }
 
-/* Active link */
-.topnav a.active {
-    background-color: #2a6cde;
-    text-decoration: none;
-}
 
 .left-side{
-    width: 40%;
+    width: 50%;
     float: left;
     position: relative;
     height: 100%;
@@ -146,10 +160,11 @@ img{
 }
 
 .right-side{
-    width: 60%;
+    width: 50%;
     float: right;
     position: relative;
     height: 100%;
+    text-decoration: none;
 }
 
 .topnav button, .bottomnav button{
