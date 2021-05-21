@@ -17,6 +17,7 @@
     <script src="js/shared.js"></script>
     <script src="js/utils/cookieUtils.js"></script>
     <script src="js/checkoutOptions.js"></script>
+    <script src="js/inputValidation.js"></script>
 
     <title>Webshop - register user</title>
 </head>
@@ -64,7 +65,8 @@
                         <td><input type='text' id="pwdcheck" placeholder='Retype your password' name="Retype your password"/></td>
                     </tr>
                     <tr>
-                        <td></br><button class='registerbtn' onclick="addCustomer()" id="registerUser">Register as user</button></br></td>
+                        <td></br><button class='registerbtn' onclick="addCustomer()" id="registerUser">Register as user</button></td>
+                        <td><span id="registerUserError"></span></td>
                     </tr>
                 </table>
             </div>

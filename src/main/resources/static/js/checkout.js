@@ -160,7 +160,6 @@ $(function(){
 });
 
 function updateAddress(){
-    /*$("#updateAddress").click(function(){*/
     let firstNameElement = document.getElementById("firstname");
     let lastNameElement = document.getElementById("lastname");
     let addressElement = document.getElementById("address");

@@ -2,20 +2,27 @@ $(function(){
     let output;
 
     $("#optionLogInBtn").click(function(){
+        $("#failedLogInOptions").hide();
         $("#myDropdown").hide();
         output =
             "<div class='userLogIn'>" +
                 "<h2>Type in your email and password to log in</h2>" +
+                "</br>" +
                 "<input type='text' class='input' id='customeremailOptions' placeholder='email' name='email'/>" +
                 "<input type='text' class='input' id='customerpasswordOptions' placeholder='password' name='password'/>" +
                 "<button class='customerLogIn' onclick='customerLogInFromOptions()' id='customerLogOnBtn'>Log in as user</button>" +
+                "</br>" +
+                "<span id='failedLogInOptions'>Incorrect login info</span>" +
             "</div>";
+
         $("#optionsHeader").hide();
         $("#optionLogInBtn").hide();
         $("#optionRegisterBtn").hide();
         $("#optionGuestBtn").hide();
-        document.getElementById("optionsLogInRegForms").innerHTML = output;
+        $("#failedLogInOptions").hide();
 
+        document.getElementById("optionsLogInRegForms").innerHTML = output;
+        $("#failedLogInOptions").hide();
     });
 
     $("#optionRegisterBtn").click(function(){
@@ -46,6 +53,7 @@ $(function(){
                         "</tr>" +
                         "<tr>" +
                             "<td></br><button class='registerbtn' onclick='addCustomer()' id='registerUser'>Register as user</button></br></td>" +
+                            "<td><span id='registerUserError'></span></td>" +
                         "</tr>" +
                     "</table>" +
                 "</div>" +
@@ -74,10 +82,10 @@ function customerLogInFromOptions(){
 
     // if input fields are empty, show failedmsg
     if(email.length === 0 || email === ' ' || email === null || password.length === 0){
-        $("#failedLogIn").show();
+        $("#failedLogInOptions").show();
     }
     else{
-        $("#failedLogIn").hide();
+        $("#failedLogInOptions").hide();
 
         // else, send userinfo into API and find out if the info is correct
         const login  = {
@@ -89,7 +97,7 @@ function customerLogInFromOptions(){
         $.post("customers/checkIfValidCustomerLoginInfo", login, function(customerID){
             if(customerID!=="FAIL"){
                 console.log("Setting cookie, user exists...")
-                $("#failedLogIn").hide();
+                $("#failedLogInOptions").hide();
 
                 setCookie("email", email, 1);
                 setCookie("customerID", customerID, 1);
@@ -100,7 +108,7 @@ function customerLogInFromOptions(){
                 window.location.href = "checkout.html";
             }
             else{
-                $("#failedLogIn").show();
+                $("#failedLogInOptions").show();
             }
         });
     }
