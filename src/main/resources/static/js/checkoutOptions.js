@@ -73,7 +73,6 @@ $(function(){
 
 function customerLogInFromOptions(){
 // check customers login-info
-    /*$("#customerLogOnBtn").click(function() {*/
     let tempUserID = getCookie("tempUserID");
     console.log("logging in...");
 

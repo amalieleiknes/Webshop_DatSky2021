@@ -549,12 +549,6 @@ a.goToCheckout{
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
-/*
-div#admproductContainer.admproductContainer {
-    margin-left: 10%;
-    width: 80%;
-    float: left;
-}*/
 
 #admproductContainer {
     max-width: 1056px;
