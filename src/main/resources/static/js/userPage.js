@@ -25,11 +25,11 @@ $(function(){
                 let orderDate = new Date(order.orderDate).toLocaleDateString('no-NO');
                     output +=
                         "<tr>" +
-                        "<td><input type='text' disabled readonly id='orderID"+line+"' size='3' value='"+order.orderID+"'/></td>" +
+                        "<td><input type='text' disabled readonly id='orderID"+line+"' size='39' value='"+order.orderID+"'/></td>" +
                         "<td>" + orderDate + "</td>" +
                         "<td>" + order.totalPrice + " NOK" + "</td>" +
                         "<td>" + order.amount + "</td>" +
-                        "<td><a class='btn btn-success' onclick='getOrderContent("+line+")'>See order content</button></td>" +
+                        "<td><a class='btn btn-success' onclick='getOrderContent("+line+")'>Preview</button></td>" +
                         "</tr>";
                     line++;
             });
